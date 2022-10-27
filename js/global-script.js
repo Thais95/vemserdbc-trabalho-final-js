@@ -1,17 +1,3 @@
-/*
-
-NECESSARIO
-
-Para instalar json server colocar no terminal:
-    npm install -g json-server
-E rodar com:
-    json-server --watch meuJSON.json
-Pagina de visualizacao:
-    http://localhost:3000/
-
-Documentacao => https://github.com/typicode/json-server
-*/
-
 const url = 'http://localhost:3000'
 
 async function getUsers(){
