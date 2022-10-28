@@ -1,0 +1,266 @@
+/* FONT IMPORT */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+@import "./cadastro-style.css";
+@import "./vaga-style.css";
+
+/* COLOR VARIABLES */
+:root {
+  --text-primary-color: #6f6c90;
+  --text-secondary-color: #170f49;
+  --text-disapproved-color: #fe6663;
+  --placeholder-color: #b1afc6;
+  --btn-main-color: #4a3aff;
+  --btn-secondary-color: #fe6663;
+  --btn-disable-color: #cccccc;
+}
+
+/* GLOBAL STYLES AND RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  border: none;
+  outline: none;
+}
+a {
+  text-decoration: none;
+  color: var(--text-primary-color);
+}
+body {
+  background-image: linear-gradient(
+    to right bottom,
+    #eedcff,
+    #f0e3ff,
+    #f2eaff,
+    #f5f1ff,
+    #f9f7ff,
+    #faf8ff,
+    #fbf9ff,
+    #fcfaff,
+    #faf7ff,
+    #f9f3ff,
+    #f7f0ff,
+    #f6ecff
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+body,
+input,
+textarea,
+button {
+  font-family: "DM Sans", sans-serif;
+  color: var(--text-primary-color);
+  font-size: 1.125rem;
+}
+
+/* TAG STYLE */
+h1 {
+  font-size: 2.125rem;
+  color: var(--text-secondary-color);
+  margin-bottom: 30px;
+  user-select: none;
+}
+label {
+  color: var(--text-secondary-color);
+  font-weight: 700;
+  padding-left: 25px;
+  margin-top: 10px;
+}
+input {
+  min-width: 80%;
+  width: 440px;
+  height: 55px;
+  padding: 25px;
+  border: 1px solid #eff0f7;
+  box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
+  border-radius: 46px;
+  margin-top: 10px;
+  transition: 0.5s;
+}
+input::placeholder {
+  color: var(--placeholder-color);
+}
+input:focus {
+  box-shadow: 0px 0px 15px rgba(74, 58, 255, 0.221);
+  transition: 0.5s;
+}
+
+select {
+  min-width: 80%;
+  width: 440px;
+  height: 55px;
+  border: 1px solid #eff0f7;
+  box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
+  border-radius: 46px;
+  margin-top: 10px;
+  transition: 0.5s;
+  padding: 0 25px 0 25px;
+  color: var(--placeholder-color);
+  font-size: 1rem;
+}
+
+select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* CONTAINERS */
+/* main */
+.container {
+  max-width: 100vw;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* main box */
+.box-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  background-color: white;
+  box-shadow: 0px 54px 54px rgba(74, 58, 255, 0.02),
+    1px 4px 104px rgba(20, 20, 43, 0.04), 0px 98px 66px rgba(19, 18, 66, 0.02);
+  border-radius: 34px;
+  gap: 20px;
+  /* add max-width isso não existia antes */
+  max-width: 850px;
+}
+/* labels and inputs */
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+/* select style */
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: "▼";
+  font-size: 1rem;
+  top: 28px;
+  right: 30px;
+  position: absolute;
+}
+/* content */
+/* class para o candidato reprovado */
+.content-container-disapproved > a p {
+  color: var(--btn-secondary-color);
+}
+
+.content-container {
+  border: 1px solid #eff0f7;
+  box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
+  border-radius: 46px;
+  user-select: none;
+  transition: 0.5s;
+}
+.content-container a {
+  width: 750px;
+  height: 65px;
+  padding: 25px 35px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.content-container:hover {
+  background: rgba(111, 108, 144, 0.15);
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+/* with button */
+.content-container-button {
+  width: 750px;
+  display: flex;
+  border: 1px solid #eff0f7;
+  box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
+  border-radius: 46px;
+  user-select: none;
+  transition: 0.5s;
+  padding: 15px 30px 15px;
+}
+
+.content-container-button a {
+  display: flex;
+  width: 60%;
+  justify-content: space-between;
+}
+/* COMPONENTS */
+.btn-disapproved {
+  min-height: 30%;
+  width: 220px;
+  height: 34px;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 86px;
+  cursor: pointer;
+}
+
+.btn {
+  min-width: 80%;
+  width: 440px;
+  height: 65px;
+  margin-top: 30px;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 86px;
+  cursor: pointer;
+}
+.btn-main {
+  background-color: var(--btn-main-color);
+  box-shadow: 0px 8px 22px rgba(74, 58, 255, 0.26);
+  transition: 0.5s;
+}
+.btn-main:hover {
+  background-color: #685aff;
+  transform: scale(1.05);
+  transition: 0.5s;
+}
+.btn-secondary {
+  background-color: var(--btn-secondary-color);
+  box-shadow: 0px 8px 22px rgba(255, 58, 58, 0.26);
+  transition: 0.5s;
+}
+.btn-secondary:hover {
+  background-color: #ff413e;
+  transform: scale(1.05);
+  transition: 0.5s;
+}
+.btn-disable {
+  background-color: var(--btn-disable-color);
+  box-shadow: 0px 8px 22px hsla(245, 97%, 64%, 0.26);
+  transition: 0.5s;
+}
+.logout {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  user-select: none;
+  cursor: pointer;
+  background: transparent;
+  transition: 0.5s;
+}
+.logout img {
+  width: 30px;
+  height: 30px;
+}
+.logout:hover {
+  color: var(--btn-main-color);
+  transition: 0.5s;
+}
