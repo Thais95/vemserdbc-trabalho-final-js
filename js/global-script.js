@@ -48,8 +48,19 @@ getVagas();
 getCandidaturas();
 
 async function fazerLogin() {
-    let emailLogin = document.getElementById('emailLogin').value;
-    let senhaLogin = document.getElementById('senhaLogin').value;
+    let emailLogin;
+    let senhaLogin;
+    if (document.getElementById('emailLogin').value) {
+        emailLogin = document.getElementById('emailLogin').value
+    } else {
+        alert('Email não pode estar vazio')
+    }
+    if (document.getElementById('senhaLogin').value) {
+        senhaLogin = document.getElementById('senhaLogin').value;
+    } else {
+        alert('Campo senha não pode estar vazio')
+    }
+
 
     let tamanho = await dataUsers.length;
     let emailsCadastrados = new Map();
@@ -63,5 +74,7 @@ async function fazerLogin() {
         if (senhas.get(emailLogin) == senhaLogin) {
             document.getElementById('logado').innerText = 'LOGADO'
         }
+    } else {
+        document.getElementById('logado').innerText = 'USUÁRIO NÃO CADASTRADO'
     }
 }
