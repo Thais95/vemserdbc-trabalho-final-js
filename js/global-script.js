@@ -33,11 +33,11 @@ async function getCandidaturas() {
   dataCandidaturas = await response.json();
 }
 
-//getUsers();
+getUsers();
 
-//getVagas();
+getVagas();
 
-//getCandidaturas();
+getCandidaturas();
 
 async function deleteVaga(id) {
   await fetch(`${url}/vagas/${id}`, {
@@ -72,21 +72,40 @@ async function fazerLogin() {
 
   if (emailsCadastrados.has(emailLogin)) {
     if (senhas.get(emailLogin) == senhaLogin) {
-      document.getElementById("logado").innerText = "LOGADO";
+      gravarItem(emailLogin);
+
+      let usuarioTipo = '';
+      dataUsers.forEach(element => {
+        if (element.email == emailLogin) {
+          usuarioTipo = element.tipo
+        } else {}
+      });
+
+      if (usuarioTipo == 'candidato') {
+        window.location.href = './pages/home-candidato.html'
+      } else {
+        window.location.href = './pages/home-recrutador.html'
+      }
     }
   } else {
     document.getElementById("logado").innerText = "USUÁRIO NÃO CADASTRADO";
   }
 }
 
-if(document
-  .getElementById("form-signup") != null) {
-document
-  .getElementById("form-signup")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-    postSignup(event);
-  });
+function logOut() {
+  localStorage.removeItem('user');
+  window.location.href = '../index.html'
+}
+
+if ((document
+    .getElementById("form-signup")) != null) {
+
+  document
+    .getElementById("form-signup")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+      postSignup(event);
+    });
 }
 
 function postSignup(e) {
@@ -96,24 +115,24 @@ function postSignup(e) {
   console.log(userSignup);
   try {
     if (
-      userSignup.name-user === "" ||
-      userSignup.e-mail === "" ||
+      userSignup.name - user === "" ||
+      userSignup.e - mail === "" ||
       userSignup.senha === "" ||
-      userSignup.birth-date === ""
+      userSignup.birth - date === ""
     ) {
       throw new Error("campos vazios");
     }
 
-    let newDateObj = new Date(userSignup.birth-date);
+    let newDateObj = new Date(userSignup.birth - date);
     let nascimentoDateObj = new Date(
       newDateObj.getTime() + newDateObj.getTimezoneOffset() * 60000
     );
 
     const json = {
-      tipo: userSignup.type-user,
-      nome: userSignup.name-user,
+      tipo: userSignup.type - user,
+      nome: userSignup.name - user,
       dataNascimento: nascimentoDateObj,
-      email: userSignup.e-mail,
+      email: userSignup.e - mail,
       senha: userSignup.password,
       candidaturas: [],
     };
@@ -166,9 +185,12 @@ function postVaga() {
 
 // Ideia para verificar usuario logado
 // Criar item:
-function gravarItem() {
+function gravarItem(email, status) {
   let key = "user";
-  let myObj = { email: "juslis@gmail.com", logado: true };
+  let myObj = {
+    email: email,
+    logado: true
+  };
   localStorage.setItem(key, JSON.stringify(myObj));
 }
 
@@ -180,31 +202,32 @@ function lerItem() {
 }
 
 async function cadidatarVaga(idVaga, idCandidato) {
- idVaga = 3;
- idCandidato = 2;
+  idVaga = 3;
+  idCandidato = 2;
 
   const response = await fetch(`${url}/vagas/${idVaga}`);
   vaga = await response.json();
   const c = vaga.candidatos;
-  
-  try{
-  const json = {
-    id: vaga.id,
-    titulo: vaga.titutlo,
-    descricao: vaga.descricao,
-    remuneracao: vaga.remuneracao,
-    candidatos: [...c, { idCandidato }]
-  };
-  
-  fetch(`${url}/vagas/${idVaga}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(json),
-  });
-} catch (error) {
-  console.error(error);
-}
-}
 
+  try {
+    const json = {
+      id: vaga.id,
+      titulo: vaga.titutlo,
+      descricao: vaga.descricao,
+      remuneracao: vaga.remuneracao,
+      candidatos: [...c, {
+        idCandidato
+      }]
+    };
+
+    fetch(`${url}/vagas/${idVaga}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(json),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
