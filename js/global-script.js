@@ -76,7 +76,7 @@ async function fazerLogin() {
 
       let usuarioTipo = '';
       dataUsers.forEach(element => {
-        if (element.email == "claudio@gmail.com") {
+        if (element.email == emailLogin) {
           usuarioTipo = element.tipo
         } else {}
       });
