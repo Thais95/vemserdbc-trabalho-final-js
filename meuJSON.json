@@ -1,25 +1,19 @@
 {
   "candidatura": [
     {
-      "id": 1,
-      "titulo": "QA",
-      "remuneracao": 3000,
-      "descricao": "Testar coisas",
-      "candidatos": []
+      "idVaga": 1,
+      "idCandidato": 2,
+      "reprovado": false
     },
     {
-      "id": 2,
-      "titulo": "Frontend",
-      "remuneracao": 2500,
-      "descricao": "Pintar botao",
-      "candidatos": []
+      "idVaga": 1,
+      "idCandidato": 2,
+      "reprovado": true
     },
     {
-      "id": 3,
-      "titulo": "Backend",
-      "remuneracao": 2600,
-      "descricao": "Fazer banco",
-      "candidatos": []
+      "idVaga": 2,
+      "idCandidato": 2,
+      "reprovado": true
     }
   ],
   "users": [
@@ -42,13 +36,45 @@
       "candidaturas": []
     },
     {
-      "id": 1,
+      "id": 3,
       "tipo": "recrutador",
       "nome": "Marisnalva Santos",
       "dataNascimento": "15/08/1996",
       "email": "maris@gmail.com",
       "senha": "1234abc",
       "candidaturas": []
+    },
+    {
+      "tipo": "userSignup.tipo",
+      "nome": "userSignup.nome",
+      "dataNascimento": "userSignup.dataNascimento",
+      "email": "userSignup.email",
+      "senha": "userSignup.senha",
+      "id": 4
+    },
+    {
+      "tipo": "userSignup.tipo",
+      "nome": "userSignup.nome",
+      "dataNascimento": "userSignup.dataNascimento",
+      "email": "userSignup.email",
+      "senha": "userSignup.senha",
+      "id": 5
+    },
+    {
+      "tipo": "userSignup.tipo",
+      "nome": "userSignup.nome",
+      "dataNascimento": "userSignup.dataNascimento",
+      "email": "userSignup.email",
+      "senha": "userSignup.senha",
+      "id": 6
+    },
+    {
+      "tipo": "userSignup.tipo",
+      "nome": "userSignup.nome",
+      "dataNascimento": "userSignup.dataNascimento",
+      "email": "userSignup.email",
+      "senha": "userSignup.senha",
+      "id": 7
     }
   ],
   "vagas": [
@@ -72,13 +98,6 @@
       "descricao": "Faz alguns bancos",
       "remuneracao": 7000,
       "candidatos": []
-    },
-    {
-      "id": 4,
-      "titulo": "Tech lead",
-      "descricao": "Manda em coisas",
-      "remuneracao": 12000,
-      "candidatos": []
     }
   ]
-  }
+}
