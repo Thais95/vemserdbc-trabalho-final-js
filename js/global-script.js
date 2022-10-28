@@ -121,12 +121,10 @@ function postSignup(e) {
   } catch (error) {
     console.error(error);
   }
-}
 
-// FORMATA A DATA DE NASCIMENTO
-//let data = document.getElementById('input-signup-date').value;
-//let dataObj = new Date(data)
-//let dataObjNoTimeZone = new Date(dataObj.getTime() + ((dataObj.getTimezoneOffset() * 60000)))
+  //apos cadastro, loga o usuario
+  //fazerLogin(userSignup.e-mail, userSignup.password)
+}
 
 function postVaga(){
   const title = document.getElementById('title').value;
