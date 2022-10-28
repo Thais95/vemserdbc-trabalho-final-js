@@ -79,12 +79,15 @@ async function fazerLogin() {
   }
 }
 
+if(document
+  .getElementById("form-signup") != null) {
 document
   .getElementById("form-signup")
   .addEventListener("submit", function (event) {
     event.preventDefault();
     postSignup(event);
   });
+}
 
 function postSignup(e) {
   let data = new FormData(e.target).entries();
