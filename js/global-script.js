@@ -176,3 +176,13 @@ function lerItem(){
   console.log(myItem);
 }
 
+
+
+// criandoVaga = document.getElementById('AQUI FICA O ID DA DIV QUE VAI RECEBER OS ELEMENTOS').insertAdjacentElement('beforeend', `
+//     <div class="content-container">
+//         <a href="${link-vaga}">
+//             <p>${titulo-vaga}</p>
+//             <p>${salario-vaga}</p>
+//         </a>
+//     </div>
+// `)
