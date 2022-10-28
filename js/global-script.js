@@ -160,3 +160,19 @@ function postVaga(){
     console.error(error);
   }
 }
+
+// Ideia para verificar usuario logado
+// Criar item:
+function gravarItem(){
+  let key = 'user';
+  let myObj = { email: 'juslis@gmail.com', logado: true };
+  localStorage.setItem(key, JSON.stringify(myObj));
+}
+
+// Ler item:
+function lerItem(){
+  let key = 'user';
+  let myItem = JSON.parse(localStorage.getItem(key));
+  console.log(myItem);
+}
+
