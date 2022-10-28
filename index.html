@@ -16,6 +16,79 @@
     <input type="password" name="senhaLogin" id="senhaLogin" placeholder="senha">
     <button onclick="fazerLogin()">Login</button>
     <p id="logado"></p>
+
+    
+    <form class="">
+        <div class="form-control">
+            <label for="tipo-usuario">Usuario:</label>
+            <select class="" name="tipo" class="" id="tipo">
+              <option value="recrutador" selected>Recrutador</option>
+              <option value="candidato">Candidato</option>
+            </select>
+          </div>
+
+        <div class="form-control">
+          <label for="nome" class="label">Nome:</label>
+          <input
+            class="modal-input"
+            name="nome"
+            id="nome"
+            type="text" required
+            onchange=""
+            pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9 ]+$"
+            maxlength="60"
+          />
+          <span id="erro-nome" class="erro-form"></span>
+        </div>
+        
+        <div class="form-control">
+          <label for="nascimento">Data de nascimento:</label>
+          <input class="modal-input" type="date" onchange="" name="nascimento" id="nascimento"/>
+          <span id="erro-nascimento" class="erro-form"></span>
+        </div>
+
+        <label for="email" class="label">Email:</label>
+          <input
+            id="email"
+            class=""
+            name="email"
+            type="email" required
+            onchange=""
+          />
+          <span id="erro-email" class="erro-form"></span>
+        </div>
+        <div class="form-control">
+        <label for="senha" class="label">senha:</label>
+          <input
+            id="senha"
+            class=""
+            name="senha"
+            type="password" required
+            onchange=""
+          />
+          <span id="erro-senha" class="erro-form"></span>
+        </div>
+        <div class="form-control">
+          <button type="submit" class="">
+              Cadastrar
+          </button>
+        </div>
+      </form>
+      <div class="form-control">
+      <label for="vaga" class="label">numero vaga:</label>
+          <input
+            id="vaga"
+            class=""
+            type="number" required
+            onchange=""
+          />
+          <span id="erro-senha" class="erro-form"></span>
+        </div>
+        <div class="form-control">
+          <button class="" onclick="deleteVaga()">
+              Cadastrar
+          </button>
+        </div>
 </body>
 <script src="./js/global-script.js"></script>
 

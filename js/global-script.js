@@ -87,22 +87,23 @@ document.querySelector("form").addEventListener("submit", function (event) {
 function postSignup(e) {
   let data = new FormData(e.target).entries();
   let userSignup = Object.fromEntries(data);
-
+  console.log(userSignup);
   try {
     if (
       userSignup.nome === "" ||
       userSignup.email === "" ||
-      userSignup.senha === ""
+      userSignup.senha === "" ||
+      userSignup.nascimento === ""
     ) {
       throw new Error("campos vazios");
     }
 
     const json = {
-      tipo: "userSignup.tipo",
-      nome: "userSignup.nome",
-      dataNascimento: "userSignup.dataNascimento",
-      email: "userSignup.email",
-      senha: "userSignup.senha",
+      tipo: userSignup.tipo,
+      nome: userSignup.nome,
+      dataNascimento: userSignup.nascimento,
+      email: userSignup.email,
+      senha: userSignup.senha,
     };
 
     fetch(`${url}/users`, {
