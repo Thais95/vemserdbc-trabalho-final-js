@@ -1,32 +1,75 @@
-const url = "http://localhost:3000";
+/*NECESSARIO
+
+Para instalar json server colocar no terminal:
+npm install -g json-server
+E rodar com:
+json-server --watch meuJSON.json
+Pagina de visualizacao:
+http://localhost:3000/
+
+Documentacao => https://github.com/typicode/json-server
+*/
+
+const url = 'http://localhost:3000'
+
+let dataUsers;
+let dataVagas = [];
+let dataCandidaturas = [];
+
 
 async function getUsers() {
   const response = await fetch(`${url}/users`);
-  const data = await response.json();
+    dataUsers = await response.json();
 
-  console.log(data);
+    // console.log(dataUsers);
 
-}
+  }
 async function getVagas() {
-  const response = await fetch(`${url}/vagas`);
-  const data = await response.json();
+    const response = await fetch(`${url}/vagas`);
+    dataVagas = await response.json();
 
-  console.log(data);
-}
+    // console.log(dataVagas);
+    
+  }
 async function getCandidaturas() {
   const response = await fetch(`${url}/candidatura`);
-  const data = await response.json();
+    dataCandidaturas = await response.json();
+    
+  }
+  
+  getUsers();
+  
+  getVagas();
+  
+  getCandidaturas();
+  
+  
+  async function deleteVaga(id) {
+      await fetch(`${url}/vagas/${id}`, {
+          method: "DELETE",
+          headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      let tamanho = await dataUsers.length;
+      let emailsCadastrados = new Map();
+      let senhas = new Map();
+      for (let i = 0; i < tamanho; i++) {
+          emailsCadastrados.set(await dataUsers[i].email, i);
+          senhas.set(await dataUsers[i].email, await dataUsers[i].senha);
+      }
+  
+      if (emailsCadastrados.has(emailLogin)) {
+          if (senhas.get(emailLogin) == senhaLogin) {
+              document.getElementById('logado').innerText = 'LOGADO'
+          }
+      } else {
+          document.getElementById('logado').innerText = 'USUÁRIO NÃO CADASTRADO'
+      }
+  }
 
-  console.log(data);
-}
-
-getUsers();
-
-getVagas();
-
-getCandidaturas();
-
-document.querySelector("form").addEventListener("submit", function (event) {
+  document.querySelector("form").addEventListener("submit", function (event) {
   event.preventDefault();
   postSignup(event);
 });
@@ -66,12 +109,3 @@ function postSignup(e) {
 //let data = document.getElementById('input-signup-date').value;
 //let dataObj = new Date(data)
 //let dataObjNoTimeZone = new Date(dataObj.getTime() + ((dataObj.getTimezoneOffset() * 60000)))
-
-async function deleteVaga(id) {
-    await fetch(`${url}/vagas/${id}`, {
-        method: "DELETE",
-        headers: {
-        "Content-Type": "application/json",
-      },
-    });
-}
