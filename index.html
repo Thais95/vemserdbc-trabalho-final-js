@@ -11,97 +11,38 @@
 </head>
 
 <body>
-    <h1>Título temporário</h1>
-    <input type="email" name="emailLogin" id="emailLogin" placeholder="email">
-    <br><br>
-    <input type="password" name="senhaLogin" id="senhaLogin" placeholder="senha">
-    <button onclick="fazerLogin()">Login</button>
-    <p id="logado"></p>
+    <main class="login-main-container">
+        <div class="login-img-container">
+            <img src="./img/illustration.svg" alt="">
+        </div>
 
-    
-    <form class="">
-        <div class="form-control">
-            <label for="tipo-usuario">Usuario:</label>
-            <select class="" name="tipo" class="" id="tipo">
-              <option value="recrutador" selected>Recrutador</option>
-              <option value="candidato">Candidato</option>
-            </select>
-          </div>
-
-        <div class="form-control">
-          <label for="nome" class="label">Nome:</label>
-          <input
-            class="modal-input"
-            name="nome"
-            id="nome"
-            type="text" required
-            onchange=""
-            pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9 ]+$"
-            maxlength="60"
-          />
-          <span id="erro-nome" class="erro-form"></span>
+        <div class="login-container">
+        <h1>Entre na sua conta</h1>
+        
+        <div class="input-login">
+        <input type="email" name="emailLogin" id="emailLogin" placeholder="Email">
+        <img src="/img/email-icon.svg" alt="">
         </div>
         
-        <div class="form-control">
-          <label for="nascimento">Data de nascimento:</label>
-          <input class="modal-input" type="date" onchange="" name="nascimento" id="nascimento"/>
-          <span id="erro-nascimento" class="erro-form"></span>
+        <div class="input-login">
+        <input type="password" name="senhaLogin" id="senhaLogin" placeholder="Senha">
+        <img src="./img/password-icon.svg" alt="">
         </div>
 
-        <label for="email" class="label">Email:</label>
-          <input
-            id="email"
-            class=""
-            name="email"
-            type="email" required
-            onchange=""
-          />
-          <span id="erro-email" class="erro-form"></span>
+        <div>
+        <button class="btn btn-main btn-login" onclick="fazerLogin()">
+            Log in
+        </button>
         </div>
-        <div class="form-control">
-        <label for="senha" class="label">senha:</label>
-          <input
-            id="senha"
-            class=""
-            name="senha"
-            type="password" required
-            onchange=""
-          />
-          <span id="erro-senha" class="erro-form"></span>
+
+        <div class="container-nav nav-login">
+            <p>Novo por aqui?</p>
+            <a href="./pages/cadastro.html">Cadastre-se agora</a>
         </div>
-        <div class="form-control">
-          <button type="submit" class="">
-              Cadastrar
-          </button>
+
+        <p id="logado"></p>
         </div>
-      </form>
-      <div class="form-control">
-      <label for="vaga" class="label">nome da vaga:</label>
-          <input
-            id="vaga"
-            class=""
-            type="text" required
-            onchange=""
-          />
-          <span id="erro-delete-vaga" class="erro-form"></span>
-        </div>
-        <div class="form-control">
-          <button class="" onclick="deleteVaga()">
-              Deletar
-          </button>
-        </div>
-        <a href="./pages/cadastrar-vaga.html" style="color: red;">cadastro de vaga</a>
-        <hr>
-        <a href="./pages/cadastro.html" style="color: red;">cadastro</a>
-        <hr>
-        <a href="./pages/home-candidato.html" style="color: red;">home candidato</a>
-        <hr>
-        <a href="./pages/home-recrutador.html" style="color: red;">home recrutador</a>
-        <hr>
-        <a href="./pages/vaga-nao-cadastrado.html" style="color: red;">vaga nao cadastrado</a>
-        <hr>
-        <button onclick="gravarItem()">gravar</button>
-        <button onclick="lerItem()">ler</button>
+    </main>
 </body>
 <script src="./js/global-script.js"></script>
 

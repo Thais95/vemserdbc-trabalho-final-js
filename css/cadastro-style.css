@@ -25,4 +25,11 @@
 
 .container-nav a {
   text-decoration: underline;
+  font-weight: 700;
+  transition: 0.5s;
+}
+
+.container-nav a:hover {
+  color: var(--btn-main-color);
+  transition: 0.5s;
 }
