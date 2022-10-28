@@ -49,18 +49,18 @@ async function deleteVaga(id) {
 }
 
 async function fazerLogin() {
-    let emailLogin;
-    let senhaLogin;
-    if (document.getElementById('emailLogin').value) {
-        emailLogin = document.getElementById('emailLogin').value
-    } else {
-        alert('Email não pode estar vazio')
-    }
-    if (document.getElementById('senhaLogin').value) {
-        senhaLogin = document.getElementById('senhaLogin').value;
-    } else {
-        alert('Campo senha não pode estar vazio')
-    }
+  let emailLogin;
+  let senhaLogin;
+  if (document.getElementById("emailLogin").value) {
+    emailLogin = document.getElementById("emailLogin").value;
+  } else {
+    alert("Email não pode estar vazio");
+  }
+  if (document.getElementById("senhaLogin").value) {
+    senhaLogin = document.getElementById("senhaLogin").value;
+  } else {
+    alert("Campo senha não pode estar vazio");
+  }
 
   let tamanho = await dataUsers.length;
   let emailsCadastrados = new Map();
@@ -79,15 +79,17 @@ async function fazerLogin() {
   }
 }
 
-document.getElementById("form-signup").addEventListener("submit", function (event) {
-  event.preventDefault();
-  postSignup(event);
-});
+document
+  .getElementById("form-signup")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+    postSignup(event);
+  });
 
 function postSignup(e) {
   let data = new FormData(e.target).entries();
   let userSignup = Object.fromEntries(data);
-  
+
   console.log(userSignup);
   try {
     if (
@@ -95,12 +97,14 @@ function postSignup(e) {
       userSignup.e-mail === "" ||
       userSignup.senha === "" ||
       userSignup.birth-date === ""
-      ) {
-        throw new Error("campos vazios");
-      }
-      
-      let newDateObj = new Date(userSignup.birth-date)
-      let nascimentoDateObj = new Date(newDateObj.getTime() + ((newDateObj.getTimezoneOffset() * 60000)))
+    ) {
+      throw new Error("campos vazios");
+    }
+
+    let newDateObj = new Date(userSignup.birth-date);
+    let nascimentoDateObj = new Date(
+      newDateObj.getTime() + newDateObj.getTimezoneOffset() * 60000
+    );
 
     const json = {
       tipo: userSignup.type-user,
@@ -108,7 +112,7 @@ function postSignup(e) {
       dataNascimento: nascimentoDateObj,
       email: userSignup.e-mail,
       senha: userSignup.password,
-      candidaturas: []
+      candidaturas: [],
     };
 
     fetch(`${url}/users`, {
@@ -126,19 +130,15 @@ function postSignup(e) {
   //fazerLogin(userSignup.e-mail, userSignup.password)
 }
 
-function postVaga(){
-  const title = document.getElementById('title').value;
-  const description = document.getElementById('description').value;
-  const salary = document.getElementById('salary').value;
+function postVaga() {
+  const title = document.getElementById("title").value;
+  const description = document.getElementById("description").value;
+  const salary = document.getElementById("salary").value;
 
   console.log(title, description, salary);
 
   try {
-    if (
-      title === "" ||
-      description === "" ||
-      salary === ""
-    ) {
+    if (title === "" || description === "" || salary === "") {
       throw new Error("campos vazios");
     }
 
@@ -146,7 +146,7 @@ function postVaga(){
       titulo: title,
       descricao: description,
       remuneracao: salary,
-      candidatos: []
+      candidatos: [],
     };
 
     fetch(`${url}/vagas`, {
@@ -163,16 +163,45 @@ function postVaga(){
 
 // Ideia para verificar usuario logado
 // Criar item:
-function gravarItem(){
-  let key = 'user';
-  let myObj = { email: 'juslis@gmail.com', logado: true };
+function gravarItem() {
+  let key = "user";
+  let myObj = { email: "juslis@gmail.com", logado: true };
   localStorage.setItem(key, JSON.stringify(myObj));
 }
 
 // Ler item:
-function lerItem(){
-  let key = 'user';
+function lerItem() {
+  let key = "user";
   let myItem = JSON.parse(localStorage.getItem(key));
   console.log(myItem);
+}
+
+async function cadidatarVaga(idVaga, idCandidato) {
+ idVaga = 3;
+ idCandidato = 2;
+
+  const response = await fetch(`${url}/vagas/${idVaga}`);
+  vaga = await response.json();
+  const c = vaga.candidatos;
+  
+  try{
+  const json = {
+    id: vaga.id,
+    titulo: vaga.titutlo,
+    descricao: vaga.descricao,
+    remuneracao: vaga.remuneracao,
+    candidatos: [...c, { idCandidato }]
+  };
+  
+  fetch(`${url}/vagas/${idVaga}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(json),
+  });
+} catch (error) {
+  console.error(error);
+}
 }
 

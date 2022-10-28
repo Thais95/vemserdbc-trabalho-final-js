@@ -137,16 +137,24 @@
     {
       "id": 2,
       "titulo": "Frontend senior",
-      "descricao": "Pinta muitos botoes",
+      "descricao": "Faz alguns bancos",
       "remuneracao": 7000,
-      "candidatos": []
+      "candidatos": [
+        {
+          "idCandidato": 2
+        }
+      ]
     },
     {
       "id": 3,
       "titulo": "Backend pleno",
       "descricao": "Faz alguns bancos",
       "remuneracao": 7000,
-      "candidatos": []
+      "candidatos": [
+        {
+          "idCandidato": 2
+        }
+      ]
     },
     {
       "titulo": "QA jr",
@@ -160,6 +168,13 @@
       "remuneracao": "14000",
       "candidatos": [],
       "id": 5
+    },
+    {
+      "titulo": "dasdasd",
+      "descricao": "asdasda",
+      "remuneracao": "2000",
+      "candidatos": [],
+      "id": 6
     }
   ]
 }
