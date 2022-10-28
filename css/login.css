@@ -38,6 +38,7 @@
 .input-login {
     display: flex;
     align-items: center;
+    padding-right: 30px;
 }
 .input-login input {
     padding-right: 60px;
@@ -47,9 +48,11 @@
     height: auto;
     margin-top: 5px;
     margin-left: -50px;
+    justify-self: end;
     -webkit-user-drag: none;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    z-index: 1;
 }
