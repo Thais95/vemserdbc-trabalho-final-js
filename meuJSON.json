@@ -1,0 +1,103 @@
+{
+  "candidatura": [
+    {
+      "idVaga": 1,
+      "idCandidato": 2,
+      "reprovado": false
+    },
+    {
+      "idVaga": 1,
+      "idCandidato": 2,
+      "reprovado": true
+    },
+    {
+      "idVaga": 2,
+      "idCandidato": 2,
+      "reprovado": true
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "tipo": "recrutador",
+      "nome": "Juslisclaudio Silva",
+      "dataNascimento": "10/05/1990",
+      "email": "juslis@gmail.com",
+      "senha": "1234abc",
+      "candidaturas": []
+    },
+    {
+      "id": 2,
+      "tipo": "candidato",
+      "nome": "Claudio Junior",
+      "dataNascimento": "05/07/2000",
+      "email": "claudio@gmail.com",
+      "senha": "1234abc",
+      "candidaturas": []
+    },
+    {
+      "id": 3,
+      "tipo": "recrutador",
+      "nome": "Marisnalva Santos",
+      "dataNascimento": "15/08/1996",
+      "email": "maris@gmail.com",
+      "senha": "1234abc",
+      "candidaturas": []
+    },
+    {
+      "tipo": "userSignup.tipo",
+      "nome": "userSignup.nome",
+      "dataNascimento": "userSignup.dataNascimento",
+      "email": "userSignup.email",
+      "senha": "userSignup.senha",
+      "id": 4
+    },
+    {
+      "tipo": "userSignup.tipo",
+      "nome": "userSignup.nome",
+      "dataNascimento": "userSignup.dataNascimento",
+      "email": "userSignup.email",
+      "senha": "userSignup.senha",
+      "id": 5
+    },
+    {
+      "tipo": "userSignup.tipo",
+      "nome": "userSignup.nome",
+      "dataNascimento": "userSignup.dataNascimento",
+      "email": "userSignup.email",
+      "senha": "userSignup.senha",
+      "id": 6
+    },
+    {
+      "tipo": "userSignup.tipo",
+      "nome": "userSignup.nome",
+      "dataNascimento": "userSignup.dataNascimento",
+      "email": "userSignup.email",
+      "senha": "userSignup.senha",
+      "id": 7
+    }
+  ],
+  "vagas": [
+    {
+      "id": 1,
+      "titulo": "QA senior",
+      "descricao": "Testa muitas coisas",
+      "remuneracao": 7000,
+      "candidatos": []
+    },
+    {
+      "id": 2,
+      "titulo": "Frontend senior",
+      "descricao": "Pinta muitos botoes",
+      "remuneracao": 7000,
+      "candidatos": []
+    },
+    {
+      "id": 3,
+      "titulo": "Backend pleno",
+      "descricao": "Faz alguns bancos",
+      "remuneracao": 7000,
+      "candidatos": []
+    }
+  ]
+}
