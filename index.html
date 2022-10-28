@@ -11,12 +11,38 @@
 </head>
 
 <body>
-    <h1>Título temporário</h1>
-    <input type="email" name="emailLogin" id="emailLogin" placeholder="email">
-    <br><br>
-    <input type="password" name="senhaLogin" id="senhaLogin" placeholder="senha">
-    <button onclick="fazerLogin()">Login</button>
-    <p id="logado"></p>
+    <main class="login-main-container">
+        <div class="login-img-container">
+            <img src="./img/illustration.svg" alt="">
+        </div>
+
+        <div class="login-container">
+        <h1>Entre na sua conta</h1>
+        
+        <div class="input-login">
+        <input type="email" name="emailLogin" id="emailLogin" placeholder="Email">
+        <img src="/img/email-icon.svg" alt="">
+        </div>
+        
+        <div class="input-login">
+        <input type="password" name="senhaLogin" id="senhaLogin" placeholder="Senha">
+        <img src="./img/password-icon.svg" alt="">
+        </div>
+
+        <div>        
+        <button class="btn btn-main" onclick="fazerLogin()">
+            Log in
+        </button>
+        </div>
+
+        <div class="container-nav nav-login">
+            <p>Novo por aqui?</p>
+            <a href="./pages/cadastro.html">Cadastre-se agora</a>
+        </div>
+
+        <p id="logado"></p>
+        </div>
+    </main>
 </body>
 <script src="./js/global-script.js"></script>
 
