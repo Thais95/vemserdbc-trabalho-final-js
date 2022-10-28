@@ -43,6 +43,38 @@
       "email": "maris@gmail.com",
       "senha": "1234abc",
       "candidaturas": []
+    },
+    {
+      "tipo": "userSignup.tipo",
+      "nome": "userSignup.nome",
+      "dataNascimento": "userSignup.dataNascimento",
+      "email": "userSignup.email",
+      "senha": "userSignup.senha",
+      "id": 4
+    },
+    {
+      "tipo": "userSignup.tipo",
+      "nome": "userSignup.nome",
+      "dataNascimento": "userSignup.dataNascimento",
+      "email": "userSignup.email",
+      "senha": "userSignup.senha",
+      "id": 5
+    },
+    {
+      "tipo": "userSignup.tipo",
+      "nome": "userSignup.nome",
+      "dataNascimento": "userSignup.dataNascimento",
+      "email": "userSignup.email",
+      "senha": "userSignup.senha",
+      "id": 6
+    },
+    {
+      "tipo": "userSignup.tipo",
+      "nome": "userSignup.nome",
+      "dataNascimento": "userSignup.dataNascimento",
+      "email": "userSignup.email",
+      "senha": "userSignup.senha",
+      "id": 7
     }
   ],
   "vagas": [
@@ -66,13 +98,6 @@
       "descricao": "Faz alguns bancos",
       "remuneracao": 7000,
       "candidatos": []
-    },
-    {
-      "id": 4,
-      "titulo": "Tech lead",
-      "descricao": "Manda em coisas",
-      "remuneracao": 12000,
-      "candidatos": []
     }
   ]
-  }
+}
