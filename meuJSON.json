@@ -1,25 +1,19 @@
 {
   "candidatura": [
     {
-      "id": 1,
-      "titulo": "QA",
-      "remuneracao": 3000,
-      "descricao": "Testar coisas",
-      "candidatos": []
+      "idVaga": 1,
+      "idCandidato": 2,
+      "reprovado": false
     },
     {
-      "id": 2,
-      "titulo": "Frontend",
-      "remuneracao": 2500,
-      "descricao": "Pintar botao",
-      "candidatos": []
+      "idVaga": 1,
+      "idCandidato": 2,
+      "reprovado": true
     },
     {
-      "id": 3,
-      "titulo": "Backend",
-      "remuneracao": 2600,
-      "descricao": "Fazer banco",
-      "candidatos": []
+      "idVaga": 2,
+      "idCandidato": 2,
+      "reprovado": true
     }
   ],
   "users": [
@@ -42,7 +36,7 @@
       "candidaturas": []
     },
     {
-      "id": 1,
+      "id": 3,
       "tipo": "recrutador",
       "nome": "Marisnalva Santos",
       "dataNascimento": "15/08/1996",
