@@ -115,6 +115,15 @@
       "email": "name3@gmail.com",
       "senha": "123456",
       "id": 13
+    },
+    {
+      "tipo": "recrutador",
+      "nome": "batman",
+      "dataNascimento": "2015-02-28T03:00:00.000Z",
+      "email": "name3@gmail.com",
+      "senha": "12345",
+      "candidaturas": [],
+      "id": 14
     }
   ],
   "vagas": [
@@ -138,6 +147,12 @@
       "descricao": "Faz alguns bancos",
       "remuneracao": 7000,
       "candidatos": []
+    },
+    {
+      "titulo": "QA jr",
+      "descricao": "Quebrar coisas",
+      "remuneracao": "6000",
+      "id": 4
     }
   ]
 }

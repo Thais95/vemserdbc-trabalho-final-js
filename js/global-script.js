@@ -87,6 +87,7 @@ document.querySelector("form").addEventListener("submit", function (event) {
 function postSignup(e) {
   let data = new FormData(e.target).entries();
   let userSignup = Object.fromEntries(data);
+  
   console.log(userSignup);
   try {
     if (
@@ -94,16 +95,20 @@ function postSignup(e) {
       userSignup.email === "" ||
       userSignup.senha === "" ||
       userSignup.nascimento === ""
-    ) {
-      throw new Error("campos vazios");
-    }
+      ) {
+        throw new Error("campos vazios");
+      }
+      
+      let newDateObj = new Date(userSignup.nascimento)
+      let nascimentoDateObj = new Date(newDateObj.getTime() + ((newDateObj.getTimezoneOffset() * 60000)))
 
     const json = {
       tipo: userSignup.tipo,
       nome: userSignup.nome,
-      dataNascimento: userSignup.nascimento,
+      dataNascimento: nascimentoDateObj,
       email: userSignup.email,
       senha: userSignup.senha,
+      candidaturas: []
     };
 
     fetch(`${url}/users`, {
@@ -122,3 +127,38 @@ function postSignup(e) {
 //let data = document.getElementById('input-signup-date').value;
 //let dataObj = new Date(data)
 //let dataObjNoTimeZone = new Date(dataObj.getTime() + ((dataObj.getTimezoneOffset() * 60000)))
+
+function postVaga(){
+  const title = document.getElementById('title').value;
+  const description = document.getElementById('description').value;
+  const salary = document.getElementById('salary').value;
+
+  console.log(title, description, salary);
+
+  try {
+    if (
+      title === "" ||
+      description === "" ||
+      salary === ""
+    ) {
+      throw new Error("campos vazios");
+    }
+
+    const json = {
+      titulo: title,
+      descricao: description,
+      remuneracao: salary,
+      candidatos: []
+    };
+
+    fetch(`${url}/vagas`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(json),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}

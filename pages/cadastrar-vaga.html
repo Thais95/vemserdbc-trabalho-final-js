@@ -21,24 +21,24 @@
                 <label for="job-title">
                     Título da vaga:
                 </label>
-                <input type="text" name="job-title" placeholder="Exemplo: QA Jr">
+                <input id="title" type="text" name="job-title" placeholder="Exemplo: QA Jr">
             </div>
 
             <div class="input-group">
                 <label for="job-description">
                     Descrição da vaga:
                 </label>
-                <input type="text" name="job-description" placeholder="Exemplo: Automatizar testes...">
+                <input id="description" type="text" name="job-description" placeholder="Exemplo: Automatizar testes...">
             </div>
 
             <div class="input-group">
                 <label for="job-description">
                     Remuneração inicial:
                 </label>
-                <input type="text" name="job-salary" placeholder="Exemplo: R$ 5000">
+                <input id="salary" type="text" name="job-salary" placeholder="Exemplo: R$ 5000">
             </div>
             
-            <button class="btn btn-main">
+            <button class="btn btn-main" onclick="postVaga()">
                 Cadastrar Vaga
             </button>
         </div>
