@@ -1,0 +1,28 @@
+.container-this-page div {
+  min-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container-this-page span {
+  font-size: 1rem;
+  color: var(--text-primary-color);
+  font-weight: 400;
+}
+
+.container-this-page h3 {
+  margin-right: auto;
+  text-align: justify;
+}
+
+.title-candidates {
+  margin: auto;
+}
+
+/* vai ser preciso para a listagem depois */
+.list-candidates {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
