@@ -33,11 +33,11 @@ async function getCandidaturas() {
   dataCandidaturas = await response.json();
 }
 
-getUsers();
+//getUsers();
 
-getVagas();
+//getVagas();
 
-getCandidaturas();
+//getCandidaturas();
 
 async function deleteVaga(id) {
   await fetch(`${url}/vagas/${id}`, {
@@ -79,7 +79,7 @@ async function fazerLogin() {
   }
 }
 
-document.querySelector("form").addEventListener("submit", function (event) {
+document.getElementById("form-signup").addEventListener("submit", function (event) {
   event.preventDefault();
   postSignup(event);
 });
@@ -91,23 +91,23 @@ function postSignup(e) {
   console.log(userSignup);
   try {
     if (
-      userSignup.nome === "" ||
-      userSignup.email === "" ||
+      userSignup.name-user === "" ||
+      userSignup.e-mail === "" ||
       userSignup.senha === "" ||
-      userSignup.nascimento === ""
+      userSignup.birth-date === ""
       ) {
         throw new Error("campos vazios");
       }
       
-      let newDateObj = new Date(userSignup.nascimento)
+      let newDateObj = new Date(userSignup.birth-date)
       let nascimentoDateObj = new Date(newDateObj.getTime() + ((newDateObj.getTimezoneOffset() * 60000)))
 
     const json = {
-      tipo: userSignup.tipo,
-      nome: userSignup.nome,
+      tipo: userSignup.type-user,
+      nome: userSignup.name-user,
       dataNascimento: nascimentoDateObj,
-      email: userSignup.email,
-      senha: userSignup.senha,
+      email: userSignup.e-mail,
+      senha: userSignup.password,
       candidaturas: []
     };
 
