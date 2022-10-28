@@ -1,0 +1,84 @@
+{
+  "candidatura": [
+    {
+      "id": 1,
+      "titulo": "QA",
+      "remuneracao": 3000,
+      "descricao": "Testar coisas",
+      "candidatos": []
+    },
+    {
+      "id": 2,
+      "titulo": "Frontend",
+      "remuneracao": 2500,
+      "descricao": "Pintar botao",
+      "candidatos": []
+    },
+    {
+      "id": 3,
+      "titulo": "Backend",
+      "remuneracao": 2600,
+      "descricao": "Fazer banco",
+      "candidatos": []
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "tipo": "recrutador",
+      "nome": "Juslisclaudio Silva",
+      "dataNascimento": "10/05/1990",
+      "email": "juslis@gmail.com",
+      "senha": "1234abc",
+      "candidaturas": []
+    },
+    {
+      "id": 2,
+      "tipo": "candidato",
+      "nome": "Claudio Junior",
+      "dataNascimento": "05/07/2000",
+      "email": "claudio@gmail.com",
+      "senha": "1234abc",
+      "candidaturas": []
+    },
+    {
+      "id": 1,
+      "tipo": "recrutador",
+      "nome": "Marisnalva Santos",
+      "dataNascimento": "15/08/1996",
+      "email": "maris@gmail.com",
+      "senha": "1234abc",
+      "candidaturas": []
+    }
+  ],
+  "vagas": [
+    {
+      "id": 1,
+      "titulo": "QA senior",
+      "descricao": "Testa muitas coisas",
+      "remuneracao": 7000,
+      "candidatos": []
+    },
+    {
+      "id": 2,
+      "titulo": "Frontend senior",
+      "descricao": "Pinta muitos botoes",
+      "remuneracao": 7000,
+      "candidatos": []
+    },
+    {
+      "id": 3,
+      "titulo": "Backend pleno",
+      "descricao": "Faz alguns bancos",
+      "remuneracao": 7000,
+      "candidatos": []
+    },
+    {
+      "id": 4,
+      "titulo": "Tech lead",
+      "descricao": "Manda em coisas",
+      "remuneracao": 12000,
+      "candidatos": []
+    }
+  ]
+  }
