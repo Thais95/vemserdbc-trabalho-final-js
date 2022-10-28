@@ -2,10 +2,9 @@ const url = 'http://localhost:3000'
 
 async function getUsers(){
   const response = await fetch(`${url}/users`);
-  const data = response.json();
+  const data = await response.json();
   
- data.then(value => console.log(value));
-  
+ console.log(data) 
 }
 async function getVagas(){
   const response = await fetch(`${url}/vagas`);
@@ -16,9 +15,9 @@ async function getVagas(){
 }
 async function getCandidaturas(){
   const response = await fetch(`${url}/candidatura`);
-  const data = response.json();
+  const data = await response.json();
   
- data.then(value => console.log(value));
+console.log(data);
   
 }
 
