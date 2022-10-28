@@ -1,0 +1,20 @@
+{
+  "name": "vemserdbc-trabalho-final",
+  "version": "1.0.0",
+  "description": "Repositório para o projeto final do módulo de **JavaScript**.\r <br />\r <br />\r [Trello](https://trello.com/invite/b/bqkmuOca/ATTIe5a432457c0e2c1ac465bd7ae22554e39D2FF326/trabalho-final-js)\r <br />\r <br />\r ![gif of a cat typing fast on a notebook](https://media.tenor.com/y2JXkY1pXkwAAAAM/cat-computer.gif)\r <br />\r > Programa Vem Ser, 10ª edição.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thais95/vemserdbc-trabalho-final-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thais95/vemserdbc-trabalho-final-js/issues"
+  },
+  "homepage": "https://github.com/Thais95/vemserdbc-trabalho-final-js#readme"
+}
