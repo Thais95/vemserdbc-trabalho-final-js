@@ -160,18 +160,40 @@ async function listarVagas() {
   let listaDeVagas = [];
   listaDeVagas = await getVagas()
 
-
-  listaDeVagas.forEach(element => {
-    document.getElementById('containerListaDeVagas').insertAdjacentHTML("beforeend",
-      `<div class="content-container">
-      <a href="./vaga-recrutador.html?id=${element.id}">
-      <p>${element.titulo}</p>
-      <p>R$ ${element.remuneracao}</p>
-      </a>
-      </div>`
-    )
-  })
-
+  let userTipo;
+  if (dataUsers.length > 0) {
+    console.log("USER", dataUsers)
+    userTipo = dataUsers.filter(user => lerItem().email == user.email)
+    console.log("TIPO", userTipo[0].tipo)
+  } else {
+    listarVagas();
+    console.error('vixe');
+  }
+  //se for recrutador vai aqui
+  if (userTipo[0].tipo == 'recrutador') {
+    listaDeVagas.forEach(element => {
+      document.getElementById('containerListaDeVagas').insertAdjacentHTML("beforeend",
+        `<div class="content-container">
+        <a href="./vaga-recrutador.html?id=${element.id}">
+        <p>${element.titulo}</p>
+        <p>R$ ${element.remuneracao}</p>
+        </a>
+        </div>`
+      )
+    })
+  } else {
+    //se for candidato vai aqui
+    listaDeVagas.forEach(element => {
+      document.getElementById('containerListaDeVagas').insertAdjacentHTML("beforeend",
+        `<div class="content-container">
+        <a href="./vaga-cadastrado.html?id=${element.id}">
+        <p>${element.titulo}</p>
+        <p>R$ ${element.remuneracao}</p>
+        </a>
+        </div>`
+      )
+    })
+  }
 }
 
 
@@ -184,7 +206,6 @@ function postVaga() {
   const description = document.getElementById("description").value;
   const salary = document.getElementById("salary").value;
 
-  console.log(title, description, salary);
 
   try {
     if (title === "" || description === "" || salary === "") {
@@ -223,7 +244,17 @@ function redirecionarVagaEspecifica() {
   const id2 = url2.split("").splice(url2.lastIndexOf("="), 3);
   id2.shift();
   const id3 = id2.join("");
-  // console.log(getInscritos(id3));
+
+  let userTipo;
+
+  if (dataUsers.length > 0) {
+    userTipo = dataUsers.filter(user => lerItem().email == user.email)
+    getInscritos(id3, userTipo[0].tipo);
+  } else {
+    redirecionarVagaEspecifica();
+    console.error('vixe');
+  }
+
 }
 
 // Ideia para verificar usuario logado
@@ -243,6 +274,7 @@ function lerItem() {
   let key = "user";
   let myItem = JSON.parse(localStorage.getItem(key));
   console.log(myItem);
+  return myItem;
 }
 
 async function cadidatarVaga(idVaga, idCandidato) {
@@ -274,6 +306,9 @@ async function cadidatarVaga(idVaga, idCandidato) {
   }
 }
 
+
+
+
 function getInscritos(id) {
   // console.log(dataVagas)
   if (dataVagas.length > 0) {
@@ -304,62 +339,109 @@ function getInscritos(id) {
       getInscritos(id);
     }, 200)
   }
-}
 
-function reprovarCandidato(idVaga, idCandidato) {
-  const candidatura = dataCandidaturas.filter(candidatura => candidatura.idVaga === idVaga && candidatura.idCandidato === idCandidato);
-  candidatura[0].reprovado = true;
+  function getInscritos(id, tipo) {
+    console.log(dataVagas)
+    console.log('getInscritos', tipo);
 
-  try {
-    const json = {
-      reprovado: candidatura[0].reprovado
-    };
+    if (dataVagas.length > 0) {
+      let idVaga = parseInt(id);
+      const vagaFiltrada = dataVagas.filter(vaga => parseInt(vaga.id) === idVaga);
+      const candidatoFiltrado = dataUsers.filter(users => vagaFiltrada[0].candidatos.includes(users.id))
+      document.getElementById('id-vacancy').innerText = vagaFiltrada[0].id;
+      document.getElementById('title-vacancy').innerText = vagaFiltrada[0].titulo;
+      document.getElementById('description-vacancy').innerText = vagaFiltrada[0].descricao;
+      document.getElementById('remuneration-vacancy').innerText = `R$ ${(vagaFiltrada[0].remuneracao).toString()}`;
+      if (tipo == 'recrutador') {
+        console.log('RECRUTADOR');
+        candidatoFiltrado.map(el =>
 
-    fetch(`${url}/candidatura/${candidatura[0].id}`, {
-      method: "PATCH",
+          document.getElementById('candidates').innerHTML += `
+      <div class="content-container-button">
+      <a href="#">
+      <p>${el.nome}</p>
+      <p>${el.nascimento}</p>
+      </a>
+      <button class="btn-disapproved btn-secondary " onclick="reprovarCandidato(${vagaFiltrada[0].id}, ${el.id})">Reprovar</button>
+      </div>
+      `
+        )
+
+      } else if (tipo == 'candidato') {
+        console.log('CANDIDATO');
+        candidatoFiltrado.map(el =>
+
+          document.getElementById('candidates').innerHTML += `
+      <div class="content-container-button">
+      <a href="#">
+      <p>${el.nome}</p>
+      <p>${el.nascimento}</p>
+      </a>
+      </div>
+      `
+        )
+      }
+    } else {
+      setTimeout(() => {
+        getInscritos(id);
+      }, 200)
+    }
+  }
+
+  function reprovarCandidato(idVaga, idCandidato) {
+    const candidatura = dataCandidaturas.filter(candidatura => candidatura.idVaga === idVaga && candidatura.idCandidato === idCandidato);
+    candidatura[0].reprovado = true;
+
+    try {
+      const json = {
+        reprovado: candidatura[0].reprovado
+      };
+
+      fetch(`${url}/candidatura/${candidatura[0].id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(json),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function cancelarCandidatura() {
+    let id = new Map();
+    dataUsers.forEach(element => {
+      id.set(element.email, element.id)
+    });
+    // console.log(id);
+    let emailCandidadoCancelado = localStorage.getItem('user');
+    // console.log(emailCandidadoCancelado);
+    emailCandidadoCancelado = JSON.parse(emailCandidadoCancelado)
+    emailCandidadoCancelado = emailCandidadoCancelado.email;
+    console.log(emailCandidadoCancelado);
+    id.get(emailCandidadoCancelado);
+    console.log(id.get(emailCandidadoCancelado));
+
+    fetch(`${url}/candidatura/${id.get(emailCandidadoCancelado)}`, {
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(json),
+      body: JSON.stringify(id.get(emailCandidadoCancelado)),
     });
-  } catch (error) {
-    console.error(error);
+
+
+
   }
+
+
+  // criandoVaga = document.getElementById('AQUI FICA O ID DA DIV QUE VAI RECEBER OS ELEMENTOS').insertAdjacentElement('beforeend', `
+  //     <div class="content-container">
+  //         <a href="${link-vaga}">
+  //             <p>${titulo-vaga}</p>
+  //             <p>${salario-vaga}</p>
+  //         </a>
+  //     </div>
+  // `)
 }
-
-async function cancelarCandidatura() {
-  let id = new Map();
-  dataUsers.forEach(element => {
-    id.set(element.email, element.id)
-  });
-  // console.log(id);
-  let emailCandidadoCancelado = localStorage.getItem('user');
-  // console.log(emailCandidadoCancelado);
-  emailCandidadoCancelado = JSON.parse(emailCandidadoCancelado)
-  emailCandidadoCancelado = emailCandidadoCancelado.email;
-  console.log(emailCandidadoCancelado);
-  id.get(emailCandidadoCancelado);
-  console.log(id.get(emailCandidadoCancelado));
-
-  fetch(`${url}/candidatura/${id.get(emailCandidadoCancelado)}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(id.get(emailCandidadoCancelado)),
-  });
-
-
-
-}
-
-
-
-// criandoVaga = document.getElementById('AQUI FICA O ID DA DIV QUE VAI RECEBER OS ELEMENTOS').insertAdjacentElement('beforeend', `
-//     <div class="content-container">
-//         <a href="${link-vaga}">
-//             <p>${titulo-vaga}</p>
-//             <p>${salario-vaga}</p>
-//         </a>
-//     </div>
-// `)
