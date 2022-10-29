@@ -162,7 +162,7 @@ async function listarVagas() {
   listaDeVagas.forEach(element => {
     document.getElementById('containerListaDeVagas').insertAdjacentHTML("beforeend",
       `<div class="content-container">
-      <a href="#">
+      <a href="./vaga-recrutador.html?id=${element.id}">
       <p>${element.titulo}</p>
       <p>R$ ${element.remuneracao}</p>
       </a>
@@ -171,7 +171,11 @@ async function listarVagas() {
   })
 
 }
-listarVagas()
+
+
+if(document.getElementById('containerListaDeVagas') !== null){
+  listarVagas()
+}
 
 function postVaga() {
   const title = document.getElementById("title").value;
@@ -208,6 +212,16 @@ function postVaga() {
 
 function redirecionarTelaVaga() {
   window.location.href = './cadastrar-vaga.html'
+}
+
+window.addEventListener('load',() => redirecionarVagaEspecifica())
+
+function redirecionarVagaEspecifica() {
+  const url2 = window.location.href
+  const id2 = url2.split("").splice(url2.lastIndexOf("="), 3);
+  id2.shift();
+  const id3 = id2.join("");
+  console.log(getInscritos(id3));
 }
 
 // Ideia para verificar usuario logado
@@ -257,18 +271,16 @@ async function cadidatarVaga(idVaga, idCandidato) {
   }
 }
 
-async function getInscritos(id){
-  const idVaga = 2;
-  const vagas = await getVagas();
-  const vagaFiltrada = vagas.filter(vaga => vaga.id === idVaga);
-  const candidatoFiltrado = dataUsers.filter(users => vagaFiltrada[0].candidatos.includes(users.id))
-  let { nome, nascimento } = candidatoFiltrado[0];
-
-  document.getElementById('id-vacancy').innerText = idVaga;
-  document.getElementById('title-vacancy').innerText = vagaFiltrada[0].titulo;
+function getInscritos(id){
+    let idVaga = parseInt(id);
+    const vagaFiltrada = dataVagas.filter(vaga => parseInt(vaga.id) === idVaga);
+    console.log(vagaFiltrada)
+    const candidatoFiltrado = dataUsers.filter(users => vagaFiltrada[0].candidatos.includes(users.id))
+    document.getElementById('id-vacancy').innerText = vagaFiltrada[0].id;
+    document.getElementById('title-vacancy').innerText = vagaFiltrada[0].titulo;
   document.getElementById('description-vacancy').innerText = vagaFiltrada[0].descricao;
   document.getElementById('remuneration-vacancy').innerText = `R$ ${(vagaFiltrada[0].remuneracao).toString()}`;
-
+  
   candidatoFiltrado.map(el => 
     
     document.getElementById('candidates').innerHTML += `
@@ -282,5 +294,3 @@ async function getInscritos(id){
     `
     )
 }
-
-getInscritos();
