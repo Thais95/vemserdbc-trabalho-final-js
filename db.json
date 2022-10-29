@@ -1,18 +1,21 @@
 {
   "candidatura": [
     {
+      "id": 1,
       "idVaga": 1,
-      "idCandidato": 2,
+      "idCandidato": 3,
       "reprovado": false
     },
     {
-      "idVaga": 1,
-      "idCandidato": 2,
-      "reprovado": true
+      "id": 2,
+      "idVaga": 2,
+      "idCandidato": 14,
+      "reprovado": false
     },
     {
+      "id": 3,
       "idVaga": 2,
-      "idCandidato": 2,
+      "idCandidato": 3,
       "reprovado": true
     }
   ],
@@ -23,35 +26,39 @@
       "nome": "Juslisclaudio Silva",
       "dataNascimento": "2015-02-28T03:00:00.000Z",
       "email": "juslis@gmail.com",
-      "senha": "1234abc",
+      "senha": "12",
       "candidaturas": []
     },
     {
       "id": 2,
-      "tipo": "candidato",
+      "tipo": "recrutador",
       "nome": "Claudio Junior",
       "dataNascimento": "2015-02-28T03:00:00.000Z",
       "email": "claudio@gmail.com",
-      "senha": "1234abc",
+      "senha": "12",
       "candidaturas": []
     },
     {
       "id": 3,
-      "tipo": "recrutador",
+      "tipo": "candidato",
       "nome": "Marisnalva Santos",
       "dataNascimento": "2015-02-28T03:00:00.000Z",
       "email": "maris@gmail.com",
-      "senha": "1234abc",
-      "candidaturas": []
+      "senha": "12",
+      "candidaturas": [
+        1,
+        2
+      ]
     },
-    
     {
-      "tipo": "recrutador",
+      "tipo": "candidato",
       "nome": "batman",
       "dataNascimento": "2015-02-28T03:00:00.000Z",
       "email": "name3@gmail.com",
-      "senha": "12345",
-      "candidaturas": [],
+      "senha": "12",
+      "candidaturas": [
+        2
+      ],
       "id": 14
     }
   ],
@@ -61,77 +68,40 @@
       "titulo": "QA senior",
       "descricao": "Testa muitas coisas",
       "remuneracao": 7000,
-      "candidatos": [1,2]
+      "candidatos": [
+        3
+      ]
     },
     {
       "id": 2,
       "titulo": "Frontend senior",
       "descricao": "Faz alguns bancos",
       "remuneracao": 7000,
-      "candidatos": [2]
+      "candidatos": [
+        14,
+        3
+      ]
     },
     {
       "id": 3,
       "titulo": "Backend pleno",
       "descricao": "Faz alguns bancos",
       "remuneracao": 7000,
-      "candidatos": [1,2]
+      "candidatos": []
     },
     {
       "titulo": "QA jr",
       "descricao": "Quebrar coisas",
       "remuneracao": "6000",
       "id": 4,
-      "candidatos": [1,2]
+      "candidatos": []
     },
     {
       "titulo": "front senior",
       "descricao": "programar",
       "remuneracao": "14000",
-      "candidatos": [1,2],
+      "candidatos": [],
       "id": 5
-    },
-    {
-      "titulo": "dasdasd",
-      "descricao": "asdasda",
-      "remuneracao": "2000",
-      "candidatos": [1,2],
-      "id": 6
-    },
-    {
-      "titulo": "qa",
-      "descricao": "test",
-      "remuneracao": "50241111",
-      "candidatos": [1,2],
-      "id": 7
-    },
-    {
-      "titulo": "sd",
-      "descricao": "sdfsdf",
-      "remuneracao": "552125",
-      "candidatos": [1,2],
-      "id": 8
-    },
-    {
-      "titulo": "sdfdsf",
-      "descricao": "sdfsdfs",
-      "remuneracao": "dfsd",
-      "candidatos": [1,2],
-      "id": 9
-    },
-    {
-      "titulo": "sdfdsf",
-      "descricao": "sdfsdf",
-      "remuneracao": "sdf",
-      "candidatos": [1,2],
-      "id": 10
-    },
-    {
-      "titulo": "testestestes",
-      "descricao": "testar os testes da",
-      "remuneracao": "51515",
-      "candidatos": [1,2],
-      "id": 11
     }
   ]
 }

@@ -32,6 +32,8 @@ async function getVagas() {
 async function getCandidaturas() {
   const response = await fetch(`${url}/candidatura`);
   dataCandidaturas = await response.json();
+
+  return dataCandidaturas;
 }
 
 getUsers();
@@ -289,7 +291,7 @@ function getInscritos(id){
     <p>${el.nome}</p>
     <p>${el.nascimento}</p>
     </a>
-    <button class="btn-disapproved btn-secondary ">Reprovar</button>
+    <button class="btn-disapproved btn-secondary " onclick="reprovarCandidato(${vagaFiltrada[0].id}, ${el.id})">Reprovar</button>
     </div>
     `
     )
@@ -299,6 +301,29 @@ function getInscritos(id){
     }, 200)
   }
   }
+
+  function reprovarCandidato(idVaga, idCandidato){
+    const candidatura = dataCandidaturas.filter(candidatura => candidatura.idVaga === idVaga && candidatura.idCandidato === idCandidato);
+    candidatura[0].reprovado = true;
+    
+    try {
+      const json = {
+        reprovado: candidatura[0].reprovado
+      };
+  
+      fetch(`${url}/candidatura/${candidatura[0].id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(json),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
 // criandoVaga = document.getElementById('AQUI FICA O ID DA DIV QUE VAI RECEBER OS ELEMENTOS').insertAdjacentElement('beforeend', `
 //     <div class="content-container">
 //         <a href="${link-vaga}">
