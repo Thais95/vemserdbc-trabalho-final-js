@@ -53,19 +53,12 @@ async function deleteVaga(id) {
   });
 }
 
-async function fazerLogin(_email, _password) {
+async function fazerLogin() {
   await onLoadPage();
-  let emailLogin;
-  let senhaLogin;
+  let emailLogin = document.getElementById("emailLogin").value;
+  let senhaLogin = document.getElementById("senhaLogin").value;
 
-  if(!_email && !_password) {
-    emailLogin = document.getElementById("emailLogin").value;
-    senhaLogin = document.getElementById("senhaLogin").value;
-    console.log("APOS CADASTRO", emailLogin, senhaLogin);
-  }else{
-    emailLogin = _email;
-    senhaLogin = _password;
-  }
+  console.log(emailLogin);
 
   if (!emailLogin) return alert("Email não pode estar vazio");
 
@@ -133,14 +126,9 @@ async function postSignup(event) {
       body: JSON.stringify(json),
     });
 
-    //window.location.href = "../index.html";
+    window.location.href = "../index.html";
     //apos cadastro, loga o usuario
-    await fazerLogin(userSignup.email, userSignup.password);
-    if (userSignup.tipo == "Candidato") {
-      window.location.href = "./home-candidato.html";
-    } else {
-      window.location.href = "./home-recrutador.html";
-    }
+    //await fazerLogin(userSignup.email, userSignup.password);
   } catch (error) {
     console.error(error);
   }
@@ -399,7 +387,11 @@ function getInscritos(id, tipo) {
       <p>${el.nome}</p>
       <p>${el.dataNascimento}</p>
       </a>
-      <button class="btn-disapproved btn-secondary " onclick="reprovarCandidato(${vagaFiltrada[0].id}, ${el.id})">Reprovar</button>
+      <button id="${
+        "btn-reprovado" + el.id
+      }" class="btn-disapproved btn-secondary" onclick="reprovarCandidato(${
+            vagaFiltrada[0].id
+          }, ${el.id})">Reprovar</button>
       </div>
       `)
       );
@@ -426,6 +418,7 @@ function getInscritos(id, tipo) {
 }
 
 function reprovarCandidato(idVaga, idCandidato) {
+  document.getElementById(`btn-reprovado${idCandidato}`).classList.add("");
   const candidatura = dataCandidaturas.filter(
     (candidatura) =>
       candidatura.idVaga === idVaga && candidatura.idCandidato === idCandidato
