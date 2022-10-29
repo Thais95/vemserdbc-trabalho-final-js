@@ -21,7 +21,7 @@
       "id": 1,
       "tipo": "recrutador",
       "nome": "Juslisclaudio Silva",
-      "dataNascimento": "10/05/1990",
+      "dataNascimento": "2015-02-28T03:00:00.000Z",
       "email": "juslis@gmail.com",
       "senha": "1234abc",
       "candidaturas": []
@@ -30,7 +30,7 @@
       "id": 2,
       "tipo": "candidato",
       "nome": "Claudio Junior",
-      "dataNascimento": "05/07/2000",
+      "dataNascimento": "2015-02-28T03:00:00.000Z",
       "email": "claudio@gmail.com",
       "senha": "1234abc",
       "candidaturas": []
@@ -39,83 +39,12 @@
       "id": 3,
       "tipo": "recrutador",
       "nome": "Marisnalva Santos",
-      "dataNascimento": "15/08/1996",
+      "dataNascimento": "2015-02-28T03:00:00.000Z",
       "email": "maris@gmail.com",
       "senha": "1234abc",
       "candidaturas": []
     },
-    {
-      "tipo": "userSignup.tipo",
-      "nome": "userSignup.nome",
-      "dataNascimento": "userSignup.dataNascimento",
-      "email": "userSignup.email",
-      "senha": "userSignup.senha",
-      "id": 4
-    },
-    {
-      "tipo": "userSignup.tipo",
-      "nome": "userSignup.nome",
-      "dataNascimento": "userSignup.dataNascimento",
-      "email": "userSignup.email",
-      "senha": "userSignup.senha",
-      "id": 5
-    },
-    {
-      "tipo": "userSignup.tipo",
-      "nome": "userSignup.nome",
-      "dataNascimento": "userSignup.dataNascimento",
-      "email": "userSignup.email",
-      "senha": "userSignup.senha",
-      "id": 6
-    },
-    {
-      "tipo": "userSignup.tipo",
-      "nome": "userSignup.nome",
-      "dataNascimento": "userSignup.dataNascimento",
-      "email": "userSignup.email",
-      "senha": "userSignup.senha",
-      "id": 7
-    },
-    {
-      "tipo": "userSignup.tipo",
-      "nome": "userSignup.nome",
-      "dataNascimento": "userSignup.dataNascimento",
-      "email": "userSignup.email",
-      "senha": "userSignup.senha",
-      "id": 8
-    },
-    {
-      "email": "name3@gmail.com",
-      "senha": "123456",
-      "id": 9
-    },
-    {
-      "email": "batman@gmail.com",
-      "senha": "123456",
-      "id": 10
-    },
-    {
-      "nome": "spider",
-      "dataNascimento": "",
-      "email": "batman@gmail.com",
-      "senha": "123456",
-      "id": 11
-    },
-    {
-      "nome": "batman",
-      "dataNascimento": "",
-      "email": "name3@gmail.com",
-      "senha": "12345",
-      "id": 12
-    },
-    {
-      "tipo": "recrutador",
-      "nome": "batman",
-      "dataNascimento": "",
-      "email": "name3@gmail.com",
-      "senha": "123456",
-      "id": 13
-    },
+    
     {
       "tipo": "recrutador",
       "nome": "batman",
@@ -132,48 +61,41 @@
       "titulo": "QA senior",
       "descricao": "Testa muitas coisas",
       "remuneracao": 7000,
-      "candidatos": []
+      "candidatos": [1,2]
     },
     {
       "id": 2,
       "titulo": "Frontend senior",
       "descricao": "Faz alguns bancos",
       "remuneracao": 7000,
-      "candidatos": [
-        {
-          "idCandidato": 2
-        }
-      ]
+      "candidatos": [2]
     },
     {
       "id": 3,
       "titulo": "Backend pleno",
       "descricao": "Faz alguns bancos",
       "remuneracao": 7000,
-      "candidatos": [
-        {
-          "idCandidato": 2
-        }
-      ]
+      "candidatos": [1,2]
     },
     {
       "titulo": "QA jr",
       "descricao": "Quebrar coisas",
       "remuneracao": "6000",
-      "id": 4
+      "id": 4,
+      "candidatos": [1,2]
     },
     {
       "titulo": "front senior",
       "descricao": "programar",
       "remuneracao": "14000",
-      "candidatos": [],
+      "candidatos": [1,2],
       "id": 5
     },
     {
       "titulo": "dasdasd",
       "descricao": "asdasda",
       "remuneracao": "2000",
-      "candidatos": [],
+      "candidatos": [1,2],
       "id": 6
     }
   ]
