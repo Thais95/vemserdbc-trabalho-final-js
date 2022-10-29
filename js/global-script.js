@@ -269,8 +269,11 @@ async function cadidatarVaga(idVaga, idCandidato) {
 }
 
 function getInscritos(id){
-    let idVaga = parseInt(id);
-    const vagaFiltrada = dataVagas.filter(vaga => parseInt(vaga.id) === idVaga);
+    console.log(dataVagas)
+    if(dataVagas.length > 0){
+
+      let idVaga = parseInt(id);
+      const vagaFiltrada = dataVagas.filter(vaga => parseInt(vaga.id) === idVaga);
     console.log(vagaFiltrada)
     const candidatoFiltrado = dataUsers.filter(users => vagaFiltrada[0].candidatos.includes(users.id))
     document.getElementById('id-vacancy').innerText = vagaFiltrada[0].id;
@@ -286,11 +289,16 @@ function getInscritos(id){
     <p>${el.nome}</p>
     <p>${el.nascimento}</p>
     </a>
-    <button class="btn-disapproved btn-secondary ">teste</button>
+    <button class="btn-disapproved btn-secondary ">Reprovar</button>
     </div>
     `
     )
-}
+  }else{
+    setTimeout(() =>{
+      getInscritos(id);
+    }, 200)
+  }
+  }
 // criandoVaga = document.getElementById('AQUI FICA O ID DA DIV QUE VAI RECEBER OS ELEMENTOS').insertAdjacentElement('beforeend', `
 //     <div class="content-container">
 //         <a href="${link-vaga}">
