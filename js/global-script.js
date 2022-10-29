@@ -53,11 +53,12 @@ async function deleteVaga(id) {
   });
 }
 
-async function fazerLogin(emailLogin, senhaLogin) {
-  if (!emailLogin && !senhaLogin) {
-    emailLogin = document.getElementById("emailLogin").value;
-    senhaLogin = document.getElementById("senhaLogin").value;
-  }
+async function fazerLogin() {
+  await onLoadPage();
+  let emailLogin = document.getElementById("emailLogin").value;
+  let senhaLogin = document.getElementById("senhaLogin").value;
+
+  console.log(emailLogin);
 
   if (!emailLogin) return alert("Email não pode estar vazio");
 
@@ -74,7 +75,7 @@ async function fazerLogin(emailLogin, senhaLogin) {
       "user",
       JSON.stringify({ email: user.email, id: user.id, logado: true })
     );
-    if (user.tipo == "candidato") {
+    if (user.tipo == "Candidato") {
       window.location.href = "./pages/home-candidato.html";
     } else {
       window.location.href = "./pages/home-recrutador.html";
@@ -230,27 +231,20 @@ const createComponentVagas = (rota, titulo, id, remuneracao) => {
   );
 };
 
-// if(document.getElementById('containerListaDeVagas') !== null){
-//   listarVagas()
-// }
-
-function postVaga() {
+async function postVaga() {
   const title = document.getElementById("title").value;
   const description = document.getElementById("description").value;
   const salary = document.getElementById("salary").value;
 
+  console.log(title);
   try {
-    if (title === "" || description === "" || salary === "") {
-      throw new Error("campos vazios");
-    }
-
     const json = {
       titulo: title,
       descricao: description,
       remuneracao: salary,
     };
 
-    fetch(`${url}/vagas`, {
+    await fetch(`${url}/vagas`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -267,9 +261,8 @@ function redirecionarTelaVaga() {
   window.location.href = "./cadastrar-vaga.html";
 }
 
-//window.addEventListener('load',() => redirecionarVagaEspecifica())
-
-function redirecionarVagaEspecifica() {
+async function redirecionarVagaEspecifica() {
+  await onLoadPage();
   const url2 = window.location.href;
   const id2 = url2.split("").splice(url2.lastIndexOf("="), 3);
   id2.shift();
@@ -304,13 +297,18 @@ function lerItem() {
   return myItem;
 }
 
-async function cadidatarVaga(idVaga, idCandidato) {
-  idVaga = 3;
-  idCandidato = 2;
+async function candidatarVaga() {
+  let idCandidato = JSON.parse(localStorage.getItem("user")).id;
+  const idVaga = window.location.href.split("=")[1];
 
   const response = await fetch(`${url}/vagas/${idVaga}`);
   vaga = await response.json();
-  const c = vaga.candidatos;
+
+  if (!vaga.candidatos) {
+    vaga.candidatos = [idCandidato];
+  } else {
+    vaga.candidatos.push(idCandidato);
+  }
 
   try {
     const json = {
@@ -318,15 +316,42 @@ async function cadidatarVaga(idVaga, idCandidato) {
       titulo: vaga.titutlo,
       descricao: vaga.descricao,
       remuneracao: vaga.remuneracao,
-      candidatos: [...c, idCandidato],
+      candidatos: vaga.candidatos,
     };
 
-    fetch(`${url}/vagas/${idVaga}`, {
+    await fetch(`${url}/vagas/${idVaga}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(json),
+    });
+
+    let user = dataUsers.find((item) => item.id == idCandidato);
+    user.candidaturas.push(parseInt(idVaga));
+
+    await fetch(`${url}/users/${idCandidato}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+
+    const jsonCandidatura = {
+      idCandidato: parseInt(idCandidato),
+      idVaga: parseInt(idVaga),
+      reprovado: false,
+    };
+
+    fetch(`${url}/candidatura`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(jsonCandidatura),
+    }).then(() => {
+      window.location.href = "./home-candidato.html";
     });
   } catch (error) {
     console.error(error);
@@ -335,12 +360,12 @@ async function cadidatarVaga(idVaga, idCandidato) {
 
 function getInscritos(id, tipo) {
   console.log(dataVagas);
-  console.log("getInscritos", tipo);
+  console.log(tipo);
 
   if (dataVagas.length > 0) {
     let idVaga = parseInt(id);
     const vagaFiltrada = dataVagas.filter(
-      (vaga) => parseInt(vaga.id) === idVaga
+      (vaga) => parseInt(vaga.id) == idVaga
     );
     const candidatoFiltrado = dataUsers.filter((users) =>
       vagaFiltrada[0].candidatos.includes(users.id)
@@ -352,7 +377,7 @@ function getInscritos(id, tipo) {
     document.getElementById(
       "remuneration-vacancy"
     ).innerText = `R$ ${vagaFiltrada[0].remuneracao.toString()}`;
-    if (tipo == "recrutador") {
+    if (tipo == "Recrutador") {
       console.log("RECRUTADOR");
       candidatoFiltrado.map(
         (el) =>
@@ -360,21 +385,22 @@ function getInscritos(id, tipo) {
       <div class="content-container-button">
       <a href="#">
       <p>${el.nome}</p>
-      <p>${el.nascimento}</p>
+      <p>${el.dataNascimento}</p>
       </a>
       <button class="btn-disapproved btn-secondary " onclick="reprovarCandidato(${vagaFiltrada[0].id}, ${el.id})">Reprovar</button>
       </div>
       `)
       );
-    } else if (tipo == "candidato") {
+    } else if (tipo == "Candidato") {
       console.log("CANDIDATO");
+      console.log(candidatoFiltrado);
       candidatoFiltrado.map(
         (el) =>
           (document.getElementById("candidates").innerHTML += `
       <div class="content-container-button">
       <a href="#">
       <p>${el.nome}</p>
-      <p>${el.nascimento}</p>
+      <p>${el.dataNascimento}</p>
       </a>
       </div>
       `)

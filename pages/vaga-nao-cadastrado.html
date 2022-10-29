@@ -15,7 +15,7 @@
 <!-- id titulo da vaga: title-vacancy -->
 <!-- id descrição: description-vacancy -->
 
-<body>
+<body onload="redirecionarVagaEspecifica()">
   <main class="container">
 
     <div class="box-container container-this-page">
@@ -72,9 +72,10 @@
           </a>
         </div> -->
       </section>
-      <button class="btn btn-main">Candidatar-me</button>
+      <button class="btn btn-main" onclick="candidatarVaga()">Candidatar-me</button>
     </div>
   </main>
+  <script src="../js/global-script.js"></script>
 </body>
 
 </html>

@@ -1,83 +1,43 @@
 {
   "candidatura": [
     {
-      "id": 1,
-      "idVaga": 3,
-      "idCandidato": 3,
-      "reprovado": true
-    },
-    {
-      "id": 2,
-      "idVaga": 4,
-      "idCandidato": 3,
-      "reprovado": false
-    },
-    {
-      "id": 3,
-      "idVaga": 2,
-      "idCandidato": 3,
-      "reprovado": true
+      "idCandidato": 2,
+      "idVaga": 1,
+      "reprovado": true,
+      "id": 1
     }
   ],
   "users": [
     {
-      "id": 1,
-      "tipo": "recrutador",
-      "nome": "Juslisclaudio Silva",
-      "dataNascimento": "2015-02-28T03:00:00.000Z",
-      "email": "juslis@gmail.com",
-      "senha": "12",
-      "candidaturas": []
+      "tipo": "Recrutador",
+      "nome": "yuri",
+      "dataNascimento": "2022/9/10",
+      "email": "yuri@gmail.com",
+      "senha": "123",
+      "candidaturas": [],
+      "id": 1
     },
     {
-      "id": 2,
-      "tipo": "recrutador",
-      "nome": "Claudio Junior",
-      "dataNascimento": "2015-02-28T03:00:00.000Z",
-      "email": "claudio@gmail.com",
-      "senha": "12",
-      "candidaturas": []
-    },
-    {
-      "id": 3,
-      "tipo": "candidato",
-      "nome": "Marisnalva Santos",
-      "dataNascimento": "2015-02-28T03:00:00.000Z",
-      "email": "maris@gmail.com",
-      "senha": "12",
-      "candidaturas": [3, 4]
-    },
-    {
-      "tipo": "candidato",
-      "nome": "batman",
-      "dataNascimento": "2015-02-28T03:00:00.000Z",
-      "email": "name3@gmail.com",
-      "senha": "12",
-      "candidaturas": [2],
-      "id": 14
+      "tipo": "Candidato",
+      "nome": "pedro",
+      "dataNascimento": "2022/9/19",
+      "email": "pedro@gmail.com",
+      "senha": "123",
+      "candidaturas": [
+        1
+      ],
+      "id": 2
     }
   ],
   "vagas": [
     {
-      "id": 3,
-      "titulo": "Backend pleno",
-      "descricao": "Faz alguns bancos",
-      "remuneracao": 7000,
-      "candidatos": []
-    },
-    {
-      "titulo": "QA jr",
-      "descricao": "Quebrar coisas",
-      "remuneracao": "6000",
-      "id": 4,
-      "candidatos": []
-    },
-    {
-      "titulo": "front senior",
-      "descricao": "programar",
-      "remuneracao": "14000",
-      "candidatos": [],
-      "id": 5
+      "titulo": "back end jr",
+      "descricao": "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in",
+      "remuneracao": "2500",
+      "id": 1,
+      "candidatos": [
+        2
+      ]
     }
   ]
 }
