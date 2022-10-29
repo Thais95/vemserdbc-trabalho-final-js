@@ -12,9 +12,18 @@ Documentacao => https://github.com/typicode/json-server
 
 const url = "http://localhost:3000";
 
-let dataUsers;
-let dataVagas = [];
+let dataUsers = [];
+var dataVagas = [];
 let dataCandidaturas = [];
+
+const onLoadPage = async () => {
+  await getUsers();
+  //console.log(dataUsers);
+  await getVagas();
+  //console.log(dataVagas);
+  await getCandidaturas();
+  //console.log(dataCandidaturas);
+};
 
 async function getUsers() {
   const response = await fetch(`${url}/users`);
@@ -25,9 +34,8 @@ async function getUsers() {
 async function getVagas() {
   const response = await fetch(`${url}/vagas`);
   dataVagas = await response.json();
-  return dataVagas;
 
-  // console.log(dataVagas);
+  //console.log(dataVagas);
 }
 async function getCandidaturas() {
   const response = await fetch(`${url}/candidatura`);
@@ -35,12 +43,6 @@ async function getCandidaturas() {
 
   return dataCandidaturas;
 }
-
-getUsers();
-
-getVagas();
-
-getCandidaturas();
 
 async function deleteVaga(id) {
   await fetch(`${url}/vagas/${id}`, {
@@ -51,158 +53,191 @@ async function deleteVaga(id) {
   });
 }
 
-async function fazerLogin() {
-  let emailLogin;
-  let senhaLogin;
-  if (document.getElementById("emailLogin").value) {
+async function fazerLogin(emailLogin, senhaLogin) {
+  if (!emailLogin && !senhaLogin) {
     emailLogin = document.getElementById("emailLogin").value;
-  } else {
-    alert("Email não pode estar vazio");
-  }
-  if (document.getElementById("senhaLogin").value) {
     senhaLogin = document.getElementById("senhaLogin").value;
-  } else {
-    alert("Campo senha não pode estar vazio");
   }
 
-  let tamanho = await dataUsers.length;
-  let emailsCadastrados = new Map();
-  let senhas = new Map();
-  for (let i = 0; i < tamanho; i++) {
-    emailsCadastrados.set(await dataUsers[i].email, i);
-    senhas.set(await dataUsers[i].email, await dataUsers[i].senha);
-  }
+  if (!emailLogin) return alert("Email não pode estar vazio");
 
-  if (emailsCadastrados.has(emailLogin)) {
-    if (senhas.get(emailLogin) == senhaLogin) {
-      gravarItem(emailLogin);
+  if (!senhaLogin) return alert("Campo senha não pode estar vazio");
 
-      let usuarioTipo = '';
-      dataUsers.forEach(element => {
-        if (element.email == emailLogin) {
-          usuarioTipo = element.tipo
-        } else {}
-      });
+  let user = dataUsers.find((item) => {
+    if (emailLogin == item.email && senhaLogin == item.senha) return item;
+  });
 
-      if (usuarioTipo == 'candidato') {
-        window.location.href = './pages/home-candidato.html'
-      } else {
-        window.location.href = './pages/home-recrutador.html'
-      }
+  if (!user)
+    document.getElementById("login-error").innerText = "USUÁRIO NÃO CADASTRADO";
+  else {
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ email: user.email, id: user.id, logado: true })
+    );
+    if (user.tipo == "candidato") {
+      window.location.href = "./pages/home-candidato.html";
+    } else {
+      window.location.href = "./pages/home-recrutador.html";
     }
-  } else {
-    document.getElementById("logado").innerText = "USUÁRIO NÃO CADASTRADO";
   }
 }
 
 function logOut() {
-  localStorage.removeItem('user');
-  window.location.href = '../index.html'
+  localStorage.removeItem("user");
+  window.location.href = "../index.html";
 }
 
-if ((document
-    .getElementById("form-signup")) != null) {
+// if (document.getElementById("form-signup") != null) {
+//   document.getElementById("form-signup").addEventListener("submit", postSignup);
+// }
 
-  document
-    .getElementById("form-signup")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-      postSignup(event);
-    });
+let formUser = document.getElementById("form-signup");
+if (formUser) {
+  formUser.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    await postSignup(event);
+  });
 }
 
-function postSignup(e) {
-  let data = new FormData(e.target).entries();
+async function postSignup(event) {
+  let data = new FormData(event.target).entries();
   let userSignup = Object.fromEntries(data);
 
-  // console.log(userSignup);
   try {
-    if (
-      userSignup.nameUser === "" ||
-      userSignup.email === "" ||
-      userSignup.senha === "" ||
-      userSignup.birthDate === ""
-    ) {
-      throw new Error("campos vazios");
-    }
-
-    let dataFormatada = userSignup.birthDate.split('-');
+    let dataFormatada = userSignup.birthDate.split("-");
 
     const json = {
       tipo: userSignup.typeUser,
       nome: userSignup.nameUser,
-      dataNascimento: new Date(dataFormatada[0], dataFormatada[1]-1, dataFormatada[2]),
+      dataNascimento: `${dataFormatada[0]}/${dataFormatada[1] - 1}/${
+        dataFormatada[2]
+      }`,
       email: userSignup.email,
       senha: userSignup.password,
       candidaturas: [],
     };
 
-    fetch(`${url}/users`, {
+    await fetch(`${url}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(json),
     });
+
+    window.location.href = "../index.html";
+    //apos cadastro, loga o usuario
+    //await fazerLogin(userSignup.email, userSignup.password);
   } catch (error) {
     console.error(error);
   }
-
-  //apos cadastro, loga o usuario
-  //fazerLogin(userSignup.e-mail, userSignup.password)
 }
 
+function deleteVaga() {
+  const url2 = window.location.href;
+  const id2 = url2.split("").splice(url2.lastIndexOf("="), 3);
+  id2.shift();
+  const id3 = id2.join("");
 
-async function listarVagas() {
-  let listaDeVagas = [];
-  listaDeVagas = await getVagas()
+  fetch(`${url}/vagas/${id3}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
 
-  let userTipo;
-  if(dataUsers.length > 0){
-    console.log("USER", dataUsers)
-    userTipo = dataUsers.filter( user => lerItem().email == user.email)
-    console.log("TIPO", userTipo[0].tipo)
-  }else{
-    listarVagas();
-    console.error('vixe');
+async function listarVagas(tipoUser) {
+  await onLoadPage();
+
+  let userToken = JSON.parse(localStorage.getItem("user"));
+
+  if (tipoUser == "recrutador") {
+    dataVagas.map((item) => {
+      return document
+        .getElementById("containerListaDeVagas")
+        .insertAdjacentHTML(
+          "beforeend",
+          `<div class="content-container">
+      <a href="./vaga-recrutador.html?id=${item.id}">
+      <p>${item.titulo}</p>
+      <p>R$ ${item.remuneracao}</p>
+      </a>
+      </div>`
+        );
+    });
+  } else {
+    let user = dataUsers.find((item) => {
+      if (item.id == userToken.id) return item;
+    });
+
+    let candidaturas = user.candidaturas.sort((a, b) => a - b);
+
+    if (!candidaturas) {
+      dataVagas.map((item) => {
+        createComponentVagas(
+          "vaga-nao-cadastrado",
+          item.titulo,
+          item.id,
+          item.remuneracao
+        );
+      });
+    } else {
+      dataVagas.map((item) => {
+        if (candidaturas.find((el) => el == item.id)) {
+          if (
+            dataCandidaturas.find((cand) => {
+              if (cand.id == item.id && cand.reprovado) {
+                return cand;
+              }
+            })
+          ) {
+            return createComponentVagas(
+              "vaga-reprovado",
+              item.titulo,
+              item.id,
+              item.remuneracao
+            );
+          }
+          createComponentVagas(
+            "vaga-cadastrado",
+            item.titulo,
+            item.id,
+            item.remuneracao
+          );
+        } else {
+          createComponentVagas(
+            "vaga-nao-cadastrado",
+            item.titulo,
+            item.id,
+            item.remuneracao
+          );
+        }
+      });
+    }
   }
-  //se for recrutador vai aqui
-  if(userTipo[0].tipo == 'recrutador'){
-    listaDeVagas.forEach(element => {
-      document.getElementById('containerListaDeVagas').insertAdjacentHTML("beforeend",
-        `<div class="content-container">
-        <a href="./vaga-recrutador.html?id=${element.id}">
-        <p>${element.titulo}</p>
-        <p>R$ ${element.remuneracao}</p>
-        </a>
-        </div>`
-      )
-    })
-  }else{
-    //se for candidato vai aqui
-    listaDeVagas.forEach(element => {
-      document.getElementById('containerListaDeVagas').insertAdjacentHTML("beforeend",
-        `<div class="content-container">
-        <a href="./vaga-cadastrado.html?id=${element.id}">
-        <p>${element.titulo}</p>
-        <p>R$ ${element.remuneracao}</p>
-        </a>
-        </div>`
-      )
-    })
-  }
 }
 
+const createComponentVagas = (rota, titulo, id, remuneracao) => {
+  return document.getElementById("containerListaDeVagas").insertAdjacentHTML(
+    "beforeend",
+    `<div class="content-container">
+<a href="./${rota}.html?id=${id}">
+<p>${titulo}</p>
+<p>R$ ${remuneracao}</p>
+</a>
+</div>`
+  );
+};
 
-if(document.getElementById('containerListaDeVagas') !== null){
-  listarVagas()
-}
+// if(document.getElementById('containerListaDeVagas') !== null){
+//   listarVagas()
+// }
 
 function postVaga() {
   const title = document.getElementById("title").value;
   const description = document.getElementById("description").value;
   const salary = document.getElementById("salary").value;
-
 
   try {
     if (title === "" || description === "" || salary === "") {
@@ -213,7 +248,6 @@ function postVaga() {
       titulo: title,
       descricao: description,
       remuneracao: salary,
-      candidatos: [],
     };
 
     fetch(`${url}/vagas`, {
@@ -223,42 +257,42 @@ function postVaga() {
       },
       body: JSON.stringify(json),
     });
-    window.location.href = './home-recrutador.html'
+    window.location.href = "./home-recrutador.html";
   } catch (error) {
     console.error(error);
   }
-
 }
 
 function redirecionarTelaVaga() {
-  window.location.href = './cadastrar-vaga.html'
+  window.location.href = "./cadastrar-vaga.html";
 }
 
-window.addEventListener('load',() => redirecionarVagaEspecifica())
+//window.addEventListener('load',() => redirecionarVagaEspecifica())
 
 function redirecionarVagaEspecifica() {
-  const url2 = window.location.href
+  const url2 = window.location.href;
   const id2 = url2.split("").splice(url2.lastIndexOf("="), 3);
   id2.shift();
   const id3 = id2.join("");
   let userTipo;
 
-  if(dataUsers.length > 0){
-    userTipo = dataUsers.filter( user => lerItem().email == user.email)
+  if (dataUsers.length > 0) {
+    userTipo = dataUsers.filter((user) => lerItem().email == user.email);
     getInscritos(id3, userTipo[0].tipo);
-  }else{
+  } else {
     redirecionarVagaEspecifica();
-    console.error('vixe');
+    console.error("vixe");
   }
 }
 
 // Ideia para verificar usuario logado
 // Criar item:
-function gravarItem(email) {
+function gravarItem(email, id) {
   let key = "user";
   let myObj = {
+    id: id,
     email: email,
-    logado: true
+    logado: true,
   };
   localStorage.setItem(key, JSON.stringify(myObj));
 }
@@ -267,7 +301,6 @@ function gravarItem(email) {
 function lerItem() {
   let key = "user";
   let myItem = JSON.parse(localStorage.getItem(key));
-  console.log(myItem);
   return myItem;
 }
 
@@ -285,7 +318,7 @@ async function cadidatarVaga(idVaga, idCandidato) {
       titulo: vaga.titutlo,
       descricao: vaga.descricao,
       remuneracao: vaga.remuneracao,
-      candidatos: [...c, idCandidato]
+      candidatos: [...c, idCandidato],
     };
 
     fetch(`${url}/vagas/${idVaga}`, {
@@ -300,23 +333,30 @@ async function cadidatarVaga(idVaga, idCandidato) {
   }
 }
 
-function getInscritos(id, tipo){
-    console.log(dataVagas)
-    console.log('getInscritos', tipo);
+function getInscritos(id, tipo) {
+  console.log(dataVagas);
+  console.log("getInscritos", tipo);
 
-    if(dataVagas.length > 0){
-      let idVaga = parseInt(id);
-      const vagaFiltrada = dataVagas.filter(vaga => parseInt(vaga.id) === idVaga);
-    const candidatoFiltrado = dataUsers.filter(users => vagaFiltrada[0].candidatos.includes(users.id))
-    document.getElementById('id-vacancy').innerText = vagaFiltrada[0].id;
-    document.getElementById('title-vacancy').innerText = vagaFiltrada[0].titulo;
-  document.getElementById('description-vacancy').innerText = vagaFiltrada[0].descricao;
-  document.getElementById('remuneration-vacancy').innerText = `R$ ${(vagaFiltrada[0].remuneracao).toString()}`;
-  if(tipo == 'recrutador'){
-    console.log('RECRUTADOR');
-    candidatoFiltrado.map(el => 
-      
-      document.getElementById('candidates').innerHTML += `
+  if (dataVagas.length > 0) {
+    let idVaga = parseInt(id);
+    const vagaFiltrada = dataVagas.filter(
+      (vaga) => parseInt(vaga.id) === idVaga
+    );
+    const candidatoFiltrado = dataUsers.filter((users) =>
+      vagaFiltrada[0].candidatos.includes(users.id)
+    );
+    document.getElementById("id-vacancy").innerText = vagaFiltrada[0].id;
+    document.getElementById("title-vacancy").innerText = vagaFiltrada[0].titulo;
+    document.getElementById("description-vacancy").innerText =
+      vagaFiltrada[0].descricao;
+    document.getElementById(
+      "remuneration-vacancy"
+    ).innerText = `R$ ${vagaFiltrada[0].remuneracao.toString()}`;
+    if (tipo == "recrutador") {
+      console.log("RECRUTADOR");
+      candidatoFiltrado.map(
+        (el) =>
+          (document.getElementById("candidates").innerHTML += `
       <div class="content-container-button">
       <a href="#">
       <p>${el.nome}</p>
@@ -324,49 +364,52 @@ function getInscritos(id, tipo){
       </a>
       <button class="btn-disapproved btn-secondary " onclick="reprovarCandidato(${vagaFiltrada[0].id}, ${el.id})">Reprovar</button>
       </div>
-      `
-      )
-    
-  }else if(tipo == 'candidato'){
-    console.log('CANDIDATO');
-    candidatoFiltrado.map(el => 
-      
-      document.getElementById('candidates').innerHTML += `
+      `)
+      );
+    } else if (tipo == "candidato") {
+      console.log("CANDIDATO");
+      candidatoFiltrado.map(
+        (el) =>
+          (document.getElementById("candidates").innerHTML += `
       <div class="content-container-button">
       <a href="#">
       <p>${el.nome}</p>
       <p>${el.nascimento}</p>
       </a>
       </div>
-      `
-      )
+      `)
+      );
     }
-  }else{
-    setTimeout(() =>{
+  } else {
+    setTimeout(() => {
       getInscritos(id);
-    }, 200)  }  
+    }, 200);
+  }
 }
 
-  function reprovarCandidato(idVaga, idCandidato){
-    const candidatura = dataCandidaturas.filter(candidatura => candidatura.idVaga === idVaga && candidatura.idCandidato === idCandidato);
-    candidatura[0].reprovado = true;
-    
-    try {
-      const json = {
-        reprovado: candidatura[0].reprovado
-      };
-  
-      fetch(`${url}/candidatura/${candidatura[0].id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(json),
-      });
-    } catch (error) {
-      console.error(error);
-    }
+function reprovarCandidato(idVaga, idCandidato) {
+  const candidatura = dataCandidaturas.filter(
+    (candidatura) =>
+      candidatura.idVaga === idVaga && candidatura.idCandidato === idCandidato
+  );
+  candidatura[0].reprovado = true;
+
+  try {
+    const json = {
+      reprovado: candidatura[0].reprovado,
+    };
+
+    fetch(`${url}/candidatura/${candidatura[0].id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(json),
+    });
+  } catch (error) {
+    console.error(error);
   }
+}
 
 // criandoVaga = document.getElementById('AQUI FICA O ID DA DIV QUE VAI RECEBER OS ELEMENTOS').insertAdjacentElement('beforeend', `
 //     <div class="content-container">

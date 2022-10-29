@@ -10,12 +10,12 @@
     <title>Home</title>
 </head>
 
-<body>
+<body onload="listarVagas('candidato')">
     <main class="container">
 
         <div class="box-container" id="containerListaDeVagas">
-            <button type="button" class="logout" title="Deslogar">
-                <p onclick="logOut()">Sair</p>
+            <button type="button" class="logout" title="Deslogar" onclick="logOut()">
+                <p>Sair</p>
                 <img src="../img/logout.svg" alt="Sair">
             </button>
         </div>

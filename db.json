@@ -2,14 +2,14 @@
   "candidatura": [
     {
       "id": 1,
-      "idVaga": 1,
+      "idVaga": 3,
       "idCandidato": 3,
       "reprovado": true
     },
     {
       "id": 2,
-      "idVaga": 2,
-      "idCandidato": 14,
+      "idVaga": 4,
+      "idCandidato": 3,
       "reprovado": false
     },
     {
@@ -45,10 +45,7 @@
       "dataNascimento": "2015-02-28T03:00:00.000Z",
       "email": "maris@gmail.com",
       "senha": "12",
-      "candidaturas": [
-        1,
-        2
-      ]
+      "candidaturas": [3, 4]
     },
     {
       "tipo": "candidato",
@@ -56,32 +53,11 @@
       "dataNascimento": "2015-02-28T03:00:00.000Z",
       "email": "name3@gmail.com",
       "senha": "12",
-      "candidaturas": [
-        2
-      ],
+      "candidaturas": [2],
       "id": 14
     }
   ],
   "vagas": [
-    {
-      "id": 1,
-      "titulo": "QA senior",
-      "descricao": "Testa muitas coisas",
-      "remuneracao": 7000,
-      "candidatos": [
-        3
-      ]
-    },
-    {
-      "id": 2,
-      "titulo": "Frontend senior",
-      "descricao": "Faz alguns bancos",
-      "remuneracao": 7000,
-      "candidatos": [
-        14,
-        3
-      ]
-    },
     {
       "id": 3,
       "titulo": "Backend pleno",

@@ -28,7 +28,7 @@
         <div class="input-group ">
           <label for="typeUser">Tipo de usuário*</label>
           <div class="select-wrapper">
-            <select name="typeUser" id="type-user">
+            <select name="typeUser" id="type-user" required>
               <option value="Candidato" selected>Candidato</option>
               <option value="Recrutador">Recrutador</option>
             </select>
@@ -36,22 +36,22 @@
         </div>
         <div class="input-group">
           <label for="nameUser">Nome completo*</label>
-          <input name="nameUser" type="text" id="name-user" placeholder="Exemplo: João da silva" />
+          <input name="nameUser" type="text" id="name-user" placeholder="Exemplo: João da silva" required />
         </div>
         <div class="input-group">
           <label for="birthDate">Data de nascimento*</label>
-          <input name="birthDate" type="date" id="birth-date" placeholder="Digite sua data de nascimento" />
+          <input name="birthDate" type="date" id="birth-date" placeholder="Digite sua data de nascimento" required />
         </div>
         <div class="input-group">
           <label for="email">Email*</label>
-          <input name="email" type="email" id="e-mail" placeholder="Digite seu email" />
+          <input name="email" type="email" id="e-mail" placeholder="Digite seu email" required />
         </div>
         <div class="input-group">
           <label for="password">Senha*</label>
-          <input name="password" type="password" id="password" placeholder="Digite sua senha" />
+          <input name="password" type="password" id="password" placeholder="Digite sua senha" required />
         </div>
 
-        <button type="submit" class="btn btn-main">Criar conta</button>
+        <input type="submit" class="btn btn-main" value="Criar conta" />
         <div class="container-nav">
           <p>Já possui uma conta?</p>
           <a href="../index.html">Acesse agora</a>

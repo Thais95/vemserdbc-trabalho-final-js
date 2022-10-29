@@ -10,37 +10,37 @@
     <title>Login</title>
 </head>
 
-<body>
+<body onload="onLoadPage()">
     <main class="login-main-container">
         <div class="login-img-container">
             <img src="./img/illustration.svg" alt="">
         </div>
 
         <div class="login-container">
-        <h1>Entre na sua conta</h1>
-        
-        <div class="input-login">
-        <input type="email" name="emailLogin" id="emailLogin" placeholder="Email">
-        <img src="/img/email-icon.svg" alt="">
-        </div>
-        
-        <div class="input-login">
-        <input type="password" name="senhaLogin" id="senhaLogin" placeholder="Senha">
-        <img src="./img/password-icon.svg" alt="">
-        </div>
+            <h1>Entre na sua conta</h1>
 
-        <div>
-        <button class="btn btn-main btn-login" onclick="fazerLogin()">
-            Log in
-        </button>
-        </div>
+            <div class="input-login">
+                <input type="email" name="emailLogin" id="emailLogin" placeholder="Email">
+                <img src="/img/email-icon.svg" alt="">
+            </div>
 
-        <div class="container-nav nav-login">
-            <p>Novo por aqui?</p>
-            <a href="./pages/cadastro.html">Cadastre-se agora</a>
-        </div>
+            <div class="input-login">
+                <input type="password" name="senhaLogin" id="senhaLogin" placeholder="Senha">
+                <img src="./img/password-icon.svg" alt="">
+            </div>
 
-        <p id="login-error" style="color: red"></p>
+            <div>
+                <button class="btn btn-main btn-login" onclick="fazerLogin()">
+                    Log in
+                </button>
+            </div>
+
+            <div class="container-nav nav-login">
+                <p>Novo por aqui?</p>
+                <a href="./pages/cadastro.html">Cadastre-se agora</a>
+            </div>
+
+            <p id="login-error" style="color: red"></p>
         </div>
     </main>
 </body>

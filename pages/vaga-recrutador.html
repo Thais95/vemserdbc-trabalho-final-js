@@ -20,7 +20,7 @@
 
     <div class="box-container container-this-page">
 
-      <a href="./cadastrar-vaga.html">
+      <a href="javascript:history.back()">
         <button type="button" class="back" title="Voltar">
           <img src="../img/back.svg" alt="Sair">
         </button>
@@ -55,7 +55,7 @@
 
       <section id="candidates" class="list-candidates">
 
-        <div class="content-container-button">
+        <!-- <div class="content-container-button">
           <a href="#">
             <p>João da Silva</p>
             <p>10/12/1999</p>
@@ -85,11 +85,11 @@
             <p>10/12/1999</p>
           </a>
           <button class="btn-disapproved btn-secondary ">Reprovar</button>
-        </div>
+        </div> -->
 
       </section>
 
-      <button class="btn btn-main">Excluir vaga</button>
+      <button class="btn btn-main" onclick="deleteVaga()">Excluir vaga</button>
     </div>
   </main>
   <script src="../js/global-script.js"></script>
