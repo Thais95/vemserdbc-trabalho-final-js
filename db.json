@@ -11,12 +11,6 @@
       "idVaga": 2,
       "idCandidato": 14,
       "reprovado": false
-    },
-    {
-      "id": 3,
-      "idVaga": 2,
-      "idCandidato": 3,
-      "reprovado": true
     }
   ],
   "users": [
@@ -70,7 +64,8 @@
       "remuneracao": 7000,
       "candidatos": [
         3
-      ]
+      ],
+      "candidatura": "3"
     },
     {
       "id": 2,
@@ -80,14 +75,8 @@
       "candidatos": [
         14,
         3
-      ]
-    },
-    {
-      "id": 3,
-      "titulo": "Backend pleno",
-      "descricao": "Faz alguns bancos",
-      "remuneracao": 7000,
-      "candidatos": []
+      ],
+      "candidatura": "3"
     },
     {
       "titulo": "QA jr",

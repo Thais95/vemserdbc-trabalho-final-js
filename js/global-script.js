@@ -239,7 +239,7 @@ function redirecionarTelaVaga() {
 
 window.addEventListener('load', () => redirecionarVagaEspecifica())
 
-function redirecionarVagaEspecifica() {
+async function redirecionarVagaEspecifica() {
   const url2 = window.location.href
   const id2 = url2.split("").splice(url2.lastIndexOf("="), 3);
   id2.shift();
@@ -247,7 +247,7 @@ function redirecionarVagaEspecifica() {
 
   let userTipo;
 
-  if (dataUsers.length > 0) {
+  if (await dataUsers.length > 0) {
     userTipo = dataUsers.filter(user => lerItem().email == user.email)
     getInscritos(id3, userTipo[0].tipo);
   } else {
@@ -387,61 +387,75 @@ function getInscritos(id) {
       }, 200)
     }
   }
+}
 
-  function reprovarCandidato(idVaga, idCandidato) {
-    const candidatura = dataCandidaturas.filter(candidatura => candidatura.idVaga === idVaga && candidatura.idCandidato === idCandidato);
-    candidatura[0].reprovado = true;
+function reprovarCandidato(idVaga, idCandidato) {
+  const candidatura = dataCandidaturas.filter(candidatura => candidatura.idVaga === idVaga && candidatura.idCandidato === idCandidato);
+  candidatura[0].reprovado = true;
 
-    try {
-      const json = {
-        reprovado: candidatura[0].reprovado
-      };
+  try {
+    const json = {
+      reprovado: candidatura[0].reprovado
+    };
 
-      fetch(`${url}/candidatura/${candidatura[0].id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(json),
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function cancelarCandidatura() {
-    let id = new Map();
-    dataUsers.forEach(element => {
-      id.set(element.email, element.id)
-    });
-    // console.log(id);
-    let emailCandidadoCancelado = localStorage.getItem('user');
-    // console.log(emailCandidadoCancelado);
-    emailCandidadoCancelado = JSON.parse(emailCandidadoCancelado)
-    emailCandidadoCancelado = emailCandidadoCancelado.email;
-    console.log(emailCandidadoCancelado);
-    id.get(emailCandidadoCancelado);
-    console.log(id.get(emailCandidadoCancelado));
-
-    fetch(`${url}/candidatura/${id.get(emailCandidadoCancelado)}`, {
-      method: "DELETE",
+    fetch(`${url}/candidatura/${candidatura[0].id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(id.get(emailCandidadoCancelado)),
+      body: JSON.stringify(json),
     });
-
-
-
+  } catch (error) {
+    console.error(error);
   }
-
-
-  // criandoVaga = document.getElementById('AQUI FICA O ID DA DIV QUE VAI RECEBER OS ELEMENTOS').insertAdjacentElement('beforeend', `
-  //     <div class="content-container">
-  //         <a href="${link-vaga}">
-  //             <p>${titulo-vaga}</p>
-  //             <p>${salario-vaga}</p>
-  //         </a>
-  //     </div>
-  // `)
 }
+
+async function cancelarCandidatura() {
+  let id = new Map();
+
+  const url2 = window.location.href
+  const id2 = url2.split("").splice(url2.lastIndexOf("="), 3);
+  id2.shift();
+  const id3 = id2.join("");
+
+  console.log(id3);
+
+  await dataUsers.forEach(element => {
+    id.set(element.email, element.id)
+  });
+
+  let emailCandidadoCancelado = localStorage.getItem('user');
+  emailCandidadoCancelado = JSON.parse(emailCandidadoCancelado)
+  emailCandidadoCancelado = emailCandidadoCancelado.email;
+  console.log(emailCandidadoCancelado);
+  id.get(emailCandidadoCancelado);
+  console.log(id.get(emailCandidadoCancelado));
+
+  fetch(`${url}/candidatura/${id.get(emailCandidadoCancelado)}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    }
+  });
+  const candidatoCancelado = {
+    candidatura: `${id.get(emailCandidadoCancelado)}`
+  }
+  fetch(`${url}/vagas/${id3}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(candidatoCancelado)
+  });
+  window.location.href = './home-candidato.html'
+}
+
+
+// criandoVaga = document.getElementById('AQUI FICA O ID DA DIV QUE VAI RECEBER OS ELEMENTOS').insertAdjacentElement('beforeend', `
+//     <div class="content-container">
+//         <a href="${link-vaga}">
+//             <p>${titulo-vaga}</p>
+//             <p>${salario-vaga}</p>
+//         </a>
+//     </div>
+// `)
