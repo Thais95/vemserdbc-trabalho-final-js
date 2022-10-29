@@ -112,27 +112,24 @@ function postSignup(e) {
   let data = new FormData(e.target).entries();
   let userSignup = Object.fromEntries(data);
 
-  console.log(userSignup);
+  // console.log(userSignup);
   try {
     if (
-      userSignup.name - user === "" ||
-      userSignup.e - mail === "" ||
+      userSignup.nameUser === "" ||
+      userSignup.email === "" ||
       userSignup.senha === "" ||
-      userSignup.birth - date === ""
+      userSignup.birthDate === ""
     ) {
       throw new Error("campos vazios");
     }
 
-    let newDateObj = new Date(userSignup.birth - date);
-    let nascimentoDateObj = new Date(
-      newDateObj.getTime() + newDateObj.getTimezoneOffset() * 60000
-    );
+    let dataFormatada = userSignup.birthDate.split('-');
 
     const json = {
-      tipo: userSignup.type - user,
-      nome: userSignup.name - user,
-      dataNascimento: nascimentoDateObj,
-      email: userSignup.e - mail,
+      tipo: userSignup.typeUser,
+      nome: userSignup.nameUser,
+      dataNascimento: new Date(dataFormatada[0], dataFormatada[1]-1, dataFormatada[2]),
+      email: userSignup.email,
       senha: userSignup.password,
       candidaturas: [],
     };
