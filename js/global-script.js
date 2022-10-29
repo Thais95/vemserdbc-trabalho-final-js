@@ -25,7 +25,7 @@ async function getUsers() {
 async function getVagas() {
   const response = await fetch(`${url}/vagas`);
   dataVagas = await response.json();
-
+  return dataVagas
   // console.log(dataVagas);
 }
 async function getCandidaturas() {
@@ -152,6 +152,26 @@ function postSignup(e) {
   //fazerLogin(userSignup.e-mail, userSignup.password)
 }
 
+
+async function listarVagas() {
+  let listaDeVagas = [];
+  listaDeVagas = await getVagas()
+
+
+  listaDeVagas.forEach(element => {
+    document.getElementById('containerListaDeVagas').insertAdjacentHTML("beforeend",
+      `<div class="content-container">
+      <a href="#">
+      <p>${element.titulo}</p>
+      <p>R$ ${element.remuneracao}</p>
+      </a>
+      </div>`
+    )
+  })
+
+}
+listarVagas()
+
 function postVaga() {
   const title = document.getElementById("title").value;
   const description = document.getElementById("description").value;
@@ -178,14 +198,20 @@ function postVaga() {
       },
       body: JSON.stringify(json),
     });
+    window.location.href = './home-recrutador.html'
   } catch (error) {
     console.error(error);
   }
+
+}
+
+function redirecionarTelaVaga() {
+  window.location.href = './cadastrar-vaga.html'
 }
 
 // Ideia para verificar usuario logado
 // Criar item:
-function gravarItem(email, status) {
+function gravarItem(email) {
   let key = "user";
   let myObj = {
     email: email,
