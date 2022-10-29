@@ -1,4 +1,4 @@
-.container-title{
+.container-title {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +19,8 @@
   text-align: center;
 }
 
-.container-nav p, a {
+.container-nav p,
+a {
   margin: 0;
 }
 

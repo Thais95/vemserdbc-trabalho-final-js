@@ -18,18 +18,19 @@
 <body>
   <main class="container">
 
+    <a href="./home-candidato.html">
+      <button type="button" class="back" title="Voltar">
+        <img src="../img/back.svg" alt="Sair">
+      </button>
+    </a>
+
+    <button type="button" class="logout" title="Deslogar">
+      <p>Sair</p>
+      <img src="../img/logout.svg" alt="Sair">
+    </button>
+
     <div class="box-container container-this-page">
 
-      <a href="./home-candidato.html">
-        <button type="button" class="back" title="Voltar">
-          <img src="../img/back.svg" alt="Sair">
-        </button>
-      </a>
-
-      <button type="button" class="logout" title="Deslogar">
-        <p>Sair</p>
-        <img src="../img/logout.svg" alt="Sair">
-      </button>
       <div>
         <h5>ID da vaga: <span id="id-vacancy">###</span></h5>
         <h5>Remuneração: <span id="remuneration-vacancy">R$ 5000</span></h5>
@@ -47,30 +48,20 @@
         <h5>Data de Nascimento</h5>
       </div>
       <section class="list-candidates">
+
+        <div class="component-placeholder">
+          <p>Nenhum candidato inscrito nesta vaga ainda!</p>
+        </div>
+
+        <!-- itens abaixo apenas ilustração -->
+
         <div class="content-container">
           <a href="#">
             <p>João da Silva</p>
             <p>10/12/1999</p>
           </a>
         </div>
-        <div class="content-container">
-          <a href="#">
-            <p>João da Silva</p>
-            <p>10/12/1999</p>
-          </a>
-        </div>
-        <div class="content-container">
-          <a href="#">
-            <p>João da Silva</p>
-            <p>10/12/1999</p>
-          </a>
-        </div>
-        <div class="content-container">
-          <a href="#">
-            <p>João da Silva</p>
-            <p>10/12/1999</p>
-          </a>
-        </div>
+
       </section>
       <button class="btn btn-main">Candidatar-me</button>
     </div>

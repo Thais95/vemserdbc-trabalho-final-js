@@ -4,7 +4,6 @@
 @import "./vaga-style.css";
 @import "./login.css";
 
-
 /* COLOR VARIABLES */
 :root {
   --text-primary-color: #6f6c90;
@@ -15,7 +14,6 @@
   --btn-secondary-color: #fe6663;
   --btn-disable-color: #cccccc;
 }
-
 
 /* GLOBAL STYLES AND RESET */
 * {
@@ -58,7 +56,6 @@ button {
   color: var(--text-primary-color);
   font-size: 1.125rem;
 }
-
 
 /* TAG STYLE */
 h1 {
@@ -109,7 +106,6 @@ select {
   appearance: none;
 }
 
-
 /* CONTAINERS */
 /* main */
 .container {
@@ -157,14 +153,19 @@ select {
 .content-container-disapproved > a p {
   color: var(--btn-secondary-color);
 }
-.content-container {
+.content-container-disapproved a:hover {
+  cursor: default;
+}
+.content-container,
+.content-container-disapproved {
   border: 1px solid #eff0f7;
   box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
   border-radius: 46px;
   user-select: none;
   transition: 0.5s;
 }
-.content-container a {
+.content-container a,
+.content-container-disapproved a {
   width: 750px;
   height: 65px;
   padding: 25px 35px 25px;
@@ -193,7 +194,6 @@ select {
   width: 60%;
   justify-content: space-between;
 }
-
 
 /* COMPONENTS */
 .btn-disapproved {
@@ -278,4 +278,23 @@ select {
 .back img {
   width: 40px;
   height: 40px;
+}
+
+/* component placeholder */
+.component-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #eff0f7;
+  box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
+  border-radius: 46px;
+  user-select: none;
+  transition: 0.5s;
+}
+
+.component-placeholder p {
+  padding: 20px 35px 20px;
+  width: 750px;
+  height: 65px;
+  text-align: center;
 }
