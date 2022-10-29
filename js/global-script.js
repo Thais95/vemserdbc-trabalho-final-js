@@ -53,12 +53,19 @@ async function deleteVaga(id) {
   });
 }
 
-async function fazerLogin() {
+async function fazerLogin(_email, _password) {
   await onLoadPage();
-  let emailLogin = document.getElementById("emailLogin").value;
-  let senhaLogin = document.getElementById("senhaLogin").value;
+  let emailLogin;
+  let senhaLogin;
 
-  console.log(emailLogin);
+  if(!_email && !_password) {
+    emailLogin = document.getElementById("emailLogin").value;
+    senhaLogin = document.getElementById("senhaLogin").value;
+    console.log("APOS CADASTRO", emailLogin, senhaLogin);
+  }else{
+    emailLogin = _email;
+    senhaLogin = _password;
+  }
 
   if (!emailLogin) return alert("Email não pode estar vazio");
 
@@ -126,9 +133,14 @@ async function postSignup(event) {
       body: JSON.stringify(json),
     });
 
-    window.location.href = "../index.html";
+    //window.location.href = "../index.html";
     //apos cadastro, loga o usuario
-    //await fazerLogin(userSignup.email, userSignup.password);
+    await fazerLogin(userSignup.email, userSignup.password);
+    if (userSignup.tipo == "Candidato") {
+      window.location.href = "./home-candidato.html";
+    } else {
+      window.location.href = "./home-recrutador.html";
+    }
   } catch (error) {
     console.error(error);
   }

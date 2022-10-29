@@ -27,6 +27,42 @@
         1
       ],
       "id": 2
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "superman",
+      "dataNascimento": "2022/9/11",
+      "email": "name3@gmail.com",
+      "senha": "12",
+      "candidaturas": [],
+      "id": 3
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "superboy",
+      "dataNascimento": "2022/9/06",
+      "email": "name4@gmail.com",
+      "senha": "12",
+      "candidaturas": [],
+      "id": 4
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "coringa",
+      "dataNascimento": "2022/9/03",
+      "email": "name3@gmail.com",
+      "senha": "12",
+      "candidaturas": [],
+      "id": 5
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "Lucia",
+      "dataNascimento": "2022/7/12",
+      "email": "name5@gmail.com",
+      "senha": "12",
+      "candidaturas": [],
+      "id": 6
     }
   ],
   "vagas": [
