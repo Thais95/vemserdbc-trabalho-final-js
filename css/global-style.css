@@ -1,5 +1,5 @@
 /* IMPORT */
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;800&display=swap');
 @import "./cadastro-style.css";
 @import "./vaga-style.css";
 @import "./login.css";
@@ -10,7 +10,7 @@
   --text-secondary-color: #170f49;
   --text-disapproved-color: #fe6663;
   --placeholder-color: #b1afc6;
-  --btn-main-color: #4a3aff;
+  --btn-main-color: #A558FF;
   --btn-secondary-color: #fe6663;
   --btn-disable-color: #cccccc;
 }
@@ -30,21 +30,7 @@ a {
   color: var(--text-primary-color);
 }
 body {
-  background-image: linear-gradient(
-    to right bottom,
-    #eedcff,
-    #f0e3ff,
-    #f2eaff,
-    #f5f1ff,
-    #f9f7ff,
-    #faf8ff,
-    #fbf9ff,
-    #fcfaff,
-    #faf7ff,
-    #f9f3ff,
-    #f7f0ff,
-    #f6ecff
-  );
+  background: linear-gradient(314deg, #EBDAFF 0%, #F9F5FF 12%, #FFFFFF 25%, #FFFFFF 69%, #F9F5FF 86%, #EBDAFF 100%);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -52,7 +38,7 @@ body,
 input,
 textarea,
 button {
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Inter', sans-serif;
   color: var(--text-primary-color);
   font-size: 1.125rem;
 }
@@ -73,11 +59,11 @@ label {
 input {
   min-width: 80%;
   width: 440px;
-  height: 55px;
+  height: 65px;
   padding: 25px;
   border: 1px solid #eff0f7;
   box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
-  border-radius: 46px;
+  border-radius: 10px;
   margin-top: 10px;
   transition: 0.5s;
 }
@@ -85,7 +71,7 @@ input::placeholder {
   color: var(--placeholder-color);
 }
 input:focus {
-  box-shadow: 0px 0px 15px rgba(74, 58, 255, 0.221);
+  box-shadow: 0px 0px 15px rgba(166, 89, 255, 0.28);
   transition: 0.5s;
 }
 select {
@@ -212,9 +198,10 @@ select {
   height: 65px;
   margin-top: 30px;
   color: white;
+  font-size: 1.2rem;
   font-weight: 600;
   text-align: center;
-  border-radius: 86px;
+  border-radius: 10px;
   cursor: pointer;
 }
 .btn a {
@@ -222,11 +209,11 @@ select {
 }
 .btn-main {
   background-color: var(--btn-main-color);
-  box-shadow: 0px 8px 22px rgba(74, 58, 255, 0.26);
+  box-shadow: 0px 8px 22px rgba(166, 89, 255, 0.26);
   transition: 0.5s;
 }
 .btn-main:hover {
-  background-color: #685aff;
+  background-color: #b87cfd;
   transform: scale(1.05);
   transition: 0.5s;
 }
@@ -291,7 +278,6 @@ select {
   user-select: none;
   transition: 0.5s;
 }
-
 .component-placeholder p {
   padding: 20px 35px 20px;
   width: 750px;
