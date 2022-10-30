@@ -123,6 +123,7 @@ if (formUser) {
 }
 
 async function postSignup(event) {
+  await onLoadPage();
   let data = new FormData(event.target).entries();
   let userSignup = Object.fromEntries(data);
   try {
@@ -136,11 +137,13 @@ async function postSignup(event) {
     if (userSignup.password.length < 4)
       throw new Error("Senha deve ter pelo menos 4 digitos");
 
-    const isCadastrado = Users.find((item) => {
-      userSignup.email == item.email ? true : false;
-    });
-
-    if (isCadastrado) throw new Error("Email já cadastrado")
+    if(dataUsers.length > 0){
+      const isCadastrado = dataUsers.find((item) => {
+        if(userSignup.email == item.email) return item;
+      });
+      
+      if (isCadastrado) throw new Error("Email já cadastrado")
+    }
 
     const json = {
       tipo: userSignup.typeUser,
@@ -166,7 +169,7 @@ async function postSignup(event) {
     //await fazerLogin(userSignup.email, userSignup.password);
   } catch (e) {
      //document.getElementById("signup-error").innerText = e.message;
-     //console.error("email ja cadastrado");
+     console.error(e);
   }
 }
 

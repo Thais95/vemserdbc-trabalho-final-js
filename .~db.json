@@ -44,7 +44,15 @@
     }
   ],
   "users": [
-    
+    {
+      "tipo": "Candidato",
+      "nome": "batman",
+      "dataNascimento": "2022/9/04",
+      "email": "name3@gmail.com",
+      "senha": "1234",
+      "candidaturas": [],
+      "id": 1
+    }
   ],
   "vagas": [
     {
