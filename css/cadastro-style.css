@@ -50,10 +50,6 @@ a {
   width: 100% !important;
 }
 
-.box-cadastro {
-  margin-bottom: 40px;
-}
-
 .box-cadastro input {
   width: 300px;
 }
@@ -68,7 +64,11 @@ a {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 1.25rem;
+}
+
+#form-signup label:first-child {
+  margin-top: 0;
 }
 
 .btn-cadastro {
