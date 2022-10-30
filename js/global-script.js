@@ -80,7 +80,7 @@ async function fazerLogin(_email, _password) {
 
     if (!senhaLogin) throw new Error("Campo senha não pode estar vazio");
 
-    if (senhaLogin.length < 4) throw new Error("Digite pelo menos 4 digitos");
+    if (senhaLogin.length < 4) throw new Error("Senha deve ter pelo menos 4 digitos");
 
     let user = dataUsers.find((item) => {
       if (emailLogin == item.email && senhaLogin == item.senha) return item;
@@ -134,7 +134,13 @@ async function postSignup(event) {
       throw new Error("Campo senha não pode estar vazio");
 
     if (userSignup.password.length < 4)
-      throw new Error("Digite pelo menos 4 digitos");
+      throw new Error("Senha deve ter pelo menos 4 digitos");
+
+    const isCadastrado = Users.find((item) => {
+      userSignup.email == item.email ? true : false;
+    });
+
+    if (isCadastrado) throw new Error("Email já cadastrado")
 
     const json = {
       tipo: userSignup.typeUser,
@@ -159,7 +165,8 @@ async function postSignup(event) {
     //apos cadastro, loga o usuario
     //await fazerLogin(userSignup.email, userSignup.password);
   } catch (e) {
-    // document.getElementById("login-error").innerText = e.message;
+     //document.getElementById("signup-error").innerText = e.message;
+     //console.error("email ja cadastrado");
   }
 }
 
