@@ -312,13 +312,8 @@ async function redirecionarVagaEspecifica() {
   const id3 = id2.join("");
   let userTipo;
 
-  if (dataUsers.length > 0) {
     userTipo = dataUsers.filter((user) => lerItem().email == user.email);
     getInscritos(id3, userTipo[0].tipo);
-  } else {
-    redirecionarVagaEspecifica();
-    console.error("vixe");
-  }
 }
 
 // Ideia para verificar usuario logado
@@ -405,7 +400,7 @@ function getInscritos(id, tipo) {
   console.log(dataVagas);
   console.log(tipo);
 
-  if (dataVagas.length > 0) {
+  
     let idVaga = parseInt(id);
     const vagaFiltrada = dataVagas.filter(
       (vaga) => parseInt(vaga.id) == idVaga
@@ -472,11 +467,6 @@ function getInscritos(id, tipo) {
       `)
       );
     }
-  } else {
-    setTimeout(() => {
-      getInscritos(id);
-    }, 200);
-  }
 }
 
 function reprovarCandidato(idVaga, idCandidato) {
