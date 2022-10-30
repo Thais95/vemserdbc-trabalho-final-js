@@ -15,21 +15,21 @@
 <!-- id titulo da vaga: title-vanancy -->
 <!-- id descrição: description-vanancy -->
 
+<a href="javascript:history.back()">
+  <button type="button" class="back" title="Voltar">
+    <img src="../img/back.svg" alt="Sair">
+  </button>
+</a>
+
+<button type="button" class="logout" title="Deslogar">
+  <p onclick="logOut()">Sair</p>
+  <img src="../img/logout.svg" alt="Sair">
+</button>
+
 <body id="body" onload="redirecionarVagaEspecifica()">
   <main class="container">
 
     <div class="box-container container-this-page">
-
-      <a href="javascript:history.back()">
-        <button type="button" class="back" title="Voltar">
-          <img src="../img/back.svg" alt="Sair">
-        </button>
-      </a>
-
-      <button type="button" class="logout" title="Deslogar">
-        <p onclick="logOut()">Sair</p>
-        <img src="../img/logout.svg" alt="Sair">
-      </button>
 
       <div>
         <h5>ID da vaga: <span id="id-vacancy">###</span></h5>
@@ -54,38 +54,6 @@
       </div>
 
       <section id="candidates" class="list-candidates">
-
-        <!-- <div class="content-container-button">
-          <a href="#">
-            <p>João da Silva</p>
-            <p>10/12/1999</p>
-          </a>
-          <button class="btn-disapproved btn-secondary ">Reprovar</button>
-        </div>
-
-        <div class="content-container-button">
-          <a href="#">
-            <p>João da Silva</p>
-            <p>10/12/1999</p>
-          </a>
-          <button class="btn-disapproved btn-secondary ">Reprovar</button>
-        </div>
-
-        <div class="content-container-button">
-          <a href="#">
-            <p>João da Silva</p>
-            <p>10/12/1999</p>
-          </a>
-          <button class="btn-disapproved btn-disable">Reprovado</button>
-        </div>
-
-        <div class="content-container-button">
-          <a href="#">
-            <p>João da Silva</p>
-            <p>10/12/1999</p>
-          </a>
-          <button class="btn-disapproved btn-secondary ">Reprovar</button>
-        </div> -->
 
       </section>
 
