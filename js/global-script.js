@@ -383,7 +383,7 @@ async function candidatarVaga() {
       candidatos: vaga.candidatos,
     };
 
-    fetch(`${url}/vagas/${idVaga}`, {
+    await fetch(`${url}/vagas/${idVaga}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -564,7 +564,7 @@ async function cancelarCandidatura() {
 
   // console.log(candidatura);
 
-  fetch(`${url}/candidatura/${candidatura.id}`, {
+  await fetch(`${url}/candidatura/${candidatura.id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
