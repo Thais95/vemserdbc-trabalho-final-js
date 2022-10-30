@@ -63,6 +63,87 @@
       "senha": "12",
       "candidaturas": [],
       "id": 6
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "talia",
+      "dataNascimento": "2022/9/05",
+      "email": "name8@gmail.com",
+      "senha": "12",
+      "candidaturas": [],
+      "id": 7
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "alain",
+      "dataNascimento": "2013/0/29",
+      "email": "name1@gmail.com",
+      "senha": "12",
+      "candidaturas": [],
+      "id": 8
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "alemao",
+      "dataNascimento": "2022/9/03",
+      "email": "name89@gmail.com",
+      "senha": "12",
+      "candidaturas": [],
+      "id": 9
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "claudio",
+      "dataNascimento": "2022/9/05",
+      "email": "claudio@gmail.com",
+      "senha": "123",
+      "candidaturas": [],
+      "id": 10
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "thanos",
+      "dataNascimento": "2022/8/30",
+      "email": "name23@gmail.com",
+      "senha": "123",
+      "candidaturas": [],
+      "id": 11
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "thanos filho",
+      "dataNascimento": "2022/8/30",
+      "email": "name233@gmail.com",
+      "senha": "123",
+      "candidaturas": [],
+      "id": 12
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "superman2",
+      "dataNascimento": "2022/9/13",
+      "email": "name376@gmail.com",
+      "senha": "12",
+      "candidaturas": [],
+      "id": 13
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "superman45",
+      "dataNascimento": "2022/9/06",
+      "email": "name309@gmail.com",
+      "senha": "12",
+      "candidaturas": [],
+      "id": 14
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "batman567",
+      "dataNascimento": "2022/8/29",
+      "email": "name67@gmail.com",
+      "senha": "12",
+      "candidaturas": [],
+      "id": 15
     }
   ],
   "vagas": [
