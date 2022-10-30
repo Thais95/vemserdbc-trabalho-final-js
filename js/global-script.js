@@ -60,7 +60,7 @@ function validaEmail(email) {
   }
 }
 
-async function fazerLogin(_email, _password) {
+async function fazerLogin() {
   await onLoadPage();
   let emailLogin;
   let senhaLogin;
@@ -148,7 +148,7 @@ async function postSignup(event) {
 
     window.location.href = "../index.html";
     //apos cadastro, loga o usuario
-    await fazerLogin(userSignup.email, userSignup.password);
+    //await fazerLogin(userSignup.email, userSignup.password);
   } catch (error) {
     console.error(error);
   }
@@ -208,7 +208,11 @@ async function listarVagas(tipoUser) {
         if (candidaturas.find((el) => el == item.id)) {
           if (
             dataCandidaturas.find((cand) => {
-              if (cand.id == item.id && cand.reprovado) {
+              if (
+                cand.idVaga == item.id &&
+                cand.reprovado == true &&
+                cand.idCandidato == user.id
+              ) {
                 return cand;
               }
             })
@@ -399,18 +403,41 @@ function getInscritos(id, tipo) {
     ).innerText = `R$ ${vagaFiltrada[0].remuneracao.toString()}`;
     if (tipo == "Recrutador") {
       console.log("RECRUTADOR");
-      candidatoFiltrado.map(
-        (el) =>
-          (document.getElementById("candidates").innerHTML += `
+      candidatoFiltrado.map((el) => {
+        if (
+          dataCandidaturas.find((item) => {
+            if (item.idCandidato == el.id && item.reprovado) return item;
+          })
+        ) {
+          document.getElementById("candidates").innerHTML += `
       <div class="content-container-button">
       <a href="#">
       <p>${el.nome}</p>
       <p>${el.dataNascimento}</p>
       </a>
-      <button class="btn-disapproved btn-secondary " onclick="reprovarCandidato(${vagaFiltrada[0].id}, ${el.id})">Reprovar</button>
+      <button id="${
+        "btn-reprovado" + el.id
+      }" class="btn-disapproved btn-disable" onclick="reprovarCandidato(${
+            vagaFiltrada[0].id
+          }, ${el.id})">Reprovar</button>
       </div>
-      `)
-      );
+      `;
+        } else {
+          document.getElementById("candidates").innerHTML += `
+          <div class="content-container-button">
+          <a href="#">
+          <p>${el.nome}</p>
+          <p>${el.dataNascimento}</p>
+          </a>
+          <button id="${
+            "btn-reprovado" + el.id
+          }" class="btn-disapproved btn-secondary" onclick="reprovarCandidato(${
+            vagaFiltrada[0].id
+          }, ${el.id})">Reprovar</button>
+          </div>
+          `;
+        }
+      });
     } else if (tipo == "Candidato") {
       console.log("CANDIDATO");
       console.log(candidatoFiltrado);
@@ -434,6 +461,11 @@ function getInscritos(id, tipo) {
 }
 
 function reprovarCandidato(idVaga, idCandidato) {
+  let btn = document.getElementById(`btn-reprovado${idCandidato}`);
+  btn.classList.add("btn-disable");
+  btn.classList.remove("btn-secondary");
+
+  console.log(`btn-reprovado${idCandidato}`);
   const candidatura = dataCandidaturas.filter(
     (candidatura) =>
       candidatura.idVaga === idVaga && candidatura.idCandidato === idCandidato
