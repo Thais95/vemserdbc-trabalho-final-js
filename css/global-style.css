@@ -169,6 +169,7 @@ select {
   border: 1px solid #eff0f7;
   box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
   border-radius: 10px;
+  margin-bottom: 10px;
   user-select: none;
   transition: 0.5s;
   text-transform: capitalize;
