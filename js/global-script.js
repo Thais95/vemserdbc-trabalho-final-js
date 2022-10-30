@@ -550,6 +550,7 @@ async function cancelarCandidatura() {
   const id2 = url2.split("").splice(url2.lastIndexOf("="), 3);
   id2.shift();
   const id3 = id2.join("");
+  if(id3.endsWith('#')) id3.shift();
 
   dataUsers.forEach((element) => {
     id.set(element.email, element.id);
@@ -560,7 +561,6 @@ async function cancelarCandidatura() {
     console.log(idCandidato);
     if (idCandidato == item.idCandidato && item.idVaga == id3) return item;
   });
-
   console.log(candidatura);
 
   await fetch(`${url}/candidatura/${candidatura.id}`, {
