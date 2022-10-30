@@ -469,6 +469,62 @@ function reprovarCandidato(idVaga, idCandidato) {
   }
 }
 
+async function cancelarCandidatura() {
+  let id = new Map();
+
+  const url2 = window.location.href;
+  const id2 = url2.split("").splice(url2.lastIndexOf("="), 3);
+  id2.shift();
+  const id3 = id2.join("");
+
+  console.log(id3);
+
+  dataUsers.forEach((element) => {
+    id.set(element.email, element.id);
+  });
+
+  let idCandidato = JSON.parse(localStorage.getItem("user")).id;
+  let candidatura = dataCandidaturas.find((item) => {
+    if (idCandidato == item.idCandidato && item.idVaga == id3) return item;
+  });
+
+  //console.log(candidatura);
+
+  // fetch(`${url}/candidatura/${candidatura.id}`, {
+  //   method: "DELETE",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // });
+
+  let vaga = dataVagas.find((item) => item.id == id3);
+  vaga.candidatos = vaga.candidatos.filter((item) => item != idCandidato);
+
+  //console.log(vaga);
+
+  fetch(`${url}/vagas/${id3}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(vaga),
+  });
+
+  let user = dataUsers.find((item) => item.id == idCandidato);
+  user.candidaturas = user.candidaturas.filter((item) => item != id3);
+  console.log(user);
+
+  fetch(`${url}/users/${idCandidato}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+
+  window.location.href = "./home-candidato.html";
+}
+
 // criandoVaga = document.getElementById('AQUI FICA O ID DA DIV QUE VAI RECEBER OS ELEMENTOS').insertAdjacentElement('beforeend', `
 //     <div class="content-container">
 //         <a href="${link-vaga}">
