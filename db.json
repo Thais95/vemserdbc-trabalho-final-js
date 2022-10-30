@@ -1,88 +1,23 @@
 {
-  "candidatura": [
-    {
-      "idCandidato": 2,
-      "idVaga": 1,
-      "reprovado": true,
-      "id": 1
-    },
-    {
-      "idCandidato": 1,
-      "idVaga": 1,
-      "reprovado": true,
-      "id": 2
-    },
-    {
-      "idCandidato": 5,
-      "idVaga": 1,
-      "reprovado": true,
-      "id": 3
-    }
-  ],
+  "candidatura": [],
   "users": [
     {
-      "tipo": "Recrutador",
-      "nome": "batman",
-      "dataNascimento": "2022/9/04",
+      "tipo": "Candidato",
+      "nome": "Batman",
+      "dataNascimento": "/NaN/undefined",
       "email": "name3@gmail.com",
       "senha": "1234",
       "candidaturas": [],
-<<<<<<< HEAD
       "id": 1
-    },
-    {
-      "tipo": "Candidato",
-      "nome": "superman",
-      "dataNascimento": "2022/9/05",
-      "email": "name@gmail.com",
-      "senha": "1234",
-      "candidaturas": [],
-      "id": 2
-=======
-      "id": 3
-    },
-    {
-      "tipo": "Recrutador",
-      "nome": "Maria Da Penha",
-      "dataNascimento": "9312/1/01",
-      "email": "mailnovo@mail.com",
-      "senha": "12345",
-      "candidaturas": [],
-      "id": 4
-    },
-    {
-      "tipo": "Candidato",
-      "nome": "Teste De Usuario",
-      "dataNascimento": "2001/0/01",
-      "email": "email@mail.com",
-      "senha": "12345",
-      "candidaturas": [
-        1
-      ],
-      "id": 5
->>>>>>> bdafb6973118ab938db2ea03da41caa5412a566a
     }
   ],
   "vagas": [
     {
-<<<<<<< HEAD
-      "titulo": "QA senior",
-      "descricao": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"",
-      "remuneracao": "10000",
-      "candidatos": [],
-      "id": 1
-=======
       "titulo": "back end pleno",
       "descricao": "lis simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "remuneracao": "5000",
       "id": 1,
-      "candidatos": [
-        17,
-        2,
-        1,
-        5
-      ]
->>>>>>> bdafb6973118ab938db2ea03da41caa5412a566a
+      "candidatos": []
     }
   ]
 }

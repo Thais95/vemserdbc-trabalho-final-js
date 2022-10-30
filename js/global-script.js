@@ -141,6 +141,9 @@ async function postSignup(event) {
 
     if (!userSignup.password)
       throw new Error("Campo de senha não pode estar vazio");
+    
+    if (!userSignup.birthDate)
+      throw new Error("Preencha data de nascimento");
 
     if (userSignup.password.length < 4)
       throw new Error("Senha deve ter pelo menos 4 dígitos");
@@ -456,7 +459,7 @@ function getInscritos(id, tipo) {
         ) {
           document.getElementById("candidates").innerHTML += `
       <div class="content-container-button">
-      <a href="#">
+      <a href="">
       <p>${el.nome}</p>
       <p>${el.dataNascimento}</p>
       </a>
@@ -470,7 +473,7 @@ function getInscritos(id, tipo) {
         } else {
           document.getElementById("candidates").innerHTML += `
           <div class="content-container-button">
-          <a href="#">
+          <a href="">
           <p>${el.nome}</p>
           <p>${el.dataNascimento}</p>
           </a>
@@ -495,7 +498,7 @@ function getInscritos(id, tipo) {
         ) {
           document.getElementById("candidates").innerHTML += `
             <div class="content-container content-container-disapproved">
-            <a href="#">
+            <a>
             <p>${el.nome}</p>
             <p>${el.dataNascimento}</p>
             </a>
@@ -504,7 +507,7 @@ function getInscritos(id, tipo) {
         } else {
           document.getElementById("candidates").innerHTML += `
       <div class="content-container ">
-      <a href="#">
+      <a>
       <p>${el.nome}</p>
       <p>${el.dataNascimento}</p>
       </a>
