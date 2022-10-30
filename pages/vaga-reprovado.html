@@ -18,18 +18,18 @@
 <body onload="redirecionarVagaEspecifica()">
   <main class="container">
 
-    <div class="box-container container-this-page">
-
-      <a href="javascript:history.back()">
-        <button type="button" class="back" title="Voltar">
-          <img src="../img/back.svg" alt="Sair">
-        </button>
-      </a>
-
-      <button type="button" class="logout" title="Deslogar">
-        <p onclick="logOut()">Sair</p>
-        <img src="../img/logout.svg" alt="Sair">
+    <a href="javascript:history.back()">
+      <button type="button" class="back" title="Voltar">
+        <img src="../img/back.svg" alt="Sair">
       </button>
+    </a>
+
+    <button type="button" class="logout" title="Deslogar">
+      <p onclick="logOut()">Sair</p>
+      <img src="../img/logout.svg" alt="Sair">
+    </button>
+
+    <div class="box-container container-this-page">
 
       <div>
         <h5>ID da vaga: <span id="id-vacancy">###</span></h5>
