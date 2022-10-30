@@ -80,7 +80,8 @@ async function fazerLogin(_email, _password) {
 
     if (!senhaLogin) throw new Error("Campo senha não pode estar vazio");
 
-    if (senhaLogin.length < 4) throw new Error("Senha deve ter pelo menos 4 digitos");
+    if (senhaLogin.length < 4)
+      throw new Error("Senha deve ter pelo menos 4 digitos");
 
     let user = dataUsers.find((item) => {
       if (emailLogin == item.email && senhaLogin == item.senha) return item;
@@ -137,12 +138,12 @@ async function postSignup(event) {
     if (userSignup.password.length < 4)
       throw new Error("Senha deve ter pelo menos 4 digitos");
 
-    if(dataUsers.length > 0){
+    if (dataUsers.length > 0) {
       const isCadastrado = dataUsers.find((item) => {
-        if(userSignup.email == item.email) return item;
+        if (userSignup.email == item.email) return item;
       });
-      
-      if (isCadastrado) throw new Error("Email já cadastrado")
+
+      if (isCadastrado) throw new Error("Email já cadastrado");
     }
 
     const json = {
@@ -168,31 +169,58 @@ async function postSignup(event) {
     //apos cadastro, loga o usuario
     //await fazerLogin(userSignup.email, userSignup.password);
   } catch (e) {
-     //document.getElementById("signup-error").innerText = e.message;
-     console.error(e);
+    //document.getElementById("signup-error").innerText = e.message;
+    console.error(e);
   }
 }
 
-function deleteVaga() {
+async function deleteVaga() {
   const url2 = window.location.href;
   const id2 = url2.split("").splice(url2.lastIndexOf("="), 3);
   id2.shift();
   const id3 = id2.join("");
+
+  let candidatura = dataCandidaturas.find((item) => {
+    if (item.idVaga == id3) return item;
+  });
+
+  if (candidatura) {
+    let user = dataUsers.find((item) => item.id == candidatura.idCandidato);
+    user.candidaturas = user.candidaturas.filter((item) => item != id3);
+
+    await fetch(`${url}/candidatura/${candidatura.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    await fetch(`${url}/users/${user.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+  }
 
   fetch(`${url}/vagas/${id3}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
+  }).then(() => {
+    window.location.href = "./home-recrutador.html";
   });
-
-  window.location.href = "./home-recrutador.html";
 }
 
 async function listarVagas(tipoUser) {
   await onLoadPage();
 
   let userToken = JSON.parse(localStorage.getItem("user"));
+
+  if (dataVagas.length == 0)
+    document.getElementById("component-empty").style.display = "flex";
 
   if (tipoUser == "recrutador") {
     dataVagas.map((item) => {
@@ -285,6 +313,7 @@ async function postVaga() {
       titulo: title,
       descricao: description,
       remuneracao: salary,
+      candidatos: [],
     };
 
     await fetch(`${url}/vagas`, {
@@ -341,17 +370,14 @@ function lerItem() {
 }
 
 async function candidatarVaga() {
+  await onLoadPage();
   let idCandidato = JSON.parse(localStorage.getItem("user")).id;
   const idVaga = window.location.href.split("=")[1];
 
   const response = await fetch(`${url}/vagas/${idVaga}`);
   vaga = await response.json();
 
-  if (!vaga.candidatos) {
-    vaga.candidatos = [idCandidato];
-  } else {
-    vaga.candidatos.push(idCandidato);
-  }
+  vaga.candidatos.push(idCandidato);
 
   try {
     const json = {
@@ -387,7 +413,7 @@ async function candidatarVaga() {
       reprovado: false,
     };
 
-    fetch(`${url}/candidatura`, {
+    await fetch(`${url}/candidatura`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -404,7 +430,6 @@ async function candidatarVaga() {
 function getInscritos(id, tipo) {
   console.log(dataVagas);
   console.log(tipo);
-
   if (dataVagas.length > 0) {
     let idVaga = parseInt(id);
     const vagaFiltrada = dataVagas.filter(
@@ -413,6 +438,7 @@ function getInscritos(id, tipo) {
     const candidatoFiltrado = dataUsers.filter((users) =>
       vagaFiltrada[0].candidatos.includes(users.id)
     );
+    console.log("oi");
     document.getElementById("id-vacancy").innerText = vagaFiltrada[0].id;
     document.getElementById("title-vacancy").innerText = vagaFiltrada[0].titulo;
     document.getElementById("description-vacancy").innerText =
@@ -458,19 +484,34 @@ function getInscritos(id, tipo) {
         }
       });
     } else if (tipo == "Candidato") {
-      console.log("CANDIDATO");
-      console.log(candidatoFiltrado);
-      candidatoFiltrado.map(
-        (el) =>
-          (document.getElementById("candidates").innerHTML += `
-      <div class="content-container-button">
+      //console.log("CANDIDATO");
+      //console.log(candidatoFiltrado);
+
+      candidatoFiltrado.map((el) => {
+        if (
+          dataCandidaturas.find((item) => {
+            if (item.idCandidato == el.id && item.reprovado) return item;
+          })
+        ) {
+          document.getElementById("candidates").innerHTML += `
+            <div class="content-container content-container-disapproved">
+            <a href="#">
+            <p>${el.nome}</p>
+            <p>${el.dataNascimento}</p>
+            </a>
+            </div>
+            `;
+        } else {
+          document.getElementById("candidates").innerHTML += `
+      <div class="content-container ">
       <a href="#">
       <p>${el.nome}</p>
       <p>${el.dataNascimento}</p>
       </a>
       </div>
-      `)
-      );
+      `;
+        }
+      });
     }
   } else {
     setTimeout(() => {
@@ -509,6 +550,7 @@ function reprovarCandidato(idVaga, idCandidato) {
 }
 
 async function cancelarCandidatura() {
+  await onLoadPage();
   let id = new Map();
 
   const url2 = window.location.href;
@@ -534,34 +576,34 @@ async function cancelarCandidatura() {
     headers: {
       "Content-Type": "application/json",
     },
+  }).then(() => {
+    let vaga = dataVagas.find((item) => item.id == id3);
+    vaga.candidatos = vaga.candidatos.filter((item) => item != idCandidato);
+
+    //console.log(vaga);
+
+    fetch(`${url}/vagas/${id3}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(vaga),
+    }).then(() => {
+      let user = dataUsers.find((item) => item.id == idCandidato);
+      user.candidaturas = user.candidaturas.filter((item) => item != id3);
+      // console.log(user);
+
+      fetch(`${url}/users/${idCandidato}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      }).then(() => {
+        window.location.href = "./home-candidato.html";
+      });
+    });
   });
-
-  let vaga = dataVagas.find((item) => item.id == id3);
-  vaga.candidatos = vaga.candidatos.filter((item) => item != idCandidato);
-
-  //console.log(vaga);
-
-  fetch(`${url}/vagas/${id3}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(vaga),
-  });
-
-  let user = dataUsers.find((item) => item.id == idCandidato);
-  user.candidaturas = user.candidaturas.filter((item) => item != id3);
-  // console.log(user);
-
-  fetch(`${url}/users/${idCandidato}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  });
-
-  window.location.href = "./home-candidato.html";
 }
 
 // criandoVaga = document.getElementById('AQUI FICA O ID DA DIV QUE VAI RECEBER OS ELEMENTOS').insertAdjacentElement('beforeend', `
