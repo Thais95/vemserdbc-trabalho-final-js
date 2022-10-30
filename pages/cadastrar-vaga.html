@@ -23,13 +23,7 @@
             </button>
         </a>
 
-        <a href="./home-recrutador.html">
-            <button type="button" class="back" title="Voltar">
-                <img src="../img/back.svg" alt="Sair">
-            </button>
-        </a>
-
-        <button type="button" class="logout" title="Deslogar">
+        <button type="button" class="logout" title="Deslogar" onclick="logOut()">
             <p>Sair</p>
             <img src="../img/logout.svg" alt="Sair">
         </button>
@@ -60,6 +54,8 @@
             <button class="btn btn-main" onclick="postVaga()">
                 Cadastrar Vaga
             </button>
+
+            <p id="login=error"></p>
         </div>
 
     </main>

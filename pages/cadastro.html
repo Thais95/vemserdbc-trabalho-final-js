@@ -25,19 +25,25 @@
       <p>Tenha acesso a milhares de vagas em um só lugar</p>
     </div>
 
+    <a href="javascript:history.back()">
+      <button type="button" class="back" title="Voltar">
+        <img src="../img/back.svg" alt="Sair">
+      </button>
+    </a>
+
     <section class="box-container box-cadastro">
 
       <form id="form-signup">
 
         <div class="input-group inputname">
-          <label for="name-user">Nome Completo*</label>
-          <input name="name-user" type="text" id="name-user" placeholder="Digite seu nome completo aqui" />
+          <label for="nameUser">Nome Completo*</label>
+          <input name="nameUser" type="text" id="name-user" placeholder="Digite seu nome completo aqui" />
         </div>
 
         <div class="input-group">
-          <label for="type-user">Tipo de Usuário*</label>
+          <label for="typeUser">Tipo de Usuário*</label>
           <div class="select-wrapper">
-            <select name="type-user" id="type-user">
+            <select name="typeUser" id="type-user">
               <option value="Candidato" selected>Candidato</option>
               <option value="Recrutador">Recrutador</option>
             </select>
@@ -45,11 +51,11 @@
         </div>
 
         <div class="input-group">
-          <label for="birth-date">Data de Nascimento*</label>
-          <input name="birth-date" type="date" id="birth-date" />
+          <label for="birthDate">Data de Nascimento*</label>
+          <input name="birthDate" type="date" id="birth-date" />
         </div>
         <div class="input-group">
-          <label for="e-mail">Email*</label>
+          <label for="email">Email*</label>
           <input name="email" type="email" id="e-mail" placeholder="Digite seu email" />
         </div>
 

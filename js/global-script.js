@@ -3,7 +3,7 @@
 Para instalar json server colocar no terminal:
 npm install -g json-server
 E rodar com:
-json-server --watch meuJSON.json
+json-server --watch db.json
 Pagina de visualizacao:
 http://localhost:3000/
 
@@ -125,7 +125,6 @@ if (formUser) {
 async function postSignup(event) {
   let data = new FormData(event.target).entries();
   let userSignup = Object.fromEntries(data);
-
   try {
     let dataFormatada = userSignup.birthDate.split("-");
 
@@ -160,7 +159,7 @@ async function postSignup(event) {
     //apos cadastro, loga o usuario
     //await fazerLogin(userSignup.email, userSignup.password);
   } catch (e) {
-    document.getElementById("login-error").innerText = e.message;
+    // document.getElementById("login-error").innerText = e.message;
   }
 }
 
@@ -176,6 +175,8 @@ function deleteVaga() {
       "Content-Type": "application/json",
     },
   });
+
+  window.location.href = "./home-recrutador.html";
 }
 
 async function listarVagas(tipoUser) {
@@ -185,17 +186,15 @@ async function listarVagas(tipoUser) {
 
   if (tipoUser == "recrutador") {
     dataVagas.map((item) => {
-      return document
-        .getElementById("containerListaDeVagas")
-        .insertAdjacentHTML(
-          "beforeend",
-          `<div class="content-container">
+      return document.getElementById("vagas").insertAdjacentHTML(
+        "afterbegin",
+        `<div class="content-container">
       <a href="./vaga-recrutador.html?id=${item.id}">
       <p>${item.titulo}</p>
       <p>R$ ${item.remuneracao}</p>
       </a>
       </div>`
-        );
+      );
     });
   } else {
     let user = dataUsers.find((item) => {
@@ -254,7 +253,7 @@ async function listarVagas(tipoUser) {
 }
 
 const createComponentVagas = (rota, titulo, id, remuneracao) => {
-  return document.getElementById("containerListaDeVagas").insertAdjacentHTML(
+  return document.getElementById("vagas").insertAdjacentHTML(
     "beforeend",
     `<div class="content-container">
 <a href="./${rota}.html?id=${id}">
@@ -507,7 +506,7 @@ async function cancelarCandidatura() {
   id2.shift();
   const id3 = id2.join("");
 
-  console.log(id3);
+  // console.log(id3);
 
   dataUsers.forEach((element) => {
     id.set(element.email, element.id);
@@ -542,7 +541,7 @@ async function cancelarCandidatura() {
 
   let user = dataUsers.find((item) => item.id == idCandidato);
   user.candidaturas = user.candidaturas.filter((item) => item != id3);
-  console.log(user);
+  // console.log(user);
 
   fetch(`${url}/users/${idCandidato}`, {
     method: "PATCH",
