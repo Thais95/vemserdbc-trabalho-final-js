@@ -1,32 +1,5 @@
 {
-  "candidatura": [
-    {
-      "idCandidato": 2,
-      "idVaga": 1,
-      "reprovado": true,
-      "id": 1
-    }
-  ],
-  "users": [
-    {
-      "tipo": "Recrutador",
-      "nome": "pedro",
-      "dataNascimento": "2022/9/10",
-      "email": "pedro@gmail.com",
-      "senha": "1234",
-      "candidaturas": [],
-      "id": 1
-    },
-    {
-      "tipo": "Candidato",
-      "nome": "joao@gmail.com",
-      "dataNascimento": "2022/9/10",
-      "email": "joao@gmail.com",
-      "senha": "1234",
-      "candidaturas": [1],
-      "id": 2
-    }
-  ],
+  "candidatura": [],
   "users": [
     {
       "tipo": "Candidato",

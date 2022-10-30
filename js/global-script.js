@@ -180,7 +180,7 @@ async function deleteVaga() {
   id2.shift();
   const id3 = id2.join("");
 
-  let candidatura = dataCandidaturas.find((item) => {
+  var candidatura = dataCandidaturas.find((item) => {
     if (item.idVaga == id3) return item;
   });
 
@@ -399,23 +399,22 @@ async function candidatarVaga() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(user),
-      }).then(() => {
-        const jsonCandidatura = {
-          idCandidato: parseInt(idCandidato),
-          idVaga: parseInt(idVaga),
-          reprovado: false,
-        };
-
-        fetch(`${url}/candidatura`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(jsonCandidatura),
-        }).then(() => {
-          window.location.href = "./home-candidato.html";
-        });
       });
+    });
+    const jsonCandidatura = {
+      idCandidato: parseInt(idCandidato),
+      idVaga: parseInt(idVaga),
+      reprovado: false,
+    };
+
+    await fetch(`${url}/candidatura`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(jsonCandidatura),
+    }).then(() => {
+      window.location.href = "./home-candidato.html";
     });
   } catch (error) {
     console.error(error);
@@ -433,7 +432,6 @@ function getInscritos(id, tipo) {
     const candidatoFiltrado = dataUsers.filter((users) =>
       vagaFiltrada[0].candidatos.includes(users.id)
     );
-    console.log("oi");
     document.getElementById("id-vacancy").innerText = vagaFiltrada[0].id;
     document.getElementById("title-vacancy").innerText = vagaFiltrada[0].titulo;
     document.getElementById("description-vacancy").innerText =
@@ -559,10 +557,11 @@ async function cancelarCandidatura() {
 
   let idCandidato = JSON.parse(localStorage.getItem("user")).id;
   let candidatura = dataCandidaturas.find((item) => {
+    console.log(idCandidato);
     if (idCandidato == item.idCandidato && item.idVaga == id3) return item;
   });
 
-  // console.log(candidatura);
+  console.log(candidatura);
 
   await fetch(`${url}/candidatura/${candidatura.id}`, {
     method: "DELETE",
