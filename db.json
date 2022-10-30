@@ -25,7 +25,9 @@
       "senha": "1234",
       "candidaturas": [1],
       "id": 2
-    },
+    }
+  ],
+  "users": [
     {
       "tipo": "Candidato",
       "nome": "maria",
