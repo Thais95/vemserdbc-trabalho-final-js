@@ -30,7 +30,7 @@ a {
   color: var(--text-primary-color);
 }
 body {
-  background: linear-gradient(314deg, #EBDAFF 0%, #F9F5FF 12%, #FFFFFF 25%, #FFFFFF 69%, #F9F5FF 86%, #EBDAFF 100%);
+  background:linear-gradient(314deg, #EEDFFF 0%, #F9F5FF 12%, #FFFFFF 28%, #FFFFFF 72%, #F9F5FF 89%, #EEDFFF 100%);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -40,12 +40,12 @@ textarea,
 button {
   font-family: 'Inter', sans-serif;
   color: var(--text-primary-color);
-  font-size: 1.125rem;
 }
 
 /* TAG STYLE */
 h1 {
-  font-size: 2.125rem;
+  font-weight: 600;
+  font-size: 2.4rem;
   color: var(--text-secondary-color);
   margin-bottom: 30px;
   user-select: none;
@@ -53,7 +53,9 @@ h1 {
 label {
   color: var(--text-secondary-color);
   font-weight: 700;
-  padding-left: 25px;
+  padding-left: 10px;
+  font-weight: 600;
+  margin-bottom: 5px;
   margin-top: 10px;
 }
 input {
@@ -64,33 +66,42 @@ input {
   border: 1px solid #eff0f7;
   box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
   border-radius: 10px;
-  margin-top: 10px;
-  transition: 0.5s;
+  margin-bottom: 20px;
+  transition: 1s;
+  font-size: 1.05rem;
 }
 input::placeholder {
   color: var(--placeholder-color);
+  font-size: 1.05rem;
 }
 input:focus {
-  box-shadow: 0px 0px 15px rgba(166, 89, 255, 0.28);
+  box-shadow: 0px 0px 10px rgba(166, 89, 255, 0.28);
+  border-color: rgba(166, 89, 255, 0.224);
   transition: 0.5s;
 }
 select {
   min-width: 80%;
   width: 440px;
-  height: 55px;
+  height: 60px;
+  margin-bottom: 20px;
   border: 1px solid #eff0f7;
   box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
-  border-radius: 46px;
-  margin-top: 10px;
-  transition: 0.5s;
+  border-radius: 10px;
+  font-size: 1.05rem;
   padding: 0 25px 0 25px;
   color: var(--placeholder-color);
-  font-size: 1rem;
+  transition: 1s;
+}
+select:focus {
+  box-shadow: 0px 0px 15px rgba(166, 89, 255, 0.28);
+  border-color: rgba(166, 89, 255, 0.28);
+  transition: 0.5s;
 }
 select {
   -webkit-appearance: none;
   appearance: none;
 }
+
 
 /* CONTAINERS */
 /* main */
@@ -109,11 +120,11 @@ select {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 50px;
+  padding: 35px;
   background-color: white;
   box-shadow: 0px 54px 54px rgba(74, 58, 255, 0.02),
     1px 4px 104px rgba(20, 20, 43, 0.04), 0px 98px 66px rgba(19, 18, 66, 0.02);
-  border-radius: 34px;
+  border-radius: 10px;
   gap: 20px;
   /* add max-width isso não existia antes */
   max-width: 850px;
@@ -126,11 +137,13 @@ select {
 /* select style */
 .select-wrapper {
   position: relative;
+  font-size: 1.05rem;
 }
 .select-wrapper::after {
   content: "▼";
+  color: black;
   font-size: 1rem;
-  top: 28px;
+  top: 20px;
   right: 30px;
   position: absolute;
 }
@@ -146,7 +159,7 @@ select {
 .content-container-disapproved {
   border: 1px solid #eff0f7;
   box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
-  border-radius: 46px;
+  border-radius: 10px;
   user-select: none;
   transition: 0.5s;
 }
@@ -170,7 +183,7 @@ select {
   display: flex;
   border: 1px solid #eff0f7;
   box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
-  border-radius: 46px;
+  border-radius: 10px;
   user-select: none;
   transition: 0.5s;
   padding: 15px 30px 15px;
@@ -189,7 +202,7 @@ select {
   color: white;
   font-weight: 600;
   text-align: center;
-  border-radius: 86px;
+  border-radius: 10px;
   cursor: pointer;
 }
 .btn {
@@ -274,7 +287,7 @@ select {
   justify-content: center;
   border: 1px solid #eff0f7;
   box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
-  border-radius: 46px;
+  border-radius: 10px;
   user-select: none;
   transition: 0.5s;
 }

@@ -44,11 +44,11 @@
 }
 .input-login input {
     padding-right: 60px;
+    margin-bottom: 0 !important;
 }
 .input-login img {
     width: 20px;
     height: auto;
-    margin-top: 5px;
     margin-left: -50px;
     justify-self: end;
     -webkit-user-drag: none;
@@ -89,4 +89,17 @@
 }
 .register-now {
     margin-top: 5px;
+}
+.attribution {
+    left: 0;
+    margin-left: 20px;
+    bottom: 0;
+    margin-bottom: 20px;
+    font-size: 0.8rem;
+    position: absolute;
+    user-select: none;
+    opacity: 0.7;
+}
+.attribution a:hover {
+    color: var(--btn-main-color);
 }

@@ -9,8 +9,14 @@
 }
 
 .container-title h1 {
-  margin: 0;
   margin-bottom: 10px;
+  color: var(--btn-main-color);
+}
+
+.container-title p {
+  font-size: 1rem;
+  user-select: none;
+  margin-bottom: 20px;
 }
 
 .container-nav {
@@ -34,4 +40,38 @@ a {
   color: var(--btn-main-color);
   transform: translateX(2);
   transition: 0.5s;
+}
+
+.inputname {
+  width: 620px;
+}
+
+.inputname input {
+  width: 100% !important;
+}
+
+.box-cadastro {
+  margin-bottom: 40px;
+}
+
+.box-cadastro input {
+  width: 300px;
+}
+
+.box-cadastro select {
+  width: 300px;
+}
+
+#form-signup {
+  display: flex;
+  max-width: 620px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.btn-cadastro {
+  margin-top: 10px !important;
+  width: 620px !important;
 }

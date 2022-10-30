@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="../img/fav.png" type="image/x-icon">
   <link rel="stylesheet" href="../css/global-style.css" />
-  <title>Cadastro</title>
+  <title>Vagas de Emprego - Cadastre-se</title>
 </head>
 
 <body>
@@ -24,10 +24,18 @@
       <h1>Cadastre-se agora</h1>
       <p>Tenha acesso a milhares de vagas em um só lugar</p>
     </div>
-    <section class="box-container">
+
+    <section class="box-container box-cadastro">
+
       <form id="form-signup">
-        <div class="input-group ">
-          <label for="type-user">Tipo de usuário*</label>
+
+        <div class="input-group inputname">
+          <label for="name-user">Nome Completo*</label>
+          <input name="name-user" type="text" id="name-user" placeholder="Digite seu nome completo aqui" />
+        </div>
+
+        <div class="input-group">
+          <label for="type-user">Tipo de Usuário*</label>
           <div class="select-wrapper">
             <select name="type-user" id="type-user">
               <option value="Candidato" selected>Candidato</option>
@@ -35,32 +43,31 @@
             </select>
           </div>
         </div>
+
         <div class="input-group">
-          <label for="name-user">Nome completo*</label>
-          <input name="name-user" type="text" id="name-user" placeholder="Exemplo: João da silva" />
-        </div>
-        <div class="input-group">
-          <label for="birth-date">Data de nascimento*</label>
-          <input name="birth-date" type="date" id="birth-date" placeholder="Digite sua data de nascimento" />
+          <label for="birth-date">Data de Nascimento*</label>
+          <input name="birth-date" type="date" id="birth-date" />
         </div>
         <div class="input-group">
           <label for="e-mail">Email*</label>
           <input name="email" type="email" id="e-mail" placeholder="Digite seu email" />
         </div>
+
         <div class="input-group">
           <label for="password">Senha*</label>
           <input name="password" type="password" id="password" placeholder="Digite sua senha" />
         </div>
 
-        <button type="submit" class="btn btn-main">Criar conta</button>
+        <button type="submit" class="btn btn-main btn-cadastro">Criar conta</button>
+
         <div class="container-nav">
           <p>Já possui uma conta?</p>
-          <a href="../index.html">Acesse agora</a>
+          <a href="../index.html" class="register-now">Acesse agora</a>
         </div>
+
       </form>
     </section>
   </main>
   <script src="../js/global-script.js"></script>
 </body>
-
 </html>
