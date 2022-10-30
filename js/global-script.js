@@ -200,17 +200,32 @@ async function deleteVaga() {
   });
 
   if (candidatura) {
-    let user = dataUsers.find((item) => item.id == candidatura.idCandidato);
-    user.candidaturas = user.candidaturas.filter((item) => item != id3);
+    let user = dataUsers.map((item) => {
+      if(item.candidaturas.includes(id3)){
+        item.candidaturas.splice(item.candidaturas.indexOf(id3), 1);
+      }
+      return item;
+    });
 
-    await fetch(`${url}/candidatura/${candidatura.id}`, {
-      method: "DELETE",
+    let candidatura = dataCandidaturas.map((item) => {
+      if(item.idVaga == id3){
+        const index = dataCandidaturas.indexOf(item);
+        dataCandidaturas.splice(index, 1);
+      }
+      return item;
+    });
+    console.log(candidatura);
+    console.log(user);
+   // user.candidaturas = user.candidaturas.filter((item) => item != id3);
+    await fetch(`${url}/candidatura`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(candidatura),
     });
 
-    await fetch(`${url}/users/${user.id}`, {
+    await fetch(`${url}/users`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -394,7 +409,7 @@ async function candidatarVaga() {
 
     const json = {
       id: vaga.id,
-      titulo: vaga.titutlo,
+      titulo: vaga.titulo,
       descricao: vaga.descricao,
       remuneracao: vaga.remuneracao,
       candidatos: vaga.candidatos,
