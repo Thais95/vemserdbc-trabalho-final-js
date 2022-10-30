@@ -22,31 +22,9 @@
   "users": [
     {
       "tipo": "Candidato",
-      "nome": "batman",
-      "dataNascimento": "2022/9/05",
-      "email": "name3@gmail.com",
-      "senha": "1234",
-      "candidaturas": [
-        1
-      ],
-      "id": 1
-    },
-    {
-      "tipo": "Candidato",
-      "nome": "batman",
-      "dataNascimento": "2022/9/03",
-      "email": "name4@gmail.com",
-      "senha": "1234",
-      "candidaturas": [
-        1
-      ],
-      "id": 2
-    },
-    {
-      "tipo": "Recrutador",
-      "nome": "superman",
-      "dataNascimento": "2022/9/04",
-      "email": "recruter@gmail.com",
+      "nome": "maria",
+      "dataNascimento": "2022/9/10",
+      "email": "maria@gmail.com",
       "senha": "1234",
       "candidaturas": [],
       "id": 3
