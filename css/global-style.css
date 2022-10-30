@@ -1,5 +1,5 @@
 /* IMPORT */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;800&display=swap");
 @import "./cadastro-style.css";
 @import "./vaga-style.css";
 @import "./login.css";
@@ -10,7 +10,7 @@
   --text-secondary-color: #170f49;
   --text-disapproved-color: #fe6663;
   --placeholder-color: #b1afc6;
-  --btn-main-color: #A558FF;
+  --btn-main-color: #a558ff;
   --btn-secondary-color: #fe6663;
   --btn-disable-color: #cccccc;
 }
@@ -30,7 +30,15 @@ a {
   color: var(--text-primary-color);
 }
 body {
-  background:linear-gradient(314deg, #EEDFFF 0%, #F9F5FF 12%, #FFFFFF 28%, #FFFFFF 72%, #F9F5FF 89%, #EEDFFF 100%);
+  background: linear-gradient(
+    314deg,
+    #eedfff 0%,
+    #f9f5ff 12%,
+    #ffffff 28%,
+    #ffffff 72%,
+    #f9f5ff 89%,
+    #eedfff 100%
+  );
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -38,7 +46,7 @@ body,
 input,
 textarea,
 button {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   color: var(--text-primary-color);
 }
 
@@ -102,7 +110,6 @@ select {
   -webkit-appearance: none;
   appearance: none;
 }
-
 
 /* CONTAINERS */
 /* main */

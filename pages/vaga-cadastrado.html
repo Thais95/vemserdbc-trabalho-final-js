@@ -15,10 +15,10 @@
 <!-- id titulo da vaga: title-vacancy -->
 <!-- id descrição: description-vacancy -->
 
-<body>
+<body onload="redirecionarVagaEspecifica()">
   <main class="container">
 
-    <a href="./home-candidato.html">
+    <a href="javascript:history.back()">
       <button type="button" class="back" title="Voltar">
         <img src="../img/back.svg" alt="Sair">
       </button>
@@ -64,9 +64,10 @@
 
 
       </section>
-      <button class="btn btn-secondary">Cancelar candidatura</button>
+      <button class="btn btn-secondary" onclick="cancelarCandidatura()">Cancelar candidatura</button>
     </div>
   </main>
+  <script src="../js/global-script.js"></script>
 </body>
 
 </html>

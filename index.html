@@ -10,7 +10,7 @@
     <title>Login | Gatho Vagas, encontre ótimas oportunidades!</title>
 </head>
 
-<body>
+<body onload="onLoadPage()">
     <main class="login-main-container">
         <div class="login-img-container">
             <img src="./img/freelancer-animate.svg" alt="">
@@ -21,21 +21,21 @@
                 <h2>Bem vindo!</h2>
                 <h1>Entre na sua conta</h1>
             </div>
-            
+
             <div class="input-login">
-            <input type="email" name="emailLogin" id="emailLogin" placeholder="Email">
-            <img src="./img/email-icon.svg" alt="">
+                <input type="email" name="emailLogin" id="emailLogin" placeholder="Email">
+                <img src="./img/email-icon.svg" alt="">
             </div>
-            
+
             <div class="input-login">
-            <input type="password" name="senhaLogin" id="senhaLogin" placeholder="Senha">
-            <img src="./img/password-icon.svg" alt="">
+                <input type="password" name="senhaLogin" id="senhaLogin" placeholder="Senha">
+                <img src="./img/password-icon.svg" alt="">
             </div>
 
             <div>
-            <button class="btn btn-main btn-login" onclick="fazerLogin()">
-                Entrar
-            </button>
+                <button class="btn btn-main btn-login" onclick="fazerLogin()">
+                    Entrar
+                </button>
             </div>
 
             <div class="container-nav nav-login">
@@ -43,7 +43,8 @@
                 <a href="./pages/cadastro.html" class="register-now">Cadastre-se agora</a>
             </div>
 
-            <span class="attribution">Work illustration by <a href="https://storyset.com/work" target="_blank">Storyset</a></span>
+            <span class="attribution">Work illustration by <a href="https://storyset.com/work"
+                    target="_blank">Storyset</a></span>
 
             <p class="login-error" id="login-error" style="color: red"></p>
         </div>
