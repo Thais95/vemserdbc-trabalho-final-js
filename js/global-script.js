@@ -76,11 +76,13 @@ async function fazerLogin(_email, _password) {
   }
 
   try {
-    if (!emailLogin) throw new Error("Email não pode estar vazio");
+    if (!emailLogin && !senhaLogin) throw new Error("Campos não podem estar vazios")
 
-    if (!senhaLogin) throw new Error("Campo senha não pode estar vazio");
+    if (!emailLogin) throw new Error("Campo de email não pode estar vazio");
 
-    if (senhaLogin.length < 4) throw new Error("Senha deve ter pelo menos 4 digitos");
+    if (!senhaLogin) throw new Error("Campo de senha não pode estar vazio");
+
+    if (senhaLogin.length < 4) throw new Error("Dados incorretos");
 
     let user = dataUsers.find((item) => {
       if (emailLogin == item.email && senhaLogin == item.senha) return item;
@@ -88,7 +90,7 @@ async function fazerLogin(_email, _password) {
 
     if (!user)
       document.getElementById("login-error").innerText =
-        "USUÁRIO NÃO CADASTRADO";
+        "Dados incorretos, por favor cheque seu email e senha";
     else {
       localStorage.setItem(
         "user",
@@ -114,6 +116,12 @@ function logOut() {
 //   document.getElementById("form-signup").addEventListener("submit", postSignup);
 // }
 
+function capitalizeName(string) {
+  string = string.toLowerCase().split(' ')
+  string = string.map(n => n.charAt(0).toUpperCase() + n.slice(1))
+  return string.join(' ')
+}
+
 let formUser = document.getElementById("form-signup");
 if (formUser) {
   formUser.addEventListener("submit", async (event) => {
@@ -129,13 +137,13 @@ async function postSignup(event) {
   try {
     let dataFormatada = userSignup.birthDate.split("-");
 
-    if (!userSignup.email) throw new Error("Email não pode estar vazio");
+    if (!userSignup.email) throw new Error("Campo de email não pode estar vazio");
 
     if (!userSignup.password)
-      throw new Error("Campo senha não pode estar vazio");
+      throw new Error("Campo de senha não pode estar vazio");
 
     if (userSignup.password.length < 4)
-      throw new Error("Senha deve ter pelo menos 4 digitos");
+      throw new Error("Senha deve ter pelo menos 4 dígitos");
 
     if(dataUsers.length > 0){
       const isCadastrado = dataUsers.find((item) => {
@@ -147,7 +155,7 @@ async function postSignup(event) {
 
     const json = {
       tipo: userSignup.typeUser,
-      nome: userSignup.nameUser,
+      nome: capitalizeName(userSignup.nameUser),
       dataNascimento: `${dataFormatada[0]}/${dataFormatada[1] - 1}/${
         dataFormatada[2]
       }`,
@@ -429,7 +437,7 @@ function getInscritos(id, tipo) {
       <p>${el.nome}</p>
       <p>${el.dataNascimento}</p>
       </a>
-      <button id="${
+      <button disabled type="button" id="${
         "btn-reprovado" + el.id
       }" class="btn-disapproved btn-disable" onclick="reprovarCandidato(${
             vagaFiltrada[0].id
@@ -443,7 +451,7 @@ function getInscritos(id, tipo) {
           <p>${el.nome}</p>
           <p>${el.dataNascimento}</p>
           </a>
-          <button id="${
+          <button type="button" id="${
             "btn-reprovado" + el.id
           }" class="btn-disapproved btn-secondary" onclick="reprovarCandidato(${
             vagaFiltrada[0].id

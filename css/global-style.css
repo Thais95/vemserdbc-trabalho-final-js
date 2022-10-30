@@ -171,6 +171,7 @@ select {
   border-radius: 10px;
   user-select: none;
   transition: 0.5s;
+  text-transform: capitalize;
 }
 .content-container a,
 .content-container-disapproved a {
@@ -307,4 +308,8 @@ select {
   width: 750px;
   height: 65px;
   text-align: center;
+}
+.titles-vacancy {
+  display: flex;
+  justify-content: center;
 }

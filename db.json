@@ -9,8 +9,14 @@
     {
       "idCandidato": 1,
       "idVaga": 1,
-      "reprovado": false,
+      "reprovado": true,
       "id": 2
+    },
+    {
+      "idCandidato": 5,
+      "idVaga": 1,
+      "reprovado": true,
+      "id": 3
     }
   ],
   "users": [
@@ -44,6 +50,26 @@
       "senha": "1234",
       "candidaturas": [],
       "id": 3
+    },
+    {
+      "tipo": "Recrutador",
+      "nome": "Maria Da Penha",
+      "dataNascimento": "9312/1/01",
+      "email": "mailnovo@mail.com",
+      "senha": "12345",
+      "candidaturas": [],
+      "id": 4
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "Teste De Usuario",
+      "dataNascimento": "2001/0/01",
+      "email": "email@mail.com",
+      "senha": "12345",
+      "candidaturas": [
+        1
+      ],
+      "id": 5
     }
   ],
   "vagas": [
@@ -55,7 +81,8 @@
       "candidatos": [
         17,
         2,
-        1
+        1,
+        5
       ]
     }
   ]
