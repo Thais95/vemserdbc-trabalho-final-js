@@ -5,6 +5,24 @@
       "idVaga": 1,
       "reprovado": true,
       "id": 1
+    },
+    {
+      "idCandidato": 3,
+      "idVaga": 1,
+      "reprovado": true,
+      "id": 2
+    },
+    {
+      "idCandidato": 4,
+      "idVaga": 1,
+      "reprovado": true,
+      "id": 3
+    },
+    {
+      "idCandidato": 6,
+      "idVaga": 1,
+      "reprovado": true,
+      "id": 4
     }
   ],
   "users": [
@@ -34,7 +52,9 @@
       "dataNascimento": "2022/9/11",
       "email": "name3@gmail.com",
       "senha": "12",
-      "candidaturas": [],
+      "candidaturas": [
+        1
+      ],
       "id": 3
     },
     {
@@ -43,7 +63,9 @@
       "dataNascimento": "2022/9/06",
       "email": "name4@gmail.com",
       "senha": "12",
-      "candidaturas": [],
+      "candidaturas": [
+        1
+      ],
       "id": 4
     },
     {
@@ -61,18 +83,23 @@
       "dataNascimento": "2022/7/12",
       "email": "name5@gmail.com",
       "senha": "12",
-      "candidaturas": [],
+      "candidaturas": [
+        1
+      ],
       "id": 6
     }
   ],
   "vagas": [
     {
       "titulo": "back end jr",
-      "descricao": "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in",
+      "descricao": "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "remuneracao": "2500",
       "id": 1,
       "candidatos": [
-        2
+        2,
+        3,
+        4,
+        6
       ]
     }
   ]
