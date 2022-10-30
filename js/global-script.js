@@ -52,55 +52,57 @@ async function deleteVaga(id) {
     },
   });
 }
-function validaEmail(email) { 
-  const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm");
+function validaEmail(email) {
+  const emailRegex = new RegExp(
+    /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,
+    "gm"
+  );
   const isValidEmail = emailRegex.test(email);
-  if(!isValidEmail){
+  if (!isValidEmail) {
     document.getElementById("login-error").innerText = "Digite um email válido";
   }
 }
 
-async function fazerLogin() {
+async function fazerLogin(_email, _password) {
   await onLoadPage();
   let emailLogin;
   let senhaLogin;
-  if(!_email && !_password) {
+  if (!_email && !_password) {
     emailLogin = document.getElementById("emailLogin").value;
     senhaLogin = document.getElementById("senhaLogin").value;
-  }else{
+  } else {
     emailLogin = _email;
     senhaLogin = _password;
   }
-  
+
   try {
-    
     if (!emailLogin) throw new Error("Email não pode estar vazio");
-    
+
     if (!senhaLogin) throw new Error("Campo senha não pode estar vazio");
-    
-    if(senhaLogin.length < 4) throw new Error("Digite pelo menos 4 digitos");
-    
+
+    if (senhaLogin.length < 4) throw new Error("Digite pelo menos 4 digitos");
+
     let user = dataUsers.find((item) => {
-    if (emailLogin == item.email && senhaLogin == item.senha) return item;
-  });
+      if (emailLogin == item.email && senhaLogin == item.senha) return item;
+    });
 
-  if (!user)
-    document.getElementById("login-error").innerText = "USUÁRIO NÃO CADASTRADO";
-  else {
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ email: user.email, id: user.id, logado: true })
-    );
-    if (user.tipo == "Candidato") {
-      window.location.href = "./pages/home-candidato.html";
-    } else {
-      window.location.href = "./pages/home-recrutador.html";
+    if (!user)
+      document.getElementById("login-error").innerText =
+        "USUÁRIO NÃO CADASTRADO";
+    else {
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ email: user.email, id: user.id, logado: true })
+      );
+      if (user.tipo == "Candidato") {
+        window.location.href = "./pages/home-candidato.html";
+      } else {
+        window.location.href = "./pages/home-recrutador.html";
+      }
     }
+  } catch (e) {
+    document.getElementById("login-error").innerText = e.message;
   }
-}catch (e) {
-  document.getElementById("login-error").innerText = e.message;
-}
-
 }
 
 function logOut() {
@@ -109,10 +111,10 @@ function logOut() {
 }
 
 // if (document.getElementById("form-signup") != null) {
-  //   document.getElementById("form-signup").addEventListener("submit", postSignup);
-  // }
-  
-  let formUser = document.getElementById("form-signup");
+//   document.getElementById("form-signup").addEventListener("submit", postSignup);
+// }
+
+let formUser = document.getElementById("form-signup");
 if (formUser) {
   formUser.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -127,12 +129,14 @@ async function postSignup(event) {
   try {
     let dataFormatada = userSignup.birthDate.split("-");
 
-      if (!userSignup.email) throw new Error("Email não pode estar vazio");
-      
-      if (!userSignup.password) throw new Error("Campo senha não pode estar vazio");
-      
-      if(userSignup.password.length < 4) throw new Error("Digite pelo menos 4 digitos");
-      
+    if (!userSignup.email) throw new Error("Email não pode estar vazio");
+
+    if (!userSignup.password)
+      throw new Error("Campo senha não pode estar vazio");
+
+    if (userSignup.password.length < 4)
+      throw new Error("Digite pelo menos 4 digitos");
+
     const json = {
       tipo: userSignup.typeUser,
       nome: userSignup.nameUser,
@@ -151,12 +155,12 @@ async function postSignup(event) {
       },
       body: JSON.stringify(json),
     });
-    
+
     window.location.href = "../index.html";
     //apos cadastro, loga o usuario
     //await fazerLogin(userSignup.email, userSignup.password);
   } catch (e) {
-     document.getElementById("login-error").innerText = e.message;
+    document.getElementById("login-error").innerText = e.message;
   }
 }
 
@@ -516,12 +520,12 @@ async function cancelarCandidatura() {
 
   //console.log(candidatura);
 
-  // fetch(`${url}/candidatura/${candidatura.id}`, {
-  //   method: "DELETE",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  // });
+  fetch(`${url}/candidatura/${candidatura.id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   let vaga = dataVagas.find((item) => item.id == id3);
   vaga.candidatos = vaga.candidatos.filter((item) => item != idCandidato);
