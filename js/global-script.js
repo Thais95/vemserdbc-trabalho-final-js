@@ -127,6 +127,12 @@ async function postSignup(event) {
   try {
     let dataFormatada = userSignup.birthDate.split("-");
 
+      if (!userSignup.email) throw new Error("Email não pode estar vazio");
+      
+      if (!userSignup.password) throw new Error("Campo senha não pode estar vazio");
+      
+      if(userSignup.password.length < 4) throw new Error("Digite pelo menos 4 digitos");
+      
     const json = {
       tipo: userSignup.typeUser,
       nome: userSignup.nameUser,
@@ -145,12 +151,12 @@ async function postSignup(event) {
       },
       body: JSON.stringify(json),
     });
-
+    
     window.location.href = "../index.html";
     //apos cadastro, loga o usuario
     //await fazerLogin(userSignup.email, userSignup.password);
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+     document.getElementById("login-error").innerText = e.message;
   }
 }
 

@@ -180,6 +180,15 @@
       "senha": "12",
       "candidaturas": [],
       "id": 15
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "asdasdaf",
+      "dataNascimento": "2022/8/29",
+      "email": "123124@gmail",
+      "senha": "123",
+      "candidaturas": [],
+      "id": 16
     }
   ],
   "vagas": [

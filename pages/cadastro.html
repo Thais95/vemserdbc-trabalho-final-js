@@ -50,13 +50,13 @@
         </div>
         <div class="input-group">
           <label for="email">Email*</label>
-          <input name="email" type="email" id="e-mail" placeholder="Digite seu email" required />
+          <input name="email" type="email" id="e-mail" placeholder="Digite seu email" onchange="validaEmail(this.value)" required />
         </div>
         <div class="input-group">
           <label for="password">Senha*</label>
           <input name="password" type="password" id="password" placeholder="Digite sua senha" required />
         </div>
-
+        <p id="login-error" style="color: red"></p>
         <input type="submit" class="btn btn-main" value="Criar conta" />
         <div class="container-nav">
           <p>Já possui uma conta?</p>
