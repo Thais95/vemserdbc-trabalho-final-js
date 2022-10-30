@@ -45,12 +45,16 @@ async function getCandidaturas() {
 }
 
 async function deleteVaga(id) {
-  await fetch(`${url}/vagas/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    await fetch(`${url}/vagas/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    Window.location.href = "./home-recrutador.html";
+  } catch (err) {}
 }
 function validaEmail(email) {
   const emailRegex = new RegExp(
@@ -76,7 +80,8 @@ async function fazerLogin(_email, _password) {
   }
 
   try {
-    if (!emailLogin && !senhaLogin) throw new Error("Campos não podem estar vazios")
+    if (!emailLogin && !senhaLogin)
+      throw new Error("Campos não podem estar vazios");
 
     if (!emailLogin) throw new Error("Campo de email não pode estar vazio");
 
@@ -117,9 +122,9 @@ function logOut() {
 // }
 
 function capitalizeName(string) {
-  string = string.toLowerCase().split(' ')
-  string = string.map(n => n.charAt(0).toUpperCase() + n.slice(1))
-  return string.join(' ')
+  string = string.toLowerCase().split(" ");
+  string = string.map((n) => n.charAt(0).toUpperCase() + n.slice(1));
+  return string.join(" ");
 }
 
 let formUser = document.getElementById("form-signup");
@@ -137,13 +142,13 @@ async function postSignup(event) {
   try {
     let dataFormatada = userSignup.birthDate.split("-");
 
-    if (!userSignup.email) throw new Error("Campo de email não pode estar vazio");
+    if (!userSignup.email)
+      throw new Error("Campo de email não pode estar vazio");
 
     if (!userSignup.password)
       throw new Error("Campo de senha não pode estar vazio");
-    
-    if (!userSignup.birthDate)
-      throw new Error("Preencha data de nascimento");
+
+    if (!userSignup.birthDate) throw new Error("Preencha data de nascimento");
 
     if (userSignup.password.length < 4)
       throw new Error("Senha deve ter pelo menos 4 dígitos");
@@ -214,7 +219,7 @@ async function deleteVaga() {
     });
   }
 
-  fetch(`${url}/vagas/${id3}`, {
+  await fetch(`${url}/vagas/${id3}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -385,6 +390,8 @@ async function candidatarVaga() {
   vaga.candidatos.push(idCandidato);
 
   try {
+    let allFetchCheck = 0;
+
     const json = {
       id: vaga.id,
       titulo: vaga.titutlo,
@@ -399,18 +406,19 @@ async function candidatarVaga() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(json),
-    }).then(() => {
-      let user = dataUsers.find((item) => item.id == idCandidato);
-      user.candidaturas.push(parseInt(idVaga));
+    }).then(() => allFetchCheck++);
 
-      fetch(`${url}/users/${idCandidato}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
-    });
+    let user = dataUsers.find((item) => item.id == idCandidato);
+    user.candidaturas.push(parseInt(idVaga));
+
+    await fetch(`${url}/users/${idCandidato}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    }).then(() => allFetchCheck++);
+
     const jsonCandidatura = {
       idCandidato: parseInt(idCandidato),
       idVaga: parseInt(idVaga),
@@ -423,9 +431,10 @@ async function candidatarVaga() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(jsonCandidatura),
-    }).then(() => {
-      window.location.href = "./home-candidato.html";
-    });
+    }).then(() => allFetchCheck++);
+    console.log("teste");
+
+    if (allFetchCheck == 3) window.location.href = "./home-candidato.html";
   } catch (error) {
     console.error(error);
   }
@@ -459,10 +468,10 @@ function getInscritos(id, tipo) {
         ) {
           document.getElementById("candidates").innerHTML += `
       <div class="content-container-button">
-      <a href="">
+      
       <p>${el.nome}</p>
       <p>${el.dataNascimento}</p>
-      </a>
+    
       <button disabled type="button" id="${
         "btn-reprovado" + el.id
       }" class="btn-disapproved btn-disable" onclick="reprovarCandidato(${
@@ -473,10 +482,10 @@ function getInscritos(id, tipo) {
         } else {
           document.getElementById("candidates").innerHTML += `
           <div class="content-container-button">
-          <a href="">
+          
           <p>${el.nome}</p>
           <p>${el.dataNascimento}</p>
-          </a>
+          
           <button type="button" id="${
             "btn-reprovado" + el.id
           }" class="btn-disapproved btn-secondary" onclick="reprovarCandidato(${
@@ -490,21 +499,22 @@ function getInscritos(id, tipo) {
       //console.log("CANDIDATO");
       //console.log(candidatoFiltrado);
 
-      candidatoFiltrado.map((el) => {
-        if (
-          dataCandidaturas.find((item) => {
-            if (item.idCandidato == el.id && item.reprovado) return item;
-          })
-        ) {
-          document.getElementById("candidates").innerHTML += `
-            <div class="content-container content-container-disapproved">
-            <a>
-            <p>${el.nome}</p>
-            <p>${el.dataNascimento}</p>
-            </a>
-            </div>
-            `;
-        } else {
+      candidatoFiltrado.map(
+        (el) => {
+          // if (
+          //   dataCandidaturas.find((item) => {
+          //     if (item.idCandidato == el.id && item.reprovado) return item;
+          //   })
+          // ) {
+          //   document.getElementById("candidates").innerHTML += `
+          //     <div class="content-container content-container-disapproved">
+          //     <a>
+          //     <p>${el.nome}</p>
+          //     <p>${el.dataNascimento}</p>
+          //     </a>
+          //     </div>
+          //     `;
+          // } else {
           document.getElementById("candidates").innerHTML += `
       <div class="content-container ">
       <a>
@@ -514,7 +524,8 @@ function getInscritos(id, tipo) {
       </div>
       `;
         }
-      });
+        // }
+      );
     }
   } else {
     setTimeout(() => {
@@ -523,7 +534,19 @@ function getInscritos(id, tipo) {
   }
 }
 
-function reprovarCandidato(idVaga, idCandidato) {
+const listarReprovado = async () => {
+  await onLoadPage();
+
+  let user = JSON.parse(localStorage.getItem("user"));
+  user = dataUsers.find((item) => item.id == user.id);
+
+  document.getElementById(
+    "candidates"
+  ).innerHTML += `<div class="content-container content-container-disapproved"><a><p>${user.nome}</p>
+  <p>${user.dataNascimento}</p></a></div>`;
+};
+
+async function reprovarCandidato(idVaga, idCandidato) {
   let btn = document.getElementById(`btn-reprovado${idCandidato}`);
   btn.classList.add("btn-disable");
   btn.classList.remove("btn-secondary");
@@ -540,7 +563,7 @@ function reprovarCandidato(idVaga, idCandidato) {
       reprovado: candidatura[0].reprovado,
     };
 
-    fetch(`${url}/candidatura/${candidatura[0].id}`, {
+    await fetch(`${url}/candidatura/${candidatura[0].id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -560,52 +583,60 @@ async function cancelarCandidatura() {
   const id2 = url2.split("").splice(url2.lastIndexOf("="), 3);
   id2.shift();
   const id3 = id2.join("");
-  if(id3.endsWith('#')) id3.shift();
+
+  if (id3.endsWith("#")) id3.shift();
 
   dataUsers.forEach((element) => {
     id.set(element.email, element.id);
   });
 
   let idCandidato = JSON.parse(localStorage.getItem("user")).id;
+  console.log(id3);
   let candidatura = dataCandidaturas.find((item) => {
     console.log(idCandidato);
     if (idCandidato == item.idCandidato && item.idVaga == id3) return item;
   });
   console.log(candidatura);
 
-  await fetch(`${url}/candidatura/${candidatura.id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then(() => {
+  try {
+    let allFetchCheck = 0;
+
+    await fetch(`${url}/candidatura/${candidatura.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(() => allFetchCheck++);
+
     let vaga = dataVagas.find((item) => item.id == id3);
     vaga.candidatos = vaga.candidatos.filter((item) => item != idCandidato);
 
     //console.log(vaga);
 
-    fetch(`${url}/vagas/${id3}`, {
+    await fetch(`${url}/vagas/${id3}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(vaga),
-    }).then(() => {
-      let user = dataUsers.find((item) => item.id == idCandidato);
-      user.candidaturas = user.candidaturas.filter((item) => item != id3);
-      console.log(user);
+    }).then(() => allFetchCheck++);
 
-      fetch(`${url}/users/${idCandidato}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      }).then(() => {
-        window.location.href = "./home-candidato.html";
-      });
-    });
-  });
+    let user = dataUsers.find((item) => item.id == idCandidato);
+    user.candidaturas = user.candidaturas.filter((item) => item != id3);
+    console.log(user);
+
+    await fetch(`${url}/users/${idCandidato}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    }).then(() => allFetchCheck++);
+
+    if (allFetchCheck == 3) window.location.href = "./home-candidato.html";
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 // criandoVaga = document.getElementById('AQUI FICA O ID DA DIV QUE VAI RECEBER OS ELEMENTOS').insertAdjacentElement('beforeend', `

@@ -4,20 +4,30 @@
     {
       "tipo": "Candidato",
       "nome": "Batman",
-      "dataNascimento": "/NaN/undefined",
+      "dataNascimento": "10/09/2022",
       "email": "name3@gmail.com",
       "senha": "1234",
       "candidaturas": [],
       "id": 1
+    },
+    {
+      "tipo": "Recrutador",
+      "nome": "Maria",
+      "dataNascimento": "2022/9/25",
+      "email": "maria@gmail.com",
+      "senha": "1234",
+      "candidaturas": [],
+      "id": 2
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "Pedro",
+      "dataNascimento": "2022/9/25",
+      "email": "pedro@gmail.com",
+      "senha": "4321",
+      "candidaturas": [],
+      "id": 3
     }
   ],
-  "vagas": [
-    {
-      "titulo": "back end pleno",
-      "descricao": "lis simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      "remuneracao": "5000",
-      "id": 1,
-      "candidatos": []
-    }
-  ]
+  "vagas": []
 }
