@@ -341,13 +341,8 @@ async function redirecionarVagaEspecifica() {
   const id3 = id2.join("");
   let userTipo;
 
-  if (dataUsers.length > 0) {
-    userTipo = dataUsers.filter((user) => lerItem().email == user.email);
-    getInscritos(id3, userTipo[0].tipo);
-  } else {
-    redirecionarVagaEspecifica();
-    console.error("vixe");
-  }
+  userTipo = dataUsers.filter((user) => lerItem().email == user.email);
+  getInscritos(id3, userTipo[0].tipo);
 }
 
 // Ideia para verificar usuario logado
@@ -388,39 +383,39 @@ async function candidatarVaga() {
       candidatos: vaga.candidatos,
     };
 
-    await fetch(`${url}/vagas/${idVaga}`, {
+    fetch(`${url}/vagas/${idVaga}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(json),
-    });
-
-    let user = dataUsers.find((item) => item.id == idCandidato);
-    user.candidaturas.push(parseInt(idVaga));
-
-    await fetch(`${url}/users/${idCandidato}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-
-    const jsonCandidatura = {
-      idCandidato: parseInt(idCandidato),
-      idVaga: parseInt(idVaga),
-      reprovado: false,
-    };
-
-    await fetch(`${url}/candidatura`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(jsonCandidatura),
     }).then(() => {
-      window.location.href = "./home-candidato.html";
+      let user = dataUsers.find((item) => item.id == idCandidato);
+      user.candidaturas.push(parseInt(idVaga));
+
+      fetch(`${url}/users/${idCandidato}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      }).then(() => {
+        const jsonCandidatura = {
+          idCandidato: parseInt(idCandidato),
+          idVaga: parseInt(idVaga),
+          reprovado: false,
+        };
+
+        fetch(`${url}/candidatura`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(jsonCandidatura),
+        }).then(() => {
+          window.location.href = "./home-candidato.html";
+        });
+      });
     });
   } catch (error) {
     console.error(error);
@@ -558,8 +553,6 @@ async function cancelarCandidatura() {
   id2.shift();
   const id3 = id2.join("");
 
-  // console.log(id3);
-
   dataUsers.forEach((element) => {
     id.set(element.email, element.id);
   });
@@ -569,7 +562,7 @@ async function cancelarCandidatura() {
     if (idCandidato == item.idCandidato && item.idVaga == id3) return item;
   });
 
-  //console.log(candidatura);
+  // console.log(candidatura);
 
   fetch(`${url}/candidatura/${candidatura.id}`, {
     method: "DELETE",
@@ -591,7 +584,7 @@ async function cancelarCandidatura() {
     }).then(() => {
       let user = dataUsers.find((item) => item.id == idCandidato);
       user.candidaturas = user.candidaturas.filter((item) => item != id3);
-      // console.log(user);
+      console.log(user);
 
       fetch(`${url}/users/${idCandidato}`, {
         method: "PATCH",
