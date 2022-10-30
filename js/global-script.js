@@ -52,19 +52,35 @@ async function deleteVaga(id) {
     },
   });
 }
+function validaEmail(email) { 
+  const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm");
+  const isValidEmail = emailRegex.test(email);
+  if(!isValidEmail){
+    document.getElementById("login-error").innerText = "Digite um email válido";
+  }
+}
 
 async function fazerLogin() {
   await onLoadPage();
-  let emailLogin = document.getElementById("emailLogin").value;
-  let senhaLogin = document.getElementById("senhaLogin").value;
-
-  console.log(emailLogin);
-
-  if (!emailLogin) return alert("Email não pode estar vazio");
-
-  if (!senhaLogin) return alert("Campo senha não pode estar vazio");
-
-  let user = dataUsers.find((item) => {
+  let emailLogin;
+  let senhaLogin;
+  if(!_email && !_password) {
+    emailLogin = document.getElementById("emailLogin").value;
+    senhaLogin = document.getElementById("senhaLogin").value;
+  }else{
+    emailLogin = _email;
+    senhaLogin = _password;
+  }
+  
+  try {
+    
+    if (!emailLogin) throw new Error("Email não pode estar vazio");
+    
+    if (!senhaLogin) throw new Error("Campo senha não pode estar vazio");
+    
+    if(senhaLogin.length < 4) throw new Error("Digite pelo menos 4 digitos");
+    
+    let user = dataUsers.find((item) => {
     if (emailLogin == item.email && senhaLogin == item.senha) return item;
   });
 
@@ -81,6 +97,10 @@ async function fazerLogin() {
       window.location.href = "./pages/home-recrutador.html";
     }
   }
+}catch (e) {
+  document.getElementById("login-error").innerText = e.message;
+}
+
 }
 
 function logOut() {
@@ -89,10 +109,10 @@ function logOut() {
 }
 
 // if (document.getElementById("form-signup") != null) {
-//   document.getElementById("form-signup").addEventListener("submit", postSignup);
-// }
-
-let formUser = document.getElementById("form-signup");
+  //   document.getElementById("form-signup").addEventListener("submit", postSignup);
+  // }
+  
+  let formUser = document.getElementById("form-signup");
 if (formUser) {
   formUser.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -107,6 +127,12 @@ async function postSignup(event) {
   try {
     let dataFormatada = userSignup.birthDate.split("-");
 
+      if (!userSignup.email) throw new Error("Email não pode estar vazio");
+      
+      if (!userSignup.password) throw new Error("Campo senha não pode estar vazio");
+      
+      if(userSignup.password.length < 4) throw new Error("Digite pelo menos 4 digitos");
+      
     const json = {
       tipo: userSignup.typeUser,
       nome: userSignup.nameUser,
@@ -125,12 +151,12 @@ async function postSignup(event) {
       },
       body: JSON.stringify(json),
     });
-
+    
     window.location.href = "../index.html";
     //apos cadastro, loga o usuario
     //await fazerLogin(userSignup.email, userSignup.password);
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+     document.getElementById("login-error").innerText = e.message;
   }
 }
 
