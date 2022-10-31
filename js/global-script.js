@@ -410,7 +410,7 @@ async function candidatarVaga() {
 
     const json = {
       id: vaga.id,
-      titulo: vaga.titutlo,
+      titulo: vaga.titulo,
       descricao: vaga.descricao,
       remuneracao: vaga.remuneracao,
       candidatos: vaga.candidatos,
