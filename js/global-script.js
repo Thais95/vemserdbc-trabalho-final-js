@@ -164,7 +164,7 @@ async function postSignup(event) {
     const json = {
       tipo: userSignup.typeUser,
       nome: capitalizeName(userSignup.nameUser),
-      dataNascimento: `${dataFormatada[2]}/${dataFormatada[1] < 10? dataFormatada[1] : '0'+ dataFormatada[1]}/${
+      dataNascimento: `${dataFormatada[2]}/${dataFormatada[1]}/${
         dataFormatada[0]
       }`,
       email: userSignup.email,

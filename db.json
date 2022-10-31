@@ -112,6 +112,33 @@
       "senha": "1234",
       "candidaturas": [],
       "id": 9
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "Asdasdasd",
+      "dataNascimento": "05/012/2000",
+      "email": "name3eqweqweq@gmail.com",
+      "senha": "1234",
+      "candidaturas": [],
+      "id": 10
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "Dasdasda",
+      "dataNascimento": "05/012/2000",
+      "email": "namedasdada3@gmail.com",
+      "senha": "1234",
+      "candidaturas": [],
+      "id": 11
+    },
+    {
+      "tipo": "Candidato",
+      "nome": "Dasdadsa",
+      "dataNascimento": "04/10/2022",
+      "email": "namedasdad3@gmail.com",
+      "senha": "1234",
+      "candidaturas": [],
+      "id": 12
     }
   ],
   "vagas": [
