@@ -142,8 +142,9 @@ async function postSignup(event) {
   try {
     let dataFormatada = userSignup.birthDate.split("-");
 
-    if (!userSignup.email)
-      throw new Error("Campo de email não pode estar vazio");
+    if(!userSignup.email && !userSignup.password) throw new Error("Campos não podem estar vazios")
+
+    if (!userSignup.email) throw new Error("Campo de email não pode estar vazio");
 
     if (!userSignup.password)
       throw new Error("Campo de senha não pode estar vazio");
@@ -158,8 +159,8 @@ async function postSignup(event) {
         if (userSignup.email == item.email) return item;
       });
 
-      if (isCadastrado) throw new Error("Email já cadastrado");
-    }
+    if (isCadastrado) throw new Error("Email já cadastrado");
+    };
 
     const json = {
       tipo: userSignup.typeUser,
@@ -184,8 +185,7 @@ async function postSignup(event) {
     //apos cadastro, loga o usuario
     //await fazerLogin(userSignup.email, userSignup.password);
   } catch (e) {
-    //document.getElementById("signup-error").innerText = e.message;
-    console.error(e);
+    document.getElementById("signup-error").innerText = e.message;
   }
 }
 
