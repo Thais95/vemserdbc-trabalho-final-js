@@ -58,6 +58,10 @@ a {
   width: 300px;
 }
 
+.box-cadastro {
+  position: relative;
+}
+
 #form-signup {
   display: flex;
   max-width: 620px;

@@ -314,3 +314,23 @@ select {
   display: flex;
   justify-content: center;
 }
+
+/* ERRORS */
+.login-error {
+  bottom: 0;
+  color: red;
+  margin-bottom: 14%;
+  text-align: center;
+  position: absolute;
+  user-select: none;
+  font-size: 1.1rem;
+}
+.signup-error {
+  bottom: 0;
+  color: red;
+  margin-bottom: 3%;
+  text-align: center;
+  position: absolute;
+  user-select: none;
+  font-size: 1.1rem;
+}
