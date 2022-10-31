@@ -294,7 +294,7 @@ select {
 
 /* component placeholder */
 .component-placeholder {
-  display: none;
+  display: hidden;
   align-items: center;
   justify-content: center;
   border: 1px solid #eff0f7;

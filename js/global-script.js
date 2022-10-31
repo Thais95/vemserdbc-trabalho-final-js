@@ -81,13 +81,13 @@ async function fazerLogin(_email, _password) {
 
   try {
     if (!emailLogin && !senhaLogin)
-      throw new Error("Campos não podem estar vazios");
+      throw new Error("Por favor, preencha todos os campos");
 
-    if (!emailLogin) throw new Error("Campo de email não pode estar vazio");
+    if (!emailLogin) throw new Error("Por favor, informe seu email");
 
-    if (!senhaLogin) throw new Error("Campo de senha não pode estar vazio");
+    if (!senhaLogin) throw new Error("Por favor, informe sua senha");
 
-    if (senhaLogin.length < 4) throw new Error("Dados incorretos");
+    if (senhaLogin.length < 4) throw new Error("Dados incorretos, por favor cheque seu email e senha");
 
     let user = dataUsers.find((item) => {
       if (emailLogin == item.email && senhaLogin == item.senha) return item;
@@ -95,7 +95,7 @@ async function fazerLogin(_email, _password) {
 
     if (!user)
       document.getElementById("login-error").innerText =
-        "Dados incorretos, por favor cheque seu email e senha";
+        "Conta não encontrada, por favor cheque seu email e senha";
     else {
       localStorage.setItem(
         "user",
@@ -142,17 +142,17 @@ async function postSignup(event) {
   try {
     let dataFormatada = userSignup.birthDate.split("-");
 
-    if(!userSignup.email && !userSignup.password) throw new Error("Campos não podem estar vazios")
+    if(!userSignup.email && !userSignup.password && !userSignup.nameUser) throw new Error("Por favor, preencha todos os campos")
 
-    if (!userSignup.email) throw new Error("Campo de email não pode estar vazio");
+    if (!userSignup.email) throw new Error("Por favor, preencha todos os campos");
 
     if (!userSignup.password)
-      throw new Error("Campo de senha não pode estar vazio");
+      throw new Error("Por favor, preencha todos os campos");
 
-    if (!userSignup.birthDate) throw new Error("Preencha data de nascimento");
+    if (!userSignup.birthDate) throw new Error("Por favor, preencha todos os campos");
 
     if (userSignup.password.length < 4)
-      throw new Error("Senha deve ter pelo menos 4 dígitos");
+      throw new Error("A senha escolhida deve ter pelo menos 4 dígitos");
 
     if (dataUsers.length > 0) {
       const isCadastrado = dataUsers.find((item) => {
@@ -650,12 +650,3 @@ async function cancelarCandidatura() {
     console.log(err);
   }
 }
-
-// criandoVaga = document.getElementById('AQUI FICA O ID DA DIV QUE VAI RECEBER OS ELEMENTOS').insertAdjacentElement('beforeend', `
-//     <div class="content-container">
-//         <a href="${link-vaga}">
-//             <p>${titulo-vaga}</p>
-//             <p>${salario-vaga}</p>
-//         </a>
-//     </div>
-// `)
