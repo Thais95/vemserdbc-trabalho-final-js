@@ -195,9 +195,6 @@ async function deleteVaga() {
   id2.shift();
   const id3 = id2.join("");
 
-  var candidatura = dataCandidaturas.filter((item) => item.idVaga == id3);
-
-  console.log(candidatura);
   await allFetchDelete(id3).then(
     () => (window.location.href = "./home-recrutador.html")
   );
@@ -207,7 +204,6 @@ const allFetchDelete = async (id3) => {
   try {
     var candidatura = dataCandidaturas.filter((item) => item.idVaga == id3);
 
-    let allFetchCheck = 0;
     if (candidatura) {
       let user = dataUsers.map((item) => {
         item.candidaturas = item.candidaturas.filter((item) => item != id3);
@@ -220,7 +216,7 @@ const allFetchDelete = async (id3) => {
           headers: {
             "Content-Type": "application/json",
           },
-        }).then(() => allFetchCheck++);
+        });
       }
 
       for (item of user) {
@@ -230,7 +226,7 @@ const allFetchDelete = async (id3) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(item),
-        }).then(() => allFetchCheck++);
+        });
       }
     }
 
