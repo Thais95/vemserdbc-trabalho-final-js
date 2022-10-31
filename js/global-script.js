@@ -195,54 +195,51 @@ async function deleteVaga() {
   id2.shift();
   const id3 = id2.join("");
 
-  var candidatura = dataCandidaturas.find((item) => {
-    if (item.idVaga == id3) return item;
-  });
-
-  if (candidatura) {
-    let user = dataUsers.map((item) => {
-      if(item.candidaturas.includes(id3)){
-        item.candidaturas.splice(item.candidaturas.indexOf(id3), 1);
-      }
-      return item;
-    });
-
-    let candidatura = dataCandidaturas.map((item) => {
-      if(item.idVaga == id3){
-        const index = dataCandidaturas.indexOf(item);
-        dataCandidaturas.splice(index, 1);
-      }
-      return item;
-    });
-    console.log(candidatura);
-    console.log(user);
-   // user.candidaturas = user.candidaturas.filter((item) => item != id3);
-    await fetch(`${url}/candidatura`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(candidatura),
-    });
-
-    await fetch(`${url}/users`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-  }
-
-  await fetch(`${url}/vagas/${id3}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then(() => {
-    window.location.href = "./home-recrutador.html";
-  });
+  await allFetchDelete(id3).then(
+    () => (window.location.href = "./home-recrutador.html")
+  );
 }
+
+const allFetchDelete = async (id3) => {
+  try {
+    var candidatura = dataCandidaturas.filter((item) => item.idVaga == id3);
+
+    if (candidatura) {
+      let user = dataUsers.map((item) => {
+        item.candidaturas = item.candidaturas.filter((item) => item != id3);
+        return item;
+      });
+
+      for (item of candidatura) {
+        await fetch(`${url}/candidatura/${item.id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
+
+      for (item of user) {
+        await fetch(`${url}/users/${item.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(item),
+        });
+      }
+    }
+
+    await fetch(`${url}/vagas/${id3}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 async function listarVagas(tipoUser) {
   await onLoadPage();
