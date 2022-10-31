@@ -1,5 +1,30 @@
 {
-  "candidatura": [],
+  "candidatura": [
+    {
+      "idCandidato": 1,
+      "idVaga": 1,
+      "reprovado": false,
+      "id": 1
+    },
+    {
+      "idCandidato": 3,
+      "idVaga": 1,
+      "reprovado": false,
+      "id": 2
+    },
+    {
+      "idCandidato": 1,
+      "idVaga": 2,
+      "reprovado": false,
+      "id": 3
+    },
+    {
+      "idCandidato": 3,
+      "idVaga": 2,
+      "reprovado": false,
+      "id": 4
+    }
+  ],
   "users": [
     {
       "tipo": "Candidato",
@@ -7,7 +32,7 @@
       "dataNascimento": "10/09/2022",
       "email": "name3@gmail.com",
       "senha": "1234",
-      "candidaturas": [],
+      "candidaturas": [1, 2],
       "id": 1
     },
     {
@@ -25,9 +50,24 @@
       "dataNascimento": "2022/9/25",
       "email": "pedro@gmail.com",
       "senha": "4321",
-      "candidaturas": [],
+      "candidaturas": [1, 2],
       "id": 3
     }
   ],
-  "vagas": []
+  "vagas": [
+    {
+      "titulo": "back end jr",
+      "descricao": "dnsajdjasdkjsa dksadjnasdnoaj dsajdasnd dnsandoasnd",
+      "remuneracao": "2500",
+      "candidatos": [1, 3],
+      "id": 1
+    },
+    {
+      "titulo": "qa jr",
+      "descricao": "kdjoasodjsa dsjandojasodnsa dnsoandoasnd",
+      "remuneracao": "2500",
+      "candidatos": [1, 3],
+      "id": 2
+    }
+  ]
 }

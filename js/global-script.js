@@ -195,39 +195,55 @@ async function deleteVaga() {
   id2.shift();
   const id3 = id2.join("");
 
-  var candidatura = dataCandidaturas.find((item) => {
-    if (item.idVaga == id3) return item;
-  });
+  var candidatura = dataCandidaturas.filter((item) => item.idVaga == id3);
 
-  if (candidatura) {
-    let user = dataUsers.find((item) => item.id == candidatura.idCandidato);
-    user.candidaturas = user.candidaturas.filter((item) => item != id3);
+  console.log(candidatura);
+  await allFetchDelete(id3).then(
+    () => (window.location.href = "./home-recrutador.html")
+  );
+}
 
-    await fetch(`${url}/candidatura/${candidatura.id}`, {
+const allFetchDelete = async (id3) => {
+  try {
+    var candidatura = dataCandidaturas.filter((item) => item.idVaga == id3);
+
+    let allFetchCheck = 0;
+    if (candidatura) {
+      let user = dataUsers.map((item) => {
+        item.candidaturas = item.candidaturas.filter((item) => item != id3);
+        return item;
+      });
+
+      for (item of candidatura) {
+        await fetch(`${url}/candidatura/${item.id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then(() => allFetchCheck++);
+      }
+
+      for (item of user) {
+        await fetch(`${url}/users/${item.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(item),
+        }).then(() => allFetchCheck++);
+      }
+    }
+
+    await fetch(`${url}/vagas/${id3}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
     });
-
-    await fetch(`${url}/users/${user.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
+  } catch (err) {
+    console.log(err);
   }
-
-  await fetch(`${url}/vagas/${id3}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then(() => {
-    window.location.href = "./home-recrutador.html";
-  });
-}
+};
 
 async function listarVagas(tipoUser) {
   await onLoadPage();
